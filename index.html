@@ -2,26 +2,39 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>이찬원 정규 2집 초집중</title>
+  <title>이찬원 정규2집 초집중</title>
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
+    /* =========================
+       기본 스타일
+    ========================= */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: 'Noto Sans KR', sans-serif;
-      overflow-x: hidden;
-      background: #f9f9f9;
     }
 
-    /* 상단바 */
+    body {
+      background-color: White;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* =========================
+       상단바
+    ========================= */
     .top-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 20px 40px;
+      justify-content: space-between;
+      padding: 2vh 5vw;
       background-color: #fce7e3;
-      border-bottom: 2px solid #e0e0e0;
-      position: relative;
+      border-bottom: 0.2vh solid #e0e0e0;
       z-index: 100;
     }
 
@@ -29,97 +42,326 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      justify-content: center;
+      font-weight: bold;
     }
 
     .logo-section img {
-      height: 60px;
-      margin-right: 15px;
+      height: 6vh;
+      margin-right: 1vw;
     }
 
-    .logo-text {
-      font-size: 22px;
-      font-weight: bold;
-    }
+    .logo-text { font-size: 2.5vh; }
 
-    /* 본문 영역 */
+    /* =========================
+       본문
+    ========================= */
     main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
       text-align: center;
-      padding: 40px 20px;
+      padding: 5vh 5vw;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    main h1 {
-      font-size: 24px;
-      margin-bottom: 30px;
+    /* =========================
+       배너 슬라이더
+    ========================= */
+    .banner-slider {
+      width: 100%;
+      max-width: 1000px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 4vh;
+      border-radius: 1rem;
     }
 
-    /* SMS 버튼 */
-    .sms-button {
-      display: inline-block;
-      padding: 15px 30px;
-      font-size: 20px;
+    .banner-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .banner {
+      min-width: 100%;
+      position: relative;
+      overflow: hidden;
+      max-height: 500px;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .banner-text {
+      position: absolute;
+      bottom: 2vh;
+      left: 2vw;
+      color: white;
+      font-size: 2rem;
       font-weight: bold;
-      color: #0070d1;
-      background-color: hsl(0, 0%, 100%);
-      border: 2px solid #ffb8ea;
-      border-radius: 50px;  /* 둥근 버튼 */
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-shadow: 0 0.3vh 0.3vh rgba(0,0,0,0.5);
     }
 
-    .sms-button:hover {
-      background-color: #ffb8ea;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    .banner-prev, .banner-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      background: rgba(255,255,255,0.5);
+      border: none;
+      border-radius: 50%;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      z-index: 10;
     }
 
+    .banner-prev { left: 1rem; }
+    .banner-next { right: 1rem; }
 
-        /* SMS 버튼 */
-    .once {
-      display: inline-block;
-      padding: 15px 30px;
-      font-size: 20px;
+    .banner-prev:hover, .banner-next:hover { background: rgba(255,255,255,0.8); }
+
+    /* 배너 인디케이터 */
+    .banner-indicators {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .banner-indicators .dot {
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .banner-indicators .dot.active {
+      background: rgba(0,0,0,0.9);
+    }
+
+    /* =========================
+       버튼 그리드
+    ========================= */
+    .button-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 5vh;
+    }
+
+    .grid-button {
+      background-color: #fff;
+      border-radius: 3vh;
+      padding: 4vh 0;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: #0070d1;
-      background-color: hsl(0, 0%, 100%);
-      border: 2px solid #ffb8ea;
-      border-radius: 50px;  /* 둥근 버튼 */
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      box-shadow: 0 0.5vh 1vh rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s;
     }
 
-    .click {
-      background-color: #ffb8ea;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    .grid-button:hover {
+      background-color: #ffd6ec;
+      transform: translateY(-0.5vh);
     }
-    /* 모바일 반응형 */
+
+    /* =========================
+       푸터
+    ========================= */
+    .site-footer {
+      background: #f9f9f9;
+      padding: 5vh 5vw;
+      font-size: 1.5vh;
+      color: #555;
+      border-top: 0.1vh solid #ddd;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2vw;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+    }
+
+    .album-cover {
+      width: 6vh;
+      height: 6vh;
+      border-radius: 1vh;
+      object-fit: cover;
+    }
+
+    .footer-right {
+      text-align: left;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-right p { margin: 0.5vh 0; }
+
+    .social-icons {
+      display: flex;
+      gap: 1vw;
+      margin-top: 1vh;
+    }
+
+    .social-icons img {
+      width: 2.5vh;
+      height: 2.5vh;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* =========================
+       반응형
+    ========================= */
+    @media (max-width: 1024px) {
+      .banner-text { font-size: 1.8rem; }
+      .grid-button { font-size: 1.3rem; }
+    }
+
     @media (max-width: 768px) {
-      .sms-button {
-        width: 80%;
-        font-size: 18px;
-      }
+      .logo-text { font-size: 4vw; }
+      .grid-button { font-size: 4vw; padding: 4vh 0; }
+      .banner-text { font-size: 4vw; }
+      .album-cover { width: 5vh; height: 5vh; }
+    }
+
+    @media (max-width: 480px) {
+      .grid-button { font-size: 6vw; padding: 3vh 0; }
+      .banner-text { font-size: 6vw; }
+      .logo-text { font-size: 5vw; }
     }
   </style>
 </head>
 <body>
+
   <!-- 상단바 -->
   <header class="top-bar">
     <a class="logo-section" href="index.html">
       <img src="favicon/channels4_profile-removebg-preview.png" alt="로고" />
-      <span class="logo-text">이찬원 정규 2집 초집중</span>
+      <span class="logo-text">이찬원 정규2집 초집중</span>
     </a>
   </header>
- <h1> 이찬원 &lt;하늘여행&gt;</h1>
-<button type="button" class="sms-button" onClick="location.href='once.html'">📻라디오</button>
-<h1>  </h1>
-<button type="button" class="sms-button" onClick="location.href='guide.html'">🚗가이드</button>
+
+  <!-- 본문 -->
+  <main>
+    <!-- 배너 슬라이더 -->
+    <div class="banner-slider">
+      <div class="banner-track">
+        <div class="banner">
+          <img src="/images/banner1.jpg" alt="배너 1">
+          <div class="banner-text"></div>
+        </div>
+        <div class="banner">
+          <img src="/images/banner2.jpg" alt="배너 2">
+          <div class="banner-text"></div>
+        </div>
+        <div class="banner">
+          <img src="/images/banner3.jpg" alt="배너 3">
+          <div class="banner-text"></div>
+        </div>
+        <div class="banner">
+          <img src="/images/banner4.jpg" alt="배너 4">
+          <div class="banner-text"></div>
+        </div>
+      </div>
+
+      <button class="banner-prev">&#10094;</button>
+      <button class="banner-next">&#10095;</button>
+
+      <!-- 배너 인디케이터 -->
+      <div class="banner-indicators">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <!-- 버튼 그리드 -->
+    <div class="button-grid">
+      <div class="grid-button" onclick="location.href='streaming.html'">스트리밍 리스트</div>
+      <div class="grid-button" onclick="location.href='guide.html'">가이드</div>
+      <div class="grid-button" onclick="location.href='vote.html'">투표</div>
+      <div class="grid-button" onclick="location.href='once.html'">📻라디오</div>
+    </div>
   </main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버" />
+        <h2>이찬원 정규2집 초집중</h2>
+      </div>
+      <div class="footer-right">
+        <h3>빈칸</h3>
+        <p>E-mail: <a href="mailto:kdg0945.com"></a></p>
+        <p>Copyright © 2025 Chanwon STREAM All rights reserved.</p>
+        <p><a href="#">개인정보보호정책</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================
+       배너 슬라이더 JS
+  ========================= -->
+  <script>
+    const track = document.querySelector('.banner-track');
+    const banners = document.querySelectorAll('.banner');
+    const prevBtn = document.querySelector('.banner-prev');
+    const nextBtn = document.querySelector('.banner-next');
+    const dots = document.querySelectorAll('.dot');
+    let index = 0;
+
+    function updateBanner() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + banners.length) % banners.length;
+      updateBanner();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % banners.length;
+      updateBanner();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        index = i;
+        updateBanner();
+      });
+    });
+
+    setInterval(() => {
+      index = (index + 1) % banners.length;
+      updateBanner();
+    }, 3000);
+  </script>
 </body>
 </html>
-
-
-
-
