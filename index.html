@@ -75,6 +75,26 @@
       box-shadow: 0 6px 10px rgba(0,0,0,0.15);
     }
 
+
+        /* SMS 버튼 */
+    .once {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0070d1;
+      background-color: hsl(0, 0%, 100%);
+      border: 2px solid #ffb8ea;
+      border-radius: 50px;  /* 둥근 버튼 */
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .click {
+      background-color: #ffb8ea;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
     /* 모바일 반응형 */
     @media (max-width: 768px) {
       .sms-button {
@@ -93,32 +113,7 @@
     </a>
   </header>
 
-  <!-- 본문 -->
-  <main>
-    <h1> 이찬원 &lt;하늘여행&gt;</h1>
-    <h6> </h6>
-    <h1> 📻라디오 신청 원클릭📻</h1>
-   <span>
-     <a class="sms-button" href="sms:%231061?body=이찬원의 &lt;하늘여행&gt; 신청합니다">
-       &lt; KBS Happy FM &gt;</a>
-   </span>
-
-    <h1>  </h1>
-    
-    <span>
-     <a class="sms-button" href="sms:%238910?body=이찬원의 &lt;하늘여행&gt; 신청합니다">
-       &lt; KBS Cool FM  &gt;</a>
-   </span>
+<button type="button" class="once" onClick="location.href='once.html'">라디오</button>
   </main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
