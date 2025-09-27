@@ -25,6 +25,27 @@
 
     a { text-decoration: none; color: inherit; }
 
+    /* 버튼 */
+    .sms-button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0070d1;
+      background-color: hsl(0, 0%, 100%);
+      border: 2px solid #ffb8ea;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .sms-button:hover {
+      background-color: #ffb8ea;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+
     /* =========================
        상단바
     ========================= */
@@ -99,23 +120,23 @@
        모달 팝업
     ========================= */
     .modal {
-      display: none;                       /* 기본적으로 숨김 */
+      display: none;
       position: fixed;
-      z-index: 200;                         /* 다른 요소 위에 표시 */
+      z-index: 200;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);          /* 반투명 검은 배경 */
+      background: rgba(0,0,0,0.5);
     }
 
     .modal-content {
       background: #fff;
       margin: 10% auto;
-      padding: 20px;
+      padding: 40px 20px;
       border-radius: 1rem;
       width: 80%;
-      max-width: 400px;
+      max-width: 450px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
@@ -129,6 +150,17 @@
     }
 
     .close-btn:hover { color: #333; }
+
+    /* =========================
+       모달 버튼 정렬
+    ========================= */
+    .modal-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
 
     /* =========================
        푸터
@@ -203,13 +235,24 @@
 
   <!-- 본문 -->
   <main>
-    <!-- 버튼 그리드 -->
     <div class="button-grid">
-      <div class="grid-button" id="openModalBtn">🍈 멜론 🍈</div>
-      <div class="grid-button" id="openModalBtn">🧞 지니 🧞</div>
-      <div class="grid-button" id="openModalBtn">🐛 벅스 🐛</div>
-      <div class="grid-button" id="openModalBtn">♈️ 바이브 ♈️</div>
-      <div class="grid-button" id="openModalBtn">💠 플로 💠</div>
+      <div class="grid-button openModalBtn" 
+           data-title="멜론 원클릭 스밍" 
+           data-text="순서대로 클릭해주세요."
+           data-buttons='
+             <button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>
+             <button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>
+             <button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>
+             <button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>
+             <button class="sms-button" onclick="location.href=`melon.html`">멜론 스밍 가이드</button>
+           '>
+        🍈 멜론 🍈
+      </div>
+
+      <div class="grid-button openModalBtn" data-title="지니" data-text="지니 관련 내용입니다.">🧞 지니 🧞</div>
+      <div class="grid-button openModalBtn" data-title="벅스" data-text="벅스 관련 내용입니다.">🐛 벅스 🐛</div>
+      <div class="grid-button openModalBtn" data-title="바이브" data-text="바이브 관련 내용입니다.">♈️ 바이브 ♈️</div>
+      <div class="grid-button openModalBtn" data-title="플로" data-text="플로 관련 내용입니다.">💠 플로 💠</div>
     </div>
   </main>
 
@@ -217,8 +260,8 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
-      <h2>팝업 제목</h2>
-      <p>이곳에 원하는 내용을 넣으세요.<br>예: 공지사항, 이미지, 링크 등</p>
+      <h2 id="modalTitle">팝업 제목</h2>
+      <div id="modalText">이곳에 원하는 내용을 넣으세요.<br>예: 공지사항, 이미지, 링크 등</div>
     </div>
   </div>
 
@@ -241,11 +284,20 @@
   <!-- JS -->
   <script>
     const modal = document.getElementById('myModal');
-    const openBtn = document.getElementById('openModalBtn');
+    const openBtns = document.querySelectorAll('.openModalBtn');
     const closeBtn = document.querySelector('.close-btn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
 
-    openBtn.addEventListener('click', () => {
-      modal.style.display = 'block';
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modalTitle.textContent = btn.getAttribute('data-title');
+        modalText.innerHTML = btn.getAttribute('data-text') + 
+                              '<div class="modal-buttons">' + 
+                              (btn.getAttribute('data-buttons') || '') + 
+                              '</div>';
+        modal.style.display = 'block';
+      });
     });
 
     closeBtn.addEventListener('click', () => {
