@@ -99,7 +99,7 @@
       margin-bottom: 5vh;
     }
 
-    .grid-button {
+     .grid-button {
       background-color: #fff;
       border-radius: 3vh;
       padding: 4vh 0;
@@ -213,12 +213,12 @@
 
     @media (max-width: 768px) {
       .logo-text { font-size: 4vw; }
-      .grid-button { font-size: 4vw; padding: 4vh 0; }
+      .grid-button { font-size: 4vw; }
       .album-cover { width: 5vh; height: 5vh; }
     }
 
     @media (max-width: 480px) {
-      .grid-button { font-size: 6vw; padding: 3vh 0; }
+      .grid-button { font-size: 6vw; }
       .logo-text { font-size: 5vw; }
     }
   </style>
@@ -238,21 +238,59 @@
     <div class="button-grid">
       <div class="grid-button openModalBtn" 
            data-title="멜론 원클릭 스밍" 
-           data-text="순서대로 클릭해주세요."
+           data-text="순서대로 클릭해주세요. (삼성/LG)"
            data-buttons='
              <button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>
              <button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>
              <button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>
              <button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>
+             <button class="sms-button" onclick="window.open(`https://han.gl/wqW2G`)">애플</button>
              <button class="sms-button" onclick="location.href=`melon.html`">멜론 스밍 가이드</button>
            '>
         🍈 멜론 🍈
       </div>
 
-      <div class="grid-button openModalBtn" data-title="지니" data-text="지니 관련 내용입니다.">🧞 지니 🧞</div>
-      <div class="grid-button openModalBtn" data-title="벅스" data-text="벅스 관련 내용입니다.">🐛 벅스 🐛</div>
-      <div class="grid-button openModalBtn" data-title="바이브" data-text="바이브 관련 내용입니다.">♈️ 바이브 ♈️</div>
-      <div class="grid-button openModalBtn" data-title="플로" data-text="플로 관련 내용입니다.">💠 플로 💠</div>
+      <div class="grid-button openModalBtn" 
+           data-title="지니 원클릭 스밍" 
+           data-text="각 폰에 맞는걸로 눌러주세요."
+           data-buttons='
+             <button class="sms-button" onclick="window.open(`https://han.gl/Cd88g`)">삼성/LG</button>
+             <button class="sms-button" onclick="window.open(`https://han.gl/sS0C4`)">애플</button>
+             <button class="sms-button" onclick="location.href=`gni.html`">지니 스밍 가이드</button>
+           '>
+        🧞 지니 🧞
+      </div>
+
+      <div class="grid-button openModalBtn" 
+           data-title="벅스 원클릭 스밍" 
+           data-text="한번만 눌러주세요."
+           data-buttons='
+             <button class="sms-button" onclick="window.open(`https://han.gl/xrtg9`)">삼성, LG, 애플</button>
+             <button class="sms-button" onclick="location.href=`bug.html`">벅스 스밍 가이드</button>
+           '>
+        🐛 벅스 🐛
+      </div>
+            <div class="grid-button openModalBtn" 
+           data-title="플로 원클릭 스밍" 
+           data-text="각 폰에 맞는걸로 눌러주세요."
+           data-buttons='
+             <button class="sms-button" onclick="window.open(`https://han.gl/UYpF7`)">삼성, LG, 애플</button>
+             <button class="sms-button" onclick="location.href=`plo.html`">플로 스밍 가이드</button>
+           '>
+        💠 플로 💠
+      </div>
+      <div class="grid-button openModalBtn" 
+        data-title="멜론 원클릭 스밍" 
+        data-text="순서대로 클릭해주세요."
+        data-buttons='
+          <button class="sms-button" onclick="window.open(`https://han.gl/QXaD4`)">1</button>
+          <button class="sms-button" onclick="window.open(`https://han.gl/4g9UV`)">2</button>
+          <button class="sms-button" onclick="window.open(`https://han.gl/VxAxR`)">3</button>
+          <button class="sms-button" onclick="window.open(`https://han.gl/Rvy7P`)">4</button>
+          <button class="sms-button" onclick="location.href=`vibe.html`">바이브 스밍 가이드</button>
+           '>
+        ♈️ 바이브 ♈️
+      </div>
     </div>
   </main>
 
@@ -273,9 +311,9 @@
         <h2>이찬원 정규2집 초집중</h2>
       </div>
       <div class="footer-right">
-        <h3>CHAN'S SUPPORTER TEAM</h3>
+        <h3>Chann's Support Team</h3>
         <p>X(트위터): <a href="mailto:@chans_CST">@chans_CST</a></p>
-        <p>Copyright © 2025 CHAN'S SUPPORTER TEAM All rights reserved.</p>
+        <p>Copyright © 2025 Chann's Support Team All rights reserved.</p>
         <p><a href="#">개인정보보호정책</a></p>
       </div>
     </div>
@@ -312,5 +350,3 @@
   </script>
 </body>
 </html>
-
-
