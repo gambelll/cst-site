@@ -32,7 +32,7 @@
       font-size: 18px;
       font-weight: bold;
       color: #0070d1;
-      background-color: hsl(0, 0%, 100%);
+      background-color: #fff;
       border: 2px solid #ffb8ea;
       border-radius: 50px;
       text-decoration: none;
@@ -41,7 +41,23 @@
       cursor: pointer;
     }
 
-    .sms-button:hover {
+    .sms-button1 {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0070d1;
+      background-color: #fff;
+      border: 2px solid #ffb8ea;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .sms-button:hover,
+    .sms-button1:hover {
       background-color: #ffb8ea;
       box-shadow: 0 6px 10px rgba(0,0,0,0.15);
     }
@@ -99,7 +115,7 @@
       margin-bottom: 5vh;
     }
 
-     .grid-button {
+    .grid-button {
       background-color: #fff;
       border-radius: 3vh;
       padding: 4vh 0;
@@ -151,14 +167,18 @@
 
     .close-btn:hover { color: #333; }
 
-    /* =========================
-       모달 버튼 정렬
-    ========================= */
-    .modal-buttons {
+    /* 바이브 모달 버튼만 2×2 정렬 */
+    .vibe-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1px;
+      row-gap: 1px;
+    }
+
+    /* 바이브 스밍 가이드 버튼 하단 중앙 */
+    .vibe-guide-button {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
       margin-top: 15px;
     }
 
@@ -236,20 +256,19 @@
   <!-- 본문 -->
   <main>
     <div class="button-grid">
+      <!-- 멜론 -->
       <div class="grid-button openModalBtn" 
            data-title="멜론 원클릭 스밍" 
-           data-text="순서대로 클릭해주세요. (삼성/LG)"
+           data-text="순서대로 클릭해주세요."
            data-buttons='
-             <button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>
-             <button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>
-             <button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>
-             <button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>
              <button class="sms-button" onclick="window.open(`https://han.gl/wqW2G`)">애플</button>
+             <button class="sms-button samsungBtn" data-action="showSamsung">삼성/LG</button>
              <button class="sms-button" onclick="location.href=`melon.html`">멜론 스밍 가이드</button>
            '>
         🍈 멜론 🍈
       </div>
 
+      <!-- 지니 -->
       <div class="grid-button openModalBtn" 
            data-title="지니 원클릭 스밍" 
            data-text="각 폰에 맞는걸로 눌러주세요."
@@ -261,6 +280,7 @@
         🧞 지니 🧞
       </div>
 
+      <!-- 벅스 -->
       <div class="grid-button openModalBtn" 
            data-title="벅스 원클릭 스밍" 
            data-text="한번만 눌러주세요."
@@ -270,7 +290,9 @@
            '>
         🐛 벅스 🐛
       </div>
-            <div class="grid-button openModalBtn" 
+
+      <!-- 플로 -->
+      <div class="grid-button openModalBtn" 
            data-title="플로 원클릭 스밍" 
            data-text="각 폰에 맞는걸로 눌러주세요."
            data-buttons='
@@ -279,18 +301,25 @@
            '>
         💠 플로 💠
       </div>
+
+      <!-- 바이브 -->
       <div class="grid-button openModalBtn" 
-        data-title="멜론 원클릭 스밍" 
-        data-text="순서대로 클릭해주세요."
-        data-buttons='
-          <button class="sms-button" onclick="window.open(`https://han.gl/QXaD4`)">1</button>
-          <button class="sms-button" onclick="window.open(`https://han.gl/4g9UV`)">2</button>
-          <button class="sms-button" onclick="window.open(`https://han.gl/VxAxR`)">3</button>
-          <button class="sms-button" onclick="window.open(`https://han.gl/Rvy7P`)">4</button>
-          <button class="sms-button" onclick="location.href=`vibe.html`">바이브 스밍 가이드</button>
+           data-title="바이브 원클릭 스밍" 
+           data-text="순서대로 클릭해주세요."
+           data-buttons='
+             <div class="vibe-buttons">
+               <button class="sms-button" onclick="window.open(`https://han.gl/QXaD4`)">1</button>
+               <button class="sms-button" onclick="window.open(`https://han.gl/4g9UV`)">2</button>
+               <button class="sms-button" onclick="window.open(`https://han.gl/VxAxR`)">3</button>
+               <button class="sms-button" onclick="window.open(`https://han.gl/Rvy7P`)">4</button>
+             </div>
+             <div class="vibe-guide-button">
+               <button class="sms-button1" onclick="location.href=`vibe.html`">바이브 스밍 가이드</button>
+             </div>
            '>
         ♈️ 바이브 ♈️
       </div>
+
     </div>
   </main>
 
@@ -299,7 +328,7 @@
     <div class="modal-content">
       <span class="close-btn">&times;</span>
       <h2 id="modalTitle">팝업 제목</h2>
-      <div id="modalText">이곳에 원하는 내용을 넣으세요.<br>예: 공지사항, 이미지, 링크 등</div>
+      <div id="modalText">내용이 여기에 표시됩니다.</div>
     </div>
   </div>
 
@@ -327,25 +356,39 @@
     const modalTitle = document.getElementById('modalTitle');
     const modalText = document.getElementById('modalText');
 
+    // 모달 열기
     openBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         modalTitle.textContent = btn.getAttribute('data-title');
-        modalText.innerHTML = btn.getAttribute('data-text') + 
-                              '<div class="modal-buttons">' + 
-                              (btn.getAttribute('data-buttons') || '') + 
+        modalText.innerHTML = btn.getAttribute('data-text') +
+                              '<div class="modal-buttons">' +
+                              (btn.getAttribute('data-buttons') || '') +
                               '</div>';
         modal.style.display = 'block';
+
+        // 삼성/LG 버튼에 이벤트 추가
+        const samsungBtn = modalText.querySelector('.samsungBtn');
+        if (samsungBtn) {
+          samsungBtn.addEventListener('click', () => {
+            modalText.innerHTML =
+              '순서대로 클릭해주세요. (삼성/LG)<br><div class="modal-buttons">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
+              '</div>';
+          });
+        }
       });
     });
 
+    // 모달 닫기
     closeBtn.addEventListener('click', () => {
       modal.style.display = 'none';
     });
 
     window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
+      if (e.target === modal) modal.style.display = 'none';
     });
   </script>
 </body>
