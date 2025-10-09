@@ -376,7 +376,20 @@
   align-items: center;
   font-weight: bold;
   font-size: 1.5rem;
-  margin-top: 1vh;
+  margin-top: 2vh;
+  border-radius: 1rem;           /* 💡 둥근 모서리 */
+  padding: 2vh 2vw;              /* 💡 안쪽 여백 */
+  width: 90%;                    /* 카드 안에서 여백 확보 */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.youtube123 {
+  background-color: #f0f2f5; /* 각 칸 흰색 */
+  border-radius: 12px;
+  flex: 1;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .youtube-stats div p {
@@ -386,11 +399,13 @@
 }
 
 .youtube-stats span {
-  font-size: 1.8rem;
-  color: #f796c9;
+  font-size: 1.3rem;
+  color: #f36ca4; /* 💡 핑크빛 포인트 컬러 */
   display: block;
   margin-top: 0.5vh;
 }
+
+
 
   </style>
 </head>
@@ -466,11 +481,12 @@
     ></iframe>
   </div>
   <div class="youtube-stats">
-    <div>
+    <div class="youtube123">
       <p>조회수</p>
       <span id="yt-views">4,381,259</span>
     </div>
-    <div>
+    &nbsp;
+    <div class="youtube123">
       <p>좋아요</p>
       <span id="yt-likes">286,900</span>
     </div>
