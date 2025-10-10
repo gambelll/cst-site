@@ -273,6 +273,79 @@
       .banner-text { font-size: 6vw; }
       .logo-text { font-size: 5vw; }
     }
+
+      /* 사이드 메뉴 */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* 숨김 상태 */
+  width: 250px;
+  height: 100%;
+  background: white; /* 흰색 배경 */
+  color: black;      /* 글씨 검정 */
+  padding: 60px 20px 20px 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.side-menu li {
+  margin: 20px 0;
+}
+
+.side-menu a {
+  color: black; /* 글씨 검정 */
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* 닫기 버튼 스타일 */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  padding: 0;
+  line-height: 1;
+}
+
+
+.hamburger {
+  font-size:28px;
+  cursor:pointer;
+  position:fixed;
+  top:15px;
+  right:20px;
+  z-index:900; /* X 버튼보다 아래 */
+}
+
+#closeBtn {
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:2rem;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:black;
+  font-weight:bold;
+  z-index:1000; /* 햄버거보다 위 */
+}
   </style>
 </head>
 <body>
@@ -283,8 +356,9 @@
       <img src="favicon/channels4_profile-removebg-preview.png" alt="로고" />
       <span class="logo-text">이찬원 정규2집 초집중</span>
     </a>
+     <div include-html="components/menu.html"></div>
   </header>
-
+ <div class="hamburger">☰</div>
   <!-- 본문 -->
   <main>
     <h1>123</h1>
@@ -306,6 +380,96 @@
     </div>
   </footer>
 </body>
+<script>
+          // include-html 함수
+    function includeHTML(callback) {
+      const elements = document.querySelectorAll('[include-html]');
+      let count = elements.length;
+      if(count===0) callback?.();
+      elements.forEach(el=>{
+        const file = el.getAttribute('include-html');
+        if(file){
+          fetch(file).then(res=>res.ok?res.text():Promise.reject())
+          .then(data=>{
+            el.innerHTML=data;
+            el.removeAttribute('include-html');
+            count--; if(count===0) callback?.();
+          }).catch(()=>{el.innerHTML="내용을 불러올 수 없습니다."; count--; if(count===0) callback?.();});
+        }
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      includeHTML(() => {
+        const hamburger = document.querySelector(".hamburger");
+        const sideMenu = document.getElementById("sideMenu");
+        const closeBtn = document.getElementById("closeBtn");
+
+        hamburger?.addEventListener("click", ()=>{
+          sideMenu?.classList.add("open");
+          hamburger.style.display="none";
+        });
+
+        closeBtn?.addEventListener("click", ()=>{
+          sideMenu?.classList.remove("open");
+          hamburger.style.display="block";
+        });
+      });
+    });
+
+      // 배너 슬라이더 기능
+      const track = document.querySelector('.banner-track');
+      const banners = document.querySelectorAll('.banner');
+      const prevBtn = document.querySelector('.banner-prev');
+      const nextBtn = document.querySelector('.banner-next');
+      const dots = document.querySelectorAll('.dot');
+      let index = 0;
+
+      function updateBanner() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      }
+
+      prevBtn.addEventListener('click', () => {
+        index = (index - 1 + banners.length) % banners.length;
+        updateBanner();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        index = (index + 1) % banners.length;
+        updateBanner();
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          index = i;
+          updateBanner();
+        });
+      });
+
+      setInterval(() => {
+        index = (index + 1) % banners.length;
+        updateBanner();
+      }, 3000);
+
+    window.addEventListener("DOMContentLoaded", () => {
+  includeHTML(() => {
+    const hamburger = document.querySelector(".hamburger");
+    const sideMenu = document.getElementById("sideMenu");
+    const closeBtn = document.getElementById("closeBtn");
+
+    if (hamburger && sideMenu) {
+      hamburger.addEventListener("click", () => {
+        sideMenu.classList.add("open");
+      });
+    }
+
+    if (closeBtn && sideMenu) {
+      closeBtn.addEventListener("click", () => {
+        sideMenu.classList.remove("open");
+      });
+    }
+  });
+});
+</script>
 </html>
-
-
