@@ -15,13 +15,17 @@
 
     /* 버튼 */
     .sms-button, .sms-button1 {
+      width: 300px;        /* 버튼 가로 고정 */
+      height: 60px;        /* 버튼 세로 고정 */
+      line-height: 1.2;    /* 텍스트 줄 높이 */
+      font-size: 18px;
       display:inline-block;
       padding:15px 30px;
       font-size:18px;
       font-weight:bold;
       color:#0070d1;
       background-color:#fff;
-      border:2px solid #ffb8ea;
+      border:1px solid rgb(88, 88, 88);
       border-radius:50px;
       text-decoration:none;
       transition:all 0.3s ease;
@@ -100,7 +104,9 @@
     .side-menu li {margin:20px 0;}
     .side-menu a {color:black; font-size:1.1rem; font-weight:500;}
     .close-btn {position:absolute; top:10px; right:15px; font-size:2rem; background:none; border:none; cursor:pointer; color:black; font-weight:bold; padding:0; line-height:1;}
-  </style>
+
+.font1 { font-family: "궁서체"; }
+</style>
 </head>
 <body>
 
@@ -122,41 +128,57 @@
       <!-- 음원 가이드 -->
       <div class="border1 grid-button openModalBtn"
            data-title="음원 가이드" 
-           data-text="텍스트 입력란"
+           data-text="아래 버튼을 누르면 해당 가이드로 이동합니다."
            data-buttons='
-          <img class="voteimg" src="/images/51.png" alt="1">
-          <p>Hello world</p>
-          <img class="voteimg" src="/images/unnamed.png" alt="2">
-          <p style="margin-top: 15px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn" data-action="showSamsung">멜론</button>
-            <button class="sms-button" onclick="window.open(`주소`)">애플</button>
-          </p>
-          <p><button class="sms-button" onclick="location.href=`melon.html`">멜론 재생설정</button></p>'
-      >🎵 음원 가이드 🎵</div>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn">🍈멜론🍈</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn1">🧞‍♂️지니🧞‍♂️</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn2">🐛벅스🐛</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn3">♈️바이브♈️</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn4">💠플로💠</button></p>'
+      >🎵음원 가이드🎵</div>
 
       <!-- 투표 가이드 -->
       <div class="border1 grid-button openModalBtn"
-           data-title="투표 가이드"
-           data-text="텍스트 입력란"
-           data-buttons='
-          <img class="voteimg" src="/images/51.png" alt="1">
-          <p>Hello world</p>
-          <img class="voteimg" src="/images/unnamed.png" alt="2">
-          <p style="margin-top: 15px; margin-bottom: 10px;">
-            <button class="sms-button" onclick="window.open(`https://han.gl/UYpF7`)">삼성, LG, 애플</button>
-          </p>
-          <p><button class="sms-button" onclick="location.href=`plo.html`">플로 재생설정</button></p>'
-      >🛎️ 투표 가이드 🛎️</div>
+            data-title="투표 우선순위"
+            data-text="아래 버튼을 누르시면 해당 가이드로 이동합니다."
+            data-buttons='
+          <img class="voteimg" src="/images/priority.png" alt="1">
+          <button class="sms-button" onclick="window.open(`주소`)">팬캐스트</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn" onclick="window.open(`주소`)">뮤빗</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button" onclick="window.open(`주소`)">Linc</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button" onclick="window.open(`주소`)">하이어</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button" onclick="window.open(`주소`)">스타플래닛</button></p>'
+      >🛎️투표 가이드🛎️</div>
 
       <!-- 뮤빗 가이드 -->
       <div class="border1 grid-button openModalBtn"
-           data-title="뮤빗 가이드"
+           data-title="뮤빗 영상 스밍"
            data-text="텍스트 입력란"
-           data-buttons='
+       data-buttons='
           <img class="voteimg" src="/images/51.png" alt="1">
-          <p>Hello world</p>
-          <img class="voteimg" src="/images/unnamed.png" alt="2">'
-      >♏ 뮤빗 가이드 ♏</div>
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>''
+      >♏뮤빗 영상 스밍♏</div>
+
+            <!-- 유튜브 가이드 -->
+      <div class="border1 grid-button openModalBtn"
+           data-title="유튜브 스트리밍 가이드"
+           data-text="텍스트 입력란"
+       data-buttons='
+          <img class="voteimg" src="/images/51.png" alt="1">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>''
+      >🎯유튜브 스밍🎯</div>
+
+             <!-- 사운드 어시스턴트 가이드 -->
+      <div class="border1 grid-button openModalBtn"
+           data-title="사운드 어시스턴트 가이드"
+           data-text="텍스트 입력란"
+       data-buttons='
+          <img class="voteimg" src="/images/assistant.jpg" alt="1">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`https://cafe.naver.com/2chanwon/833837?tc=shared_link`)">자세한 내용은 여기로</button>''
+      >📣사운드어시스턴트📣</div>
     </div>
   </main>
 
@@ -236,11 +258,116 @@
                               (btn.getAttribute('data-buttons')||'') +
                               '</div>';
         modal.style.display='block';
+    const samsungBtn = modalText.querySelector('.samsungBtn');
+          if (samsungBtn) {
+            samsungBtn.addEventListener('click', () => {
+              modalText.innerHTML =
+                '🍈멜론🍈 <div class="modal-buttons">' +
+               '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
+              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' + '</div>' +
+               '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +'</div>' +
+           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +'</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
+'</div>' +
+              '</div>';
+            });
+          }
+
+          const samsungBtn1 = modalText.querySelector('.samsungBtn1');
+          if (samsungBtn1) {
+            samsungBtn1.addEventListener('click', () => {
+              modalText.innerHTML =
+                '🧞‍♂️지니🧞‍♂️ <div class="modal-buttons">' +
+                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +
+           '</div>' +
+           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
+              '</div>' +
+              '</div>';
+            });
+          }
+
+          const samsungBtn2 = modalText.querySelector('.samsungBtn2');
+          if (samsungBtn2) {
+            samsungBtn2.addEventListener('click', () => {
+              modalText.innerHTML =
+                '🐛벅스🐛 <div class="modal-buttons">' +
+                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +
+           '</div>' +
+           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
+              '</div>' +
+              '</div>';
+            });
+          }
+          
+          const samsungBtn3 = modalText.querySelector('.samsungBtn3');
+          if (samsungBtn3) {
+            samsungBtn3.addEventListener('click', () => {
+              modalText.innerHTML =
+                '♈️바이브♈️ <div class="modal-buttons">' +
+                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +
+           '</div>' +
+           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
+              '</div>' +
+              '</div>';
+            });
+          }
+          
+          const samsungBtn4 = modalText.querySelector('.samsungBtn4');
+          if (samsungBtn4) {
+            samsungBtn4.addEventListener('click', () => {
+              modalText.innerHTML =
+                '💠플로💠 <div class="modal-buttons">' +
+                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +
+           '</div>' +
+           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +
+          '</div>' +
+          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
+              '</div>' +
+              '</div>';
+            });
+          }
+
       });
     });
+    
 
     closeModalBtn.addEventListener('click',()=>{modal.style.display='none';});
     window.addEventListener('click', e=>{if(e.target===modal) modal.style.display='none';});
+
+
   </script>
 </body>
 </html>
