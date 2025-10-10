@@ -16,14 +16,14 @@
     /* 버튼 */
 .sms-button, .sms-button1 {
   display: inline-block;
-  width: 220px;        /* 버튼 가로 고정 */
+  width: 300px;        /* 버튼 가로 고정 */
   height: 60px;        /* 버튼 세로 고정 */
   line-height: 1.2;    /* 텍스트 줄 높이 */
   font-size: 18px;
   font-weight: bold;
   color: #0070d1;
   background-color: #fff;
-  border: 2px solid rgb(88, 88, 88);
+  border: 1px solid rgb(88, 88, 88);
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -128,16 +128,67 @@
   <!-- 본문 -->
   <main>
     <a class="sms-button" href="sms:%230505?body=이찬원">💌음악중심 문자투표💌</a>
+&nbsp;
     <a class="sms-button openModalBtn" 
-       data-title="팬캐스트" 
+       data-title="[뮤직뱅크] 팬캐스트" 
        data-text="텍스트 입력란."
        data-buttons='
-         <p style="margin-top: 15px; margin-bottom: 10px;">
-           <button class="sms-button samsungBtn" data-action="showSamsung">삼성/LG</button>
-           <button class="sms-button" onclick="window.open(`https://han.gl/wqW2G`)">애플</button>
-         </p>
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <img class="voteimg" src="/images/51.png" alt="1">
+          <p>Hello world</p>
+          <img class="voteimg" src="/images/unnamed.png" alt="2">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>
        '>
-       팬캐스트 투표
+      팬캐스트 투표하기
+    </a>
+&nbsp;
+    <a class="sms-button openModalBtn" 
+       data-title="[음악중심] 뮤빗" 
+       data-text="텍스트 입력란."
+       data-buttons='
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <img class="voteimg" src="/images/51.png" alt="1">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>
+       '>
+      뮤빗 투표하기
+    </a>
+&nbsp;
+        <a class="sms-button openModalBtn" 
+       data-title="[인기가요] LiNC" 
+       data-text="텍스트 입력란."
+       data-buttons='
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <img class="voteimg" src="/images/51.png" alt="1">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>
+       '>
+      LiNC 투표하기
+    </a>
+&nbsp;
+        <a class="sms-button openModalBtn" 
+       data-title="[인기가요] 하이어" 
+       data-text="텍스트 입력란."
+       data-buttons='
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <img class="voteimg" src="/images/51.png" alt="1">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>
+       '>
+      하이어 투표하기
+    </a>
+&nbsp;
+        <a class="sms-button openModalBtn" 
+       data-title="[더쇼] 스타플래닛" 
+       data-text="텍스트 입력란."
+       data-buttons='
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <img class="voteimg" src="/images/51.png" alt="1">
+          <p style="margin-top: 15px; margin-bottom: 10px;">
+          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>
+       '>
+      스타플래닛 투표하기
     </a>
   </main>
 
