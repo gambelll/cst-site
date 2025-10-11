@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>이찬원 정규2집 초집중</title>
+  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+
+    /* SMS 버튼 */
+    .sms-button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0070d1;
+      background-color: #fff;
+      border: 2px solid #ffb8ea;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .sms-button:hover {
+      background-color: #ffb8ea;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+
+    /* 기본 스타일 */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+
+    body {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* 상단바 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2vh 5vw;
+      background-color: #fce7e3;
+      border-bottom: 0.2vh solid #e0e0e0;
+      z-index: 100;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .logo-section img {
+      height: 6vh;
+      margin-right: 1vw;
+    }
+
+    .logo-text { font-size: 2.5vh; }
+
+    /* 본문 */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      text-align: center;
+      padding: 5vh 5vw;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    main img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* 푸터 */
+    .site-footer {
+      background: #f9f9f9;
+      padding: 5vh 5vw;
+      font-size: 1.5vh;
+      color: #555;
+      border-top: 0.1vh solid #ddd;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2vw;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+    }
+
+    .album-cover {
+      width: 6vh;
+      height: 6vh;
+      border-radius: 1vh;
+      object-fit: cover;
+    }
+
+    .footer-right { text-align: left; flex: 1; min-width: 200px; }
+    .footer-right p { margin: 0.5vh 0; }
+
+    /* 사이드 메뉴 */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: white;
+      color: black;
+      padding: 60px 20px 20px 20px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    }
+    .side-menu.open { right: 0; }
+    .side-menu ul { list-style: none; padding: 0; margin-top: 20px; }
+    .side-menu li { margin: 20px 0; }
+    .side-menu a { color: black; font-size: 1.1rem; font-weight: 500; }
+
+    /* 닫기 버튼 */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: black;
+      font-weight: bold;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* 햄버거 버튼 */
+    .hamburger {
+      font-size: 28px;
+      cursor: pointer;
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 900;
+    }
+
+    #closeBtn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: black;
+      font-weight: bold;
+      z-index: 1000;
+    }
+
+    .font1 { font-family: "궁서체"; }
+
+main img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* 가운데 정렬 */
+  border-radius: 10px; /* 살짝 둥글게 (선택사항) */
+}
+
+/* 큰 화면 (데스크톱) */
+@media (min-width: 1025px) {
+  main img {
+    width: 90%; /* 전체 창의 90%만 사용 */
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media (max-width: 1024px) and (min-width: 601px) {
+  main img {
+    width: 80%;
+  }
+}
+
+/* 작은 화면 (모바일) */
+@media (max-width: 600px) {
+  main img {
+    width: 95%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 상단바 -->
+  <header class="top-bar">
+    <a class="logo-section" href="index.html">
+      <img src="favicon/channels4_profile-removebg-preview.png" alt="로고" />
+      <span class="logo-text">이찬원 정규2집 초집중</span>
+    </a>
+    <div include-html="components/menu.html"></div>
+  </header>
+
+  <!-- 햄버거 버튼 -->
+  <div class="hamburger">☰</div>
+
+  <!-- 본문 -->
+  <main>
+    <h1 class="font1">🍈 멜론 재생설정 🍈</h1>
+    <br><br>
+    <img src="/images/melon_play.jpg" alt="멜론 재생 설정 안내 이미지">
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버" />
+        <h2>이찬원 정규2집 초집중</h2>
+      </div>
+      <div class="footer-right">
+        <h3>CHAN'S SUPPORTER TEAM</h3>
+        <p>X(트위터): <a href="mailto:@chans_CST">@chans_CST</a></p>
+        <p>Copyright © CHAN'S SUPPORTER TEAM All rights reserved.</p>
+        <p><a href="#">개인정보보호정책</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // include-html 함수
+    function includeHTML(callback) {
+      const elements = document.querySelectorAll('[include-html]');
+      let count = elements.length;
+      if (count === 0) callback?.();
+      elements.forEach(el => {
+        const file = el.getAttribute('include-html');
+        if (file) {
+          fetch(file)
+            .then(res => res.ok ? res.text() : Promise.reject())
+            .then(data => {
+              el.innerHTML = data;
+              el.removeAttribute('include-html');
+              count--;
+              if (count === 0) callback?.();
+            })
+            .catch(() => {
+              el.innerHTML = "내용을 불러올 수 없습니다.";
+              count--;
+              if (count === 0) callback?.();
+            });
+        }
+      });
+    }
+
+    // 실행
+    window.addEventListener("DOMContentLoaded", () => {
+      includeHTML(() => {
+        const hamburger = document.querySelector(".hamburger");
+        const sideMenu = document.getElementById("sideMenu");
+        const closeBtn = document.getElementById("closeBtn");
+
+        hamburger?.addEventListener("click", () => {
+          sideMenu?.classList.add("open");
+          hamburger.style.display = "none";
+        });
+
+        closeBtn?.addEventListener("click", () => {
+          sideMenu?.classList.remove("open");
+          hamburger.style.display = "block";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
