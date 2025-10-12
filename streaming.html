@@ -104,6 +104,27 @@ margin → 한 번에 모든 방향 지정 가능 (margin: 5px 5px 5px 0;)
     @media(max-width:1024px){.grid-button{font-size:1.3rem;}}
     @media(max-width:768px){.logo-text{font-size:4vw;}.grid-button{font-size:4vw;}.album-cover{width:5vh;height:5vh;}}
     @media(max-width:480px){.grid-button{font-size:6vw;}.logo-text{font-size:5vw;}}
+
+    /* 큰 화면 (데스크톱) */
+@media (min-width: 1025px) {
+  main img {
+    width: 90%; /* 전체 창의 90%만 사용 */
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media (max-width: 1024px) and (min-width: 601px) {
+  main img {
+    width: 80%;
+  }
+}
+
+/* 작은 화면 (모바일) */
+@media (max-width: 600px) {
+  main img {
+    width: 95%;
+  }
+}
   </style>
 </head>
 <body>
@@ -124,6 +145,7 @@ margin → 한 번에 모든 방향 지정 가능 (margin: 5px 5px 5px 0;)
   <main>
     <h1>음원 원클릭</h1>
     <p style="margin-top: 50px; margin-bottom: 10px;"></p>
+
     <div class="button-grid">
 
       <!-- 멜론 -->
@@ -163,15 +185,14 @@ margin → 한 번에 모든 방향 지정 가능 (margin: 5px 5px 5px 0;)
            data-title="바이브 원클릭 스밍"
            data-text="순서대로 클릭해주세요."
            data-buttons='
-             <div class="vibe-buttons">
+               <p style="margin-top: 15px; margin-bottom: 10px;">
                <button class="sms-button" onclick="window.open(`https://han.gl/QXaD4`)">1</button>
-               <button class="sms-button" onclick="window.open(`https://han.gl/4g9UV`)">2</button>
+               <button class="sms-button" onclick="window.open(`https://han.gl/4g9UV`)">2</button></p>
+               <p style="margin-top: 15px; margin-bottom: 10px;">
                <button class="sms-button" onclick="window.open(`https://han.gl/VxAxR`)">3</button>
-               <button class="sms-button" onclick="window.open(`https://han.gl/Rvy7P`)">4</button>
-             </div>
-             <div class="vibe-guide-button">
-               <button class="sms-button1" onclick="location.href=`s_vibe.html`">바이브 재생설정</button>
-             </div>'>
+               <button class="sms-button" onclick="window.open(`https://han.gl/Rvy7P`)">4</button></p>
+               <p style="margin-top: 15px; margin-bottom: 10px;">
+               <button class="sms-button1" onclick="location.href=`s_vibe.html`">바이브 재생설정</button></p>'>
         ♈️ 바이브 ♈️
       </div>
       
@@ -186,6 +207,8 @@ margin → 한 번에 모든 방향 지정 가능 (margin: 5px 5px 5px 0;)
         💠 플로 💠
       </div>      
     </div>
+    <p style="margin-top: 15px; margin-bottom: 10px;"></p>
+        <img src="/images/tmafl.jpg" alt="스밍리스트">
   </main>
 
   <!-- 모달 -->
