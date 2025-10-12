@@ -109,6 +109,34 @@
     .close-btn {position:absolute; top:10px; right:15px; font-size:2rem; background:none; border:none; cursor:pointer; color:black; font-weight:bold; padding:0; line-height:1;}
 
 .font1 { font-family: "궁서체"; }
+main img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* 가운데 정렬 */
+  border-radius: 10px; /* 살짝 둥글게 (선택사항) */
+}
+
+/* 큰 화면 (데스크톱) */
+@media (min-width: 1025px) {
+  main img {
+    width: 90%; /* 전체 창의 90%만 사용 */
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media (max-width: 1024px) and (min-width: 601px) {
+  main img {
+    width: 80%;
+  }
+}
+
+/* 작은 화면 (모바일) */
+@media (max-width: 600px) {
+  main img {
+    width: 95%;
+  }
+}
 </style>
 </head>
 <body>
@@ -278,11 +306,11 @@
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<button class="sms-button" onclick="window.open(`g_melon2.html`)">이용권 구매하기</button>' +'</div>' +
                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_melon2.html`)">뮤직웨이브</button>' +'</div>' +
+              '<button class="sms-button" onclick="window.open(`g_melon3.html`)">뮤직웨이브</button>' +'</div>' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_melon3.html`)">다운로드</button>' +'</div>' +
+              '<button class="sms-button" onclick="window.open(`g_melon4.html`)">다운로드</button>' +'</div>' +
           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_melon4.html`)">선물</button>' +
+              '<button class="sms-button" onclick="window.open(`g_melon5.html`)">선물</button>' +
 '</div>' +
               '</div>';
             });
@@ -318,13 +346,13 @@
               '<button class="sms-button" onclick="window.open(`g_bugs1.html`)">가입/계정추가</button>' +
           '</div>' +
           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_bugs2.html`)">폰에서 다운</button>' +
+              '<button class="sms-button" onclick="window.open(`g_bugs2.html`)">다운/삭제</button>' +
            '</div>' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_bugs3.html`)">PC에서 다운</button>' +
+              '<button class="sms-button" onclick="window.open(`g_bugs3.html`)">3</button>' +
           '</div>' +
           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_bugs4.html`)">다운 후 삭제</button>' +
+              '<button class="sms-button" onclick="window.open(`g_bugs4.html`)">4</button>' +
               '</div>' +
               '</div>';
             });
