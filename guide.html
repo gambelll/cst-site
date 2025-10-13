@@ -96,9 +96,9 @@
     @media(max-width:768px){.logo-text{font-size:4vw;}.grid-button{font-size:4vw;}.album-cover{width:5vh;height:5vh;}}
     @media(max-width:480px){.grid-button{font-size:6vw;}.logo-text{font-size:5vw;}}
 
-    .voteimg {margin:10% auto; padding:40px 20px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
-    .voteimg1 {margin:5% auto; padding:40px 20px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
-    .voteimg2 {margin:10% auto; padding:40px 20px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
+    .voteimg {padding:1px 15px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
+    .voteimg1 {padding:1px 15px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
+    .voteimg2 {padding:1px 15px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
 
     /* 사이드 메뉴 */
     .side-menu {position:fixed; top:0; right:-250px; width:250px; height:100%; background:#fff; color:#000; padding:60px 20px 20px 20px; transition:right 0.3s ease; z-index:1500; box-shadow:-2px 0 5px rgba(0,0,0,0.1);}
@@ -108,7 +108,9 @@
     .side-menu a {color:black; font-size:1.1rem; font-weight:500;}
     .close-btn {position:absolute; top:10px; right:15px; font-size:2rem; background:none; border:none; cursor:pointer; color:black; font-weight:bold; padding:0; line-height:1;}
 
-.font1 { font-family: "궁서체"; }
+    .font1 { font-family: "궁서체"; }
+    .font2 { font-family: "굴림체"; }
+
 main img {
   max-width: 100%;
   height: auto;
@@ -161,22 +163,25 @@ main img {
       <!-- 음원 가이드 -->
       <div class="border1 grid-button openModalBtn"
            data-title="음원 가이드" 
-           data-text="아래 버튼을 누르면 해당 가이드로 이동합니다."
+           data-text="(아래 버튼을 누르면 해당 가이드로 이동합니다.)"
            data-buttons='
           <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn">🍈멜론🍈</button></p>
           <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn1">🧞‍♂️지니🧞‍♂️</button></p>
           <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn2">🐛벅스🐛</button></p>
           <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn3">♈️바이브♈️</button></p>
           <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn4">💠플로💠</button></p>
+          <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button samsungBtn5">🐤카카오뮤직🐤</button></p>
           '>
           🎵음원 가이드🎵</div>
 
       <!-- 투표 가이드 -->
       <div class="border1 grid-button openModalBtn"
-            data-title="투표 우선순위"
-            data-text="아래 버튼을 누르시면 해당 가이드로 이동합니다."
+            data-title="🛎️투표 우선순위🛎️"
+            data-text="(아래 버튼을 누르시면 해당 가이드로 이동합니다.)"
             data-buttons='
-          <img class="voteimg1" src="/images/priority.png" alt="1">
+          <p style="margin-top: 30px; margin-bottom: 20px;">
+            <img class="voteimg1" src="/images/vote_priority.png" alt="1">
+                      <p style="margin-top: 15px; margin-bottom: 10px;">
             <button class="sms-button" onclick="window.open(`https://cafe.naver.com/2chanwon/1941459?tc=shared_link`)">팬캐스트</button></p>
           <p style="margin-top: 15px; margin-bottom: 10px;">
             <button class="sms-button samsungBtn" onclick="window.open(`https://cafe.naver.com/2chanwon/1941460?tc=shared_link`)">뮤빗</button></p>
@@ -191,33 +196,72 @@ main img {
 
       <!-- 뮤빗 가이드 -->
       <div class="border1 grid-button openModalBtn"
-           data-title="뮤빗 영상 스밍"
-           data-text="매일 계정별로 재생해주시길 바랍니다."
+           data-title="♏뮤빗 영상 스밍♏"
+           data-text="(매일 계정별로 재생해주시길 바랍니다.)"
        data-buttons='
-              <p style="margin-top: 30px; margin-bottom: 20px;">
-          <h2>뮤빗 영상을 재생하시면 투표에 사용하실 수 있는 하트 비트가 지급됩니다. </h2>
-              <p style="margin-top: 30px; margin-bottom: 20px;">
-          <h1 style="color: red;">뮤빗 플레이리스트 15곡 재생 </h1>
-              <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3>✅️ 영상 재생 완료시 3하트비트 지급<br>
+              <p style="margin-top: 30px; margin-bottom: 20px;"></p>  
+          <h4 class="font2">뮤빗 영상을 재생하시면 투표에 사용하실 수 있는 하트 비트가 지급됩니다. </h4>
+              <p style="margin-top: 30px; margin-bottom: 20px;"></p>  
+          <h2 style="color: white; background-color: red; display: inline;">플레이리스트 15곡 재생</h2>
+              <p style="margin-top: 10px; margin-bottom: 10px;"></p>  
+<h4 class="font2">✅️ 영상 재생 완료시 3하트비트 지급<br>
     ✅️ 1일 계정별로 15곡까지 적용<br>
-    💥💥 폰을 자주 못 만지는 시간에 돌려놓기만 하면 한시간 이내 계정별 45하트비트 적립
-              <p style="margin-top: 30px; margin-bottom: 20px;">
-          <button class="sms-button" style="width: 280px;"  onclick="window.open(`https://mubeat.applink.info/1cYX5BnOV9`)">♏️ CST 15곡 플레이 리스트</button>
-                    <img class="voteimg" src="/images/mubit.jpg" alt="1">
+    💥💥 폰을 자주 못 만지는 시간에 돌려놓기만 하면 한시간 이내 계정별 45하트비트 적립</h3>
+              <p style="margin-top: 30px; margin-bottom: 20px;"></p>  
+          <button class="sms-button" style="width: 280px;"  onclick="window.open(`https://mubeat.applink.info/1cYX5BnOV9`)">(클릭!) CST 플레이 리스트</button>
+          <p style="margin-top: 30px; margin-bottom: 20px;"></p>          
+          <img class="voteimg" src="/images/mubit.jpg" alt="1">
            '>
-          ♏뮤빗 영상 스밍♏</div>
+          ♏뮤빗 영상 스밍♏
+        </div>
 
             <!-- 유튜브 가이드 -->
-      <div class="border1 grid-button openModalBtn"
-           data-title="유튜브 스트리밍 가이드"
-           data-text="텍스트 입력란"
-       data-buttons='
-          <img class="voteimg" src="/images/51.png" alt="1">
-          <p style="margin-top: 5px; margin-bottom: 10px;">
-          <button class="sms-button" onclick="window.open(`주소`)">자세한 내용은 여기로</button>
-          '>
-          🎯유튜브 스밍🎯</div>
+<div class="border1 grid-button openModalBtn"
+     data-title="🎯유튜브 스트리밍 가이드🎯"
+     data-text="텍스트 입력란"
+     data-buttons='
+       
+뮤직비디오의 조회수를 확보하기 위한 유튜브 수동재생 가이드를 안내 드립니다.
+<img class="voteimg" src="/images/youtube1.jpg" alt="1">
+
+
+     <h2 style="text-align: left;">계정마다 좋아요👍🏻와 댓글💬 필수!!</h2>
+
+<h3 style="text-align: left;">1단계: 불특정 다수에게 노출 되게 하라</h3>
+
+<h4 style="text-align: left;">1. [이찬원] 검색해서 영상 찾아 보셨나요?<br>
+2. 지인들에게 카톡 공유하셨나요?<br>
+3. 나의 SNS에 공유하셨나요?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(인스타그램, 트위터, 블로그 등)</h4>
+
+<h3 style="text-align: left;">2단계: 수동재생으로 영상의 온도를 올려라</h3>
+
+<h4 style="text-align: left;">✅️ 계정별 수동재생</h4>
+<h5 style="text-align: left;">구글 계정별 1회 스밍 후 좋아요, 댓글 쓰기</h5> 
+
+<h4 style="text-align: left;">✅️ 카톡 수동재생</h4>
+<h5 style="text-align: left;">
+1. 유튜브에서 [이찬원] 검색 후 영상 찾기<br>
+2. 카톡 나에게 공유하기로 내 카톡으로 공유 <br>
+3. 카톡에서 링크 열어 로그아웃 상태로 재생 <br>
+4. 재생이 끝났다면 창 끄기 <br>
+5. 위의 3번과 4번을 4~5회 반복하기 <br>
+*광고는 건너뛰기<br><br>
+👉영상이 나온 후 24시간 동안은 최대한 수동재생으로 응원해주세요. 
+&nbsp;&nbsp;&nbsp;&nbsp;(재생목록은 필요시에만)
+</h5>
+
+<h2 style="text-align: left;">👇 유튜브 수동재생 집중 가이드 👇</h2>
+<p style="margin-top: 15px; margin-bottom: 10px;"></p>
+<img class="voteimg" src="/images/youtube1.jpg" alt="1">
+<img class="voteimg" src="/images/youtube2.jpg" alt="1">
+<img class="voteimg" src="/images/youtube3.jpg" alt="1">
+<p style="margin-top: 5px; margin-bottom: 10px;"></p>
+
+'>
+🎯유튜브 스밍🎯
+</div>
+
 
              <!-- 사운드 어시스턴트 가이드 -->
       <div class="border1 grid-button openModalBtn"
@@ -308,6 +352,7 @@ main img {
                               (btn.getAttribute('data-buttons')||'') +
                               '</div>';
         modal.style.display='block';
+        
     const samsungBtn = modalText.querySelector('.samsungBtn');
           if (samsungBtn) {
             samsungBtn.addEventListener('click', () => {
@@ -339,12 +384,6 @@ main img {
           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<button class="sms-button" onclick="window.open(`g_genie2.html`)">다운/삭제</button>' +
            '</div>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_genie3.html`)">선물</button>' +
-          '</div>' +
-          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_genie4.html`)">4</button>' +
-              '</div>' +
               '</div>';
             });
           }
@@ -360,12 +399,6 @@ main img {
           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<button class="sms-button" onclick="window.open(`g_bugs2.html`)">다운/삭제</button>' +
            '</div>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_bugs3.html`)">3</button>' +
-          '</div>' +
-          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_bugs4.html`)">4</button>' +
-              '</div>' +
               '</div>';
             });
           }
@@ -376,17 +409,11 @@ main img {
               modalText.innerHTML =
                 '♈️바이브♈️ <div class="modal-buttons">' +
                 '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_vibe1.html`)">가입/계정추가</button>' +
+              '<button class="sms-button" onclick="window.open(`g_vibe1.html`)">이용권 구매</button>' +
           '</div>' +
           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<button class="sms-button" onclick="window.open(`g_vibe2.html`)">다운/삭제</button>' +
            '</div>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_vibe3.html`)">노래방</button>' +
-          '</div>' +
-          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_vibe4.html`)">4</button>' +
-              '</div>' +
               '</div>';
             });
           }
@@ -399,19 +426,22 @@ main img {
                 '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<button class="sms-button" onclick="window.open(`g_flo1.html`)">가입/계정추가</button>' +
           '</div>' +
-          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_flo2.html`)">2</button>' +
-           '</div>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_flo3.html`)">3</button>' +
-          '</div>' +
-          '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`g_flo4.html`)">4</button>' +
-              '</div>' +
               '</div>';
             });
           }
 
+
+                    const samsungBtn5 = modalText.querySelector('.samsungBtn5');
+          if (samsungBtn5) {
+            samsungBtn5.addEventListener('click', () => {
+              modalText.innerHTML =
+                '🐤카카오뮤직🐤 <div class="modal-buttons">' +
+                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
+              '<button class="sms-button" onclick="window.open(`g_kamu1.html`)">bgm 다운하기</button>' +
+           '</div>' +
+              '</div>';
+            });
+          }
       });
     });
     
