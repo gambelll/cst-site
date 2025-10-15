@@ -15,7 +15,7 @@
 
     /* 버튼 */
     .sms-button, .sms-button1 {
-      width: 230px;        /* 버튼 가로 고정 */
+      width: 250px;        /* 버튼 가로 고정 */
       height: 60px;        /* 버튼 세로 고정 */
       line-height: 1.2;    /* 텍스트 줄 높이 */
       font-size: 18px;
@@ -158,8 +158,8 @@ main img {
   <!-- 본문 -->
   <main>
     <h1 style="display: inline-block;  background-color: #E7B2A5;  color: #464646;   padding: 4px 10px;  border-radius: 6px;  font-weight: 700;"> 이찬원 &lt;오늘은 왠지&gt;</h1>
-    <h6> </h6>
-     <h1 class="font1"> 📻라디오 신청 원클릭📻</h1>
+    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
+     <h2 class="font1"> 📻라디오 신청 원클릭📻</h2>
     <p style="margin-top: 50px; margin-bottom: 30px;"></p>
     <div class="button-grid">
       <div class="border1 grid-button openModalBtn"
@@ -274,22 +274,24 @@ main img {
             samsungBtn.addEventListener('click', () => {
               modalText.innerHTML =
                 '<div class="modal-buttons">' +
-               '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
+                  '<div style="text-align: left;">' +
+                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
               '<h2 class="font1">💥라디오 신청시 유의사항 💥</h2>' + '</div>' +
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h3 class="font2">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
 
-           '<div style="margin-top: 50px; margin-bottom: 30px;">' +
-              ' <h3>👇KBS COOL FM 신청곡👇</h3> ' +
+           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
+              ' <h3>👇MBC FM4U 신청곡👇</h3> ' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h4 class="font2">*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
               '<h4 class="font2">➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +          
-              '<span><a class="sms-button" href="sms:%238910?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청곡</a></span> ' +
+              '<span><a class="sms-button" href="sms:%238910?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +
            '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/kbs_cool.jpg" alt="쿨에프엠">' +'</div>' +
-'</div>' +
-              '</div>';
+              ' <img class="voteimg" src="/images/mbc_fm4u.jpg" alt="쿨에프엠">' +'</div>' +
+           '</div>' +
+           '</div>' +              
+           '</div>';
             });
           }
 
@@ -298,12 +300,13 @@ main img {
             samsungBtn1.addEventListener('click', () => {
               modalText.innerHTML =
                 '<div class="modal-buttons">' +
-                '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
-              '<h2 class="font1">💥라디오 신청시 유의사항 💥</h2>' + '</div>' +
+                  '<div style="text-align: left;">' +
+                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
+              '<h2 class="font1">💥 라디오 신청시 유의사항 💥</h2>' + '</div>' +
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h3 class="font2">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
 
-           '<div style="margin-top: 50px; margin-bottom: 30px;">' +
+           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <h3>👇KBS HAPPY FM 신청곡👇</h3> ' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h4 class="font2">*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
@@ -313,6 +316,7 @@ main img {
            '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <img class="voteimg" src="/images/kbs_happy.jpg" alt="해피에프엠">' +'</div>' +
            '</div>' +
+            '<div>' +
               '</div>';
             });
           }
@@ -322,12 +326,13 @@ main img {
             samsungBtn2.addEventListener('click', () => {
               modalText.innerHTML =
                 '<div class="modal-buttons">' +
-                '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
-              '<h2 class="font1">💥라디오 신청시 유의사항 💥</h2>' + '</div>' +
+                  '<div style="text-align: left;">'+
+                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
+              '<h2 class="font1">💥 라디오 신청시 유의사항 💥</h2>' + '</div>' +
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h3 class="font2">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
 
-           '<div style="margin-top: 50px; margin-bottom: 30px;">' +
+           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <h3>👇MBC FM4U 신청곡👇</h3> ' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h4 class="font2">*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
@@ -337,7 +342,8 @@ main img {
            '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <img class="voteimg" src="/images/mbc_fm4u.jpg" alt="에프엠포유">' +'</div>' +
            '</div>' +
-              '</div>';
+           '</div>' +              
+           '</div>';
             });
           }
           
@@ -346,12 +352,13 @@ main img {
             samsungBtn3.addEventListener('click', () => {
               modalText.innerHTML =
                 '<div class="modal-buttons">' +
-                '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
-              '<h2 class="font1">💥라디오 신청시 유의사항 💥</h2>' + '</div>' +
+                  '<div style="text-align: left;">' +
+                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
+              '<h2 class="font1">💥 라디오 신청시 유의사항 💥</h2>' + '</div>' +
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h3 class="font2">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
 
-           '<div style="margin-top: 50px; margin-bottom: 30px;">' +
+           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <h3>👇MBC 표준 FM 신청곡👇</h3> ' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h4 class="font2">*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
@@ -361,6 +368,7 @@ main img {
            '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <img class="voteimg" src="/images/mbc_vywns.jpg" alt="표준에프엠">' +'</div>' +
            '</div>' +
+            '<div>' +
               '</div>';
             });
           }
@@ -370,12 +378,13 @@ main img {
             samsungBtn4.addEventListener('click', () => {
               modalText.innerHTML =
                 '<div class="modal-buttons">' +
-                '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
-              '<h2 class="font1">💥라디오 신청시 유의사항 💥</h2>' + '</div>' +
+                  '<div style="text-align: left;">' +
+                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
+              '<h2 class="font1">💥 라디오 신청시 유의사항 💥</h2>' + '</div>' +
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h3 class="font2">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
 
-           '<div style="margin-top: 50px; margin-bottom: 30px;">' +
+           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <h3>👇SBS 파워 FM 신청곡👇</h3> ' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h4 class="font2">*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
@@ -385,6 +394,7 @@ main img {
            '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <img class="voteimg" src="/images/sbs_power.jpg" alt="파워에프엠">' +'</div>' +
           '</div>' +
+           '<div>' +
               '</div>';
             });
           }
@@ -395,12 +405,13 @@ main img {
             samsungBtn5.addEventListener('click', () => {
               modalText.innerHTML =
                 '<div class="modal-buttons">' +
-                '<div style="margin-top: 15px; margin-bottom: 10px;">' + 
-              '<h2 class="font1">💥라디오 신청시 유의사항 💥</h2>' + '</div>' +
+                  '<div style="text-align: left;">' +
+                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
+              '<h2 class="font1">💥 라디오 신청시 유의사항 💥</h2>' + '</div>' +
                              '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h3 class="font2">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
 
-           '<div style="margin-top: 50px; margin-bottom: 30px;">' +
+           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <h3>👇SBS 러브 FM 신청곡👇</h3> ' +
            '<div style="margin-top: 15px; margin-bottom: 10px;">' +
               '<h4 class="font2">*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
@@ -410,6 +421,7 @@ main img {
            '<div style="margin-top: 30px; margin-bottom: 20px;">' +
               ' <img class="voteimg" src="/images/sbs_love.jpg" alt="러브에프엠">' +'</div>' +
            '</div>' +
+           '<div>' +
               '</div>';
             });
           }
