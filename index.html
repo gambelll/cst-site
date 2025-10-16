@@ -455,12 +455,12 @@
   <div class="youtube-card">
   <h3> 📈 유튜브 추이</h3>
   <div class="video-wrapper">
-    <iframe
-      src="https://www.youtube.com/watch?v=nPdAYsCxcO8&list=RDnPdAYsCxcO8&start_radio=1autoplay=1&mute=1"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    ></iframe>
+   <iframe
+  src="https://www.youtube.com/embed/nPdAYsCxcO8?list=RDnPdAYsCxcO8&autoplay=1&mute=1"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen>
+</iframe>
   </div>
   <div class="youtube-stats">
     <div class="youtube123">
@@ -596,7 +596,7 @@
 });
 
 const API_KEY = 'AIzaSyDyBTeWrMGPDpFgT0zfqXV6SAdf3DwvC2c';
-const VIDEO_ID = 'AhmRaCQayv8';
+const VIDEO_ID = 'nPdAYsCxcO8';
 
 async function fetchVideoStats() {
   const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${VIDEO_ID}&key=${API_KEY}`;
@@ -622,5 +622,4 @@ setInterval(fetchVideoStats, 60000);
   </script>
 </body>
 </html>
-
 
