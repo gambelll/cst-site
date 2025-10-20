@@ -482,17 +482,16 @@
     <div class="grid-button border1" onclick="location.href='radio.html'">라디오 원클릭</div>
    </div>
   <div class="youtube-card">
-  <h3> 📈 유튜브 추이</h3>
+  <h3>📈 유튜브 추이</h3>
   <div class="video-wrapper">
-   <iframe
-  src="https://www.youtube.com/embed/ySfISbXiKOA?autoplay=1&mute=1"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen>
-</iframe>
-
-</iframe>
+    <iframe
+      src="https://www.youtube.com/embed/AIh7UA7UoYI?list=RDAIh7UA7UoYI&start_radio=1&autoplay=1&mute=1"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
   </div>
+
   <div class="youtube-stats">
     <div class="youtube123">
       <p>조회수</p>
@@ -627,7 +626,7 @@
 });
 
 const API_KEY = 'AIzaSyDyBTeWrMGPDpFgT0zfqXV6SAdf3DwvC2c';
-const VIDEO_ID = 'ySfISbXiKOA';
+const VIDEO_ID = 'AIh7UA7UoYI';
 
 async function fetchVideoStats() {
   const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${VIDEO_ID}&key=${API_KEY}`;
