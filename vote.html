@@ -109,7 +109,7 @@
 
 .voteimg {
   max-width: 100%;
-  max-height: 300px;
+
   object-fit: contain;
 }
 
@@ -152,6 +152,69 @@ main img {
     margin: 0 auto; /* 가로 중앙 정렬 */
     text-align: center;
   }
+
+  /* 전체 화면 어둡게 */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 모달 내용 */
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto; /* 이미지가 커도 스크롤 가능 */
+  }
+
+  /* 모달 안 이미지 */
+  .modal-content img {
+    width: 100%;
+    height: auto;         /* 비율 유지 */
+    object-fit: contain;  /* 안 잘리게 */
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .modal-content img:hover {
+    transform: scale(1.02);
+  }
+
+  /* 클릭 시 열릴 큰 이미지용 전체화면 모달 */
+  .image-modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-modal img {
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 10px;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px; right: 30px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+
   </style>
 </head>
 <body>
@@ -171,9 +234,60 @@ main img {
   <main>
     <h1 style="font-weight: bold;">투표 바로가기</h1>
     <p style="margin-top: 50px; margin-bottom: 10px;"></p>
+    <a class="sms-button openModalBtn voteimg" 
+   data-title="[음중] 스테이지 엠픽 투표" 
+   data-text="10월 25일 오후 5시~10월 30일 오전 11시"
+   data-buttons='
+     <div style="text-align: left;">
+       <p style="margin-top: 40px; margin-bottom: 20px;"></p>
+<h3>금일 쇼! 음악중심 생방송이 종료 된 후에 최고의 무대를 뽑는 [<span style="color: white; background-color: red;">스테이지 엠픽</span>]투표가 시작되었습니다.<br>
+  인기가요 핫스테이지상과 같이 <span style="color: white; background-color: red;">아티스트에게 트로피가 전달됩니다.</span>
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+<h2 style="font-weight:bold; color:blue;"> 투표기간: 10월 25일 오후 5시~10월 30일 오전 11시 </h2>
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+<h3>​뮤니버스 사이트에서 계정별 <span style="color: white; background-color: red;">매일 10표씩 투표</span>하기 
+&nbsp;&nbsp;(어플설치 없음, 광고보기 없음)<br>
+✔️네이버앱은 사용불가<br>
+✔️크롬, 삼성인터넷, 오페라, 웨일, 파이어폭스 가능<br>
+‼️예전 KGMA 칼리버스 투표 생각하세요‼️
+ <p style="margin-top: 30px; margin-bottom: 20px;"></p>
+👇사이트👇
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+<button class="sms-button" onclick="window.open(`muniverse.io/votehome`)">뮤니버스 바로가기</button>
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+👇로그인 방법👇
+ <img class="voteimg" src="/images/muni_login1.jpg" alt="1">
+      <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+       <img class="voteimg" src="/images/muni_login2.jpg" alt="1">
+      <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+       <img class="voteimg" src="/images/muni_login3.jpg" alt="1">
+      <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+👇투표방법👇
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+반드시 + 눌러 10 표 한번에 투표하기
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+<img class="voteimg" src="/images/muni_vote1.jpg" alt="1">
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+     <img class="voteimg" src="/images/muni_vote2.jpg" alt="1">
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+     <img class="voteimg" src="/images/muni_vote3.jpg" alt="1">
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+     <img class="voteimg" src="/images/muni_vote4.jpg" alt="1">
+     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
+ ​👇로그아웃 방법👇
+    <p style="margin-top: 15px; margin-bottom: 10px;">
+<img class="voteimg" src="/images/muni_logout1.jpg" alt="1">
+     <p style="margin-top: 15px; margin-bottom: 10px;">
+      <img class="voteimg" src="/images/muni_logout2.jpg" alt="1">
+     <p style="margin-top: 15px; margin-bottom: 10px;">
+    '>
+   🚨스테이지 엠빅 투표하기🚨
+</a>
+&nbsp;
     <a class="sms-button" href="sms:%230505?body=이찬원">💌음악중심 문자투표💌</a>
 &nbsp;
-    <a class="sms-button openModalBtn voteimg" 
+<!--미공-->
+    <!-- <a class="sms-button openModalBtn voteimg" 
    data-title="[뮤직뱅크] 팬캐스트" 
    data-text="곧 오픈 예정입니다."
    data-buttons='
@@ -232,7 +346,7 @@ main img {
           <p style="margin-top: 15px; margin-bottom: 10px;">
           <button class="sms-button" onclick="window.open(`주소`)">스타플래닛 투표하러 가기</button>
        '>
-      스타플래닛 투표하기
+      스타플래닛 투표하기 -->
     </a>
   </main>
 
