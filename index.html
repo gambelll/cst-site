@@ -415,7 +415,18 @@
   margin-top: 0.5vh;
 }
 
-
+  .musiccore-btn {
+    background-color: #ff85a2; /* 기본 핑크 */
+    color: white;
+    font-weight: bold;
+    border: 2px solid #ff5f8a;
+    transition: all 0.25s ease;
+  }
+  .musiccore-btn:hover {
+    background-color: #ff4d79; /* hover 시 진한 핑크 */
+    transform: scale(1.05); /* 살짝 커지는 효과 */
+    box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
+  }
 
   </style>
 </head>
@@ -482,7 +493,10 @@
     <div class="grid-button border1" onclick="location.href='guide.html'">가이드</div>
     <div class="grid-button border1" onclick="location.href='vote.html'">투표 바로가기</div>
     <div class="grid-button border1" onclick="location.href='radio.html'">라디오 원클릭</div>
-     <div class="grid-button border1" onclick="location.href='sms:%230505?body=이찬원'">💌 음악중심 문자투표 💌</div>
+
+     <div class="grid-button border1 musiccore-btn" onclick="location.href='sms:%230505?body=이찬원'">
+    💌 음악중심 문자투표 💌
+  </div>
    </div>
   <div class="youtube-card">
   <h3>📈 유튜브 추이</h3>
