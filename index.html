@@ -15,8 +15,9 @@
   <title>이찬원 정규2집 초집중 (메인)</title>
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
  <style>
     /* =========================
        기본 스타일
@@ -430,19 +431,24 @@
     box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
   }
 
-    #visitorCounter {
+
+ #visitorBox {
       display: none; /* 기본 숨김 */
       position: fixed;
       bottom: 10px;
       right: 10px;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
       color: #fff;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 15px;
+      border-radius: 12px;
       font-size: 14px;
+      width: 320px;
       z-index: 9999;
     }
-
+    canvas {
+      width: 100% !important;
+      height: 180px !important;
+    }
   </style>
 </head>
 <body>
@@ -538,7 +544,11 @@
   </div>
 </div>
 
-  <div id="visitorCounter"></div>
+<div id="visitorBox">
+    <p id="today"></p>
+    <p id="total"></p>
+    <canvas id="visitorChart"></canvas>
+  </div>
 
 </main>
 
@@ -686,8 +696,8 @@ fetchVideoStats();
 setInterval(fetchVideoStats, 60000);
 
 
-   // ===== Firebase 설정 복사해서 붙이기 =====
-    const firebaseConfig = {
+    // === Firebase 설정 (당신의 config 붙이기) ===
+const firebaseConfig = {
   apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
   authDomain: "visitor-counter-bf055.firebaseapp.com",
   projectId: "visitor-counter-bf055",
@@ -696,57 +706,73 @@ setInterval(fetchVideoStats, 60000);
   appId: "1:388207600708:web:5e9fc58d2ad75a3cd6c811",
   measurementId: "G-W7ZDT9H9D9"
 };
-    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
     async function updateVisitorCount() {
-      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-      const docRef = db.collection("visitors").doc(today);
-      const totalRef = db.collection("visitors").doc("total");
+      const today = new Date().toISOString().split('T')[0];
+      const todayDoc = db.collection('visitors').doc(today);
+      const totalDoc = db.collection('visitors').doc('total');
 
-      await db.runTransaction(async (tx) => {
-        const todayDoc = await tx.get(docRef);
-        const totalDoc = await tx.get(totalRef);
-
-        let todayCount = todayDoc.exists ? todayDoc.data().count : 0;
-        let totalCount = totalDoc.exists ? totalDoc.data().count : 0;
-
-        todayCount++;
-        totalCount++;
-
-        tx.set(docRef, { count: todayCount });
-        tx.set(totalRef, { count: totalCount });
+      await db.runTransaction(async tx => {
+        const t = await tx.get(todayDoc);
+        const g = await tx.get(totalDoc);
+        const todayCount = t.exists ? t.data().count + 1 : 1;
+        const totalCount = g.exists ? g.data().count + 1 : 1;
+        tx.set(todayDoc, { count: todayCount });
+        tx.set(totalDoc, { count: totalCount });
       });
     }
 
     async function loadVisitorData() {
-      const snapshot = await db.collection("visitors").get();
+      const snap = await db.collection('visitors').get();
       let data = {};
-      snapshot.forEach(doc => {
-        data[doc.id] = doc.data().count;
-      });
+      snap.forEach(doc => data[doc.id] = doc.data().count);
 
       const today = new Date().toISOString().split('T')[0];
       const todayCount = data[today] || 0;
-      const totalCount = data["total"] || 0;
+      const totalCount = data['total'] || 0;
 
-      // 최근 5일 정렬
-      const dateKeys = Object.keys(data).filter(k => k !== "total").sort().slice(-5);
-      let list = dateKeys.map(k => `<li>${k}: ${data[k]}명</li>`).join("");
+      // 날짜 정렬 후 최근 7일만 그래프
+      const keys = Object.keys(data)
+        .filter(k => k !== 'total')
+        .sort()
+        .slice(-7);
 
-      document.getElementById('visitorCounter').innerHTML = `
-        <p>오늘 방문자: ${todayCount}명</p>
-        <p>총 누적: ${totalCount}명</p>
-        <p>최근 방문자 수:</p>
-        <ul>${list}</ul>
-      `;
+      const values = keys.map(k => data[k]);
+
+      // 숫자 표시
+      document.getElementById('today').textContent = `📅 오늘 방문자: ${todayCount}명`;
+      document.getElementById('total').textContent = `🌏 총 누적 방문자: ${totalCount}명`;
+
+      // 그래프 표시
+      const ctx = document.getElementById('visitorChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: keys,
+          datasets: [{
+            label: '일별 방문자 수',
+            data: values,
+            borderWidth: 1,
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 1)'
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#fff' } },
+            y: { ticks: { color: '#fff' }, beginAtZero: true }
+          }
+        }
+      });
     }
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('admin') === 'showVisitor') {
-      document.getElementById('visitorCounter').style.display = 'block';
+      document.getElementById('visitorBox').style.display = 'block';
       updateVisitorCount().then(loadVisitorData);
     } else {
       updateVisitorCount();
