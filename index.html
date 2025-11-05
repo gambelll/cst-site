@@ -15,9 +15,12 @@
   <title>이찬원 정규2집 초집중 (메인)</title>
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Firebase & Chart.js -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
  <style>
     /* =========================
        기본 스타일
@@ -431,8 +434,8 @@
     box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
   }
 
-        #visitorBox {
-      display: none; /* 기본 숨김 */
+    #visitorBox {
+      display: none;
       position: fixed;
       bottom: 10px;
       right: 10px;
@@ -550,6 +553,7 @@
     <p id="total"></p>
     <canvas id="visitorChart"></canvas>
   </div>
+
 
 </main>
 
@@ -697,111 +701,123 @@ fetchVideoStats();
 setInterval(fetchVideoStats, 60000);
 
 
-    // === Firebase 설정 (당신의 config 붙이기) ===
-const firebaseConfig = {
-  apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
-  authDomain: "visitor-counter-bf055.firebaseapp.com",
-  projectId: "visitor-counter-bf055",
-  storageBucket: "visitor-counter-bf055.firebasestorage.app",
-  messagingSenderId: "388207600708",
-  appId: "1:388207600708:web:5e9fc58d2ad75a3cd6c811",
-  measurementId: "G-W7ZDT9H9D9"
-};
+<script>
+  // === Firebase 설정 (당신의 config 그대로 유지) ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
+    authDomain: "visitor-counter-bf055.firebaseapp.com",
+    projectId: "visitor-counter-bf055",
+    storageBucket: "visitor-counter-bf055.firebasestorage.app",
+    messagingSenderId: "388207600708",
+    appId: "1:388207600708:web:5e9fc58d2ad75a3cd6c811",
+    measurementId: "G-W7ZDT9H9D9"
+  };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-    // === 📅 방문자 수 업데이트 ===
-    async function updateVisitorCount() {
-      const today = new Date().toISOString().split('T')[0];
-      const todayDoc = db.collection('visitors').doc(today);
-      const totalDoc = db.collection('visitors').doc('total');
+  // === 📅 방문자 수 증가 ===
+  async function updateVisitorCount() {
+    const today = new Date().toISOString().split('T')[0];
+    const todayDoc = db.collection('visitors').doc(today);
+    const totalDoc = db.collection('visitors').doc('total');
 
-      await db.runTransaction(async tx => {
-        const t = await tx.get(todayDoc);
-        const g = await tx.get(totalDoc);
-        const todayCount = t.exists ? t.data().count + 1 : 1;
-        const totalCount = g.exists ? g.data().count + 1 : 1;
-        tx.set(todayDoc, { count: todayCount });
-        tx.set(totalDoc, { count: totalCount });
-      });
-    }
+    await db.runTransaction(async tx => {
+      const t = await tx.get(todayDoc);
+      const g = await tx.get(totalDoc);
+      const todayCount = t.exists ? t.data().count + 1 : 1;
+      const totalCount = g.exists ? g.data().count + 1 : 1;
+      tx.set(todayDoc, { count: todayCount }, { merge: true });
+      tx.set(totalDoc, { count: totalCount }, { merge: true });
+    });
+  }
 
-    // === 📊 방문자 데이터 로드 & 그래프 ===
-    async function loadVisitorData() {
-      const snap = await db.collection('visitors').get();
-      let data = {};
-      snap.forEach(doc => data[doc.id] = doc.data().count);
+  // === 📊 그래프 그리기 ===
+  let chart;
+  function renderChart(data) {
+    const keys = Object.keys(data)
+      .filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)) // 날짜형식만 필터
+      .sort()
+      .slice(-7);
+    const values = keys.map(k => data[k]);
 
-      const today = new Date().toISOString().split('T')[0];
-      const todayCount = data[today] || 0;
-      const totalCount = data['total'] || 0;
-
-      // 최근 7일 정렬
-      const keys = Object.keys(data)
-        .filter(k => k !== 'total')
-        .sort()
-        .slice(-7);
-      const values = keys.map(k => data[k]);
-
-      document.getElementById('today').textContent = `📅 오늘 방문자: ${todayCount}명`;
-      document.getElementById('total').textContent = `🌏 총 누적 방문자: ${totalCount}명`;
-
-      const ctx = document.getElementById('visitorChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: keys,
-          datasets: [{
-            label: '일별 방문자 수',
-            data: values,
-            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            borderRadius: 5
-          }]
-        },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: {
-            x: { ticks: { color: '#fff' } },
-            y: { ticks: { color: '#fff' }, beginAtZero: true }
-          }
+    const ctx = document.getElementById('visitorChart').getContext('2d');
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: keys,
+        datasets: [{
+          label: '일별 방문자 수',
+          data: values,
+          fill: true,
+          tension: 0.3,
+          backgroundColor: 'rgba(255, 105, 180, 0.2)',
+          borderColor: '#ff6fa8',
+          borderWidth: 2,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: '#ff6fa8'
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#fff' } },
+          y: { ticks: { color: '#fff' }, beginAtZero: true }
         }
-      });
-    }
+      }
+    });
+  }
 
-    // === 👥 실시간 접속자 수 추적 ===
-    async function trackLiveUsers() {
-      const activeRef = db.collection("activeUsers");
-      const sessionId = Math.random().toString(36).substring(2, 15);
-      const userRef = activeRef.doc(sessionId);
-      await userRef.set({ active: true, time: firebase.firestore.FieldValue.serverTimestamp() });
+  // === 👥 실시간 접속자 추적 ===
+  async function trackLiveUsers() {
+    const activeRef = db.collection("activeUsers");
+    const sessionId = Math.random().toString(36).substring(2, 15);
+    const userRef = activeRef.doc(sessionId);
+    await userRef.set({ active: true, time: firebase.firestore.FieldValue.serverTimestamp() });
 
-      // 페이지 떠날 때 세션 삭제
-      window.addEventListener("beforeunload", () => {
-        userRef.delete();
-      });
+    // 페이지 닫을 때 세션 제거
+    window.addEventListener("beforeunload", () => {
+      userRef.delete();
+    });
 
-      // 관리자일 경우 실시간 접속자 표시
-      activeRef.onSnapshot(snapshot => {
-        const count = snapshot.size;
-        document.getElementById('live').textContent = `👥 현재 접속자: ${count}명`;
-      });
-    }
+    // 실시간 접속자 감시
+    activeRef.onSnapshot(snapshot => {
+      const count = snapshot.size;
+      document.getElementById('live').textContent = `👥 현재 접속자: ${count}명`;
+    });
+  }
 
-    // === 🔑 관리자 모드 판단 ===
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('admin') === 'showVisitor') {
-      document.getElementById('visitorBox').style.display = 'block';
-      updateVisitorCount().then(() => {
-        loadVisitorData();
-        trackLiveUsers();
-      });
-    } else {
-      updateVisitorCount();
-      trackLiveUsers(); // 일반 방문자도 실시간 접속자 집계만 등록
-    }
+  // === 📈 실시간 그래프/방문자 반영 ===
+  function watchVisitorData() {
+    db.collection("visitors").onSnapshot(snapshot => {
+      let data = {};
+      snapshot.forEach(doc => data[doc.id] = doc.data().count || 0);
+
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('today').textContent = `📅 오늘 방문자: ${data[today] || 0}명`;
+      document.getElementById('total').textContent = `🌏 총 누적 방문자: ${data['total'] || 0}명`;
+
+      renderChart(data);
+    });
+  }
+
+  // === 🔑 관리자 모드만 표시 ===
+  const params = new URLSearchParams(window.location.search);
+  const isAdmin = params.get('admin') === 'showVisitor';
+
+  if (isAdmin) {
+    document.getElementById('visitorBox').style.display = 'block';
+    updateVisitorCount().then(() => {
+      trackLiveUsers();
+      watchVisitorData();
+    });
+  } else {
+    updateVisitorCount();
+    trackLiveUsers();
+  }
+</script>
+
   </script>
 </body>
 </html>
