@@ -547,12 +547,32 @@
   </div>
 </div>
 
-  <div id="visitorBox">
-    <p id="live">👥 현재 접속자: 계산중...</p>
-    <p id="today"></p>
-    <p id="total"></p>
-    <canvas id="visitorChart"></canvas>
+<!-- 방문자 통계 박스 -->
+<div id="visitorBox" style="
+  display:none;
+  position:fixed;
+  bottom:10px;
+  right:10px;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  z-index:999999;
+  font-family:'Noto Sans KR', sans-serif;
+  width:320px;
+">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <h3 style="margin:0; font-size:15px;">📊 방문자 통계</h3>
+    <button id="closeVisitorBox"
+      style="background:none; border:none; font-size:18px; cursor:pointer; z-index:1000001; position:relative;">✕</button>
   </div>
+  <p id="todayVisitors">오늘 방문자: 0</p>
+  <p id="yesterdayVisitors">어제 방문자: 0</p>
+  <p id="totalVisitors">총 누적 방문자: 0</p>
+  <canvas id="visitorChart" width="300" height="150"
+    style="pointer-events:none; z-index:1;"></canvas>
+</div>
 
 
 </main>
@@ -699,9 +719,54 @@ async function fetchVideoStats() {
 
 fetchVideoStats();
 setInterval(fetchVideoStats, 60000);
+  </script>
 
+  <!-- 🔒 관리자 접근용 비밀번호 입력 -->
+<div id="adminLogin" style="text-align:center; margin-top:20px; display:none;">
+  <input type="password" id="adminPassword" placeholder="관리자 비밀번호 입력" 
+         style="padding:10px; border-radius:8px; border:1px solid #aaa;">
+  <button onclick="checkAdminPassword()" 
+          style="padding:10px 20px; border:none; background:#ff66a3; color:white; border-radius:8px; cursor:pointer;">
+    확인
+  </button>
+  <p id="loginMessage" style="color:red; margin-top:8px;"></p>
+</div>
 
 <script>
+  // 🔑 관리자 비밀번호 (원하는 값으로 변경)
+  const ADMIN_PASSWORD = "8196"; 
+
+  // 로그인 박스 표시
+  document.getElementById('adminLogin').style.display = 'block';
+
+  function checkAdminPassword() {
+    const input = document.getElementById("adminPassword").value;
+    const msg = document.getElementById("loginMessage");
+
+    if (input === ADMIN_PASSWORD) {
+      msg.textContent = "✅ 관리자 모드로 진입합니다.";
+      setTimeout(() => {
+        document.getElementById("adminLogin").style.display = "none";
+        document.getElementById("visitorBox").style.display = "block";
+        startAdminMode();
+      }, 800);
+    } else {
+      msg.textContent = "❌ 비밀번호가 틀렸습니다.";
+    }
+  }
+
+  // 🔧 관리자 모드 시작 시 실행
+  function startAdminMode() {
+    updateVisitorCount().then(() => {
+      trackLiveUsers();
+      watchVisitorData();
+    });
+  }
+
+  // 일반 사용자 → 방문자만 증가 + 실시간 접속자 반영
+  updateVisitorCount();
+  trackLiveUsers();
+
   // === Firebase 설정 (당신의 config 그대로 유지) ===
   const firebaseConfig = {
     apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
@@ -816,9 +881,31 @@ setInterval(fetchVideoStats, 60000);
     updateVisitorCount();
     trackLiveUsers();
   }
-</script>
 
-  </script>
+  // 닫기 버튼 기능
+  window.addEventListener("DOMContentLoaded", () => {
+    const closeBtn = document.getElementById("closeVisitorBox");
+    const box = document.getElementById("visitorBox");
+
+    if (closeBtn && box) {
+      closeBtn.addEventListener("click", () => {
+        box.style.display = "none";
+        console.log("✅ 방문자 박스 닫힘");
+      });
+    }
+  });
+  
+  window.addEventListener("DOMContentLoaded", () => {
+  const closeBtn = document.getElementById("closeVisitorBox");
+  const box = document.getElementById("visitorBox");
+  
+  if (closeBtn && box) {
+    closeBtn.addEventListener("click", () => {
+      box.style.display = "none";
+    });
+  }
+});
+</script>
 </body>
 </html>
 
