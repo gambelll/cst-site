@@ -15,7 +15,9 @@
   <title>이찬원 정규2집 초집중 (메인)</title>
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
+ <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+ <style>
     /* =========================
        기본 스타일
     ========================= */
@@ -428,6 +430,19 @@
     box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
   }
 
+    #visitorCounter {
+      display: none; /* 기본 숨김 */
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      z-index: 9999;
+    }
+
   </style>
 </head>
 <body>
@@ -520,9 +535,11 @@
     <span id="yt-likes">286,900</span>
   </div>
 </div>
-
   </div>
 </div>
+  <h1>환영합니다!</h1>
+  <div id="visitorCounter"></div>
+
 </main>
 
   <!-- 푸터 -->
@@ -668,8 +685,74 @@ async function fetchVideoStats() {
 fetchVideoStats();
 setInterval(fetchVideoStats, 60000);
 
+   // ===== Firebase 설정 복사해서 붙이기 =====
+    const firebaseConfig = {
+  apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
+  authDomain: "visitor-counter-bf055.firebaseapp.com",
+  projectId: "visitor-counter-bf055",
+  storageBucket: "visitor-counter-bf055.firebasestorage.app",
+  messagingSenderId: "388207600708",
+  appId: "1:388207600708:web:5e9fc58d2ad75a3cd6c811",
+  measurementId: "G-W7ZDT9H9D9"
+};
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    async function updateVisitorCount() {
+      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      const docRef = db.collection("visitors").doc(today);
+      const totalRef = db.collection("visitors").doc("total");
+
+      await db.runTransaction(async (tx) => {
+        const todayDoc = await tx.get(docRef);
+        const totalDoc = await tx.get(totalRef);
+
+        let todayCount = todayDoc.exists ? todayDoc.data().count : 0;
+        let totalCount = totalDoc.exists ? totalDoc.data().count : 0;
+
+        todayCount++;
+        totalCount++;
+
+        tx.set(docRef, { count: todayCount });
+        tx.set(totalRef, { count: totalCount });
+      });
+    }
+
+    async function loadVisitorData() {
+      const snapshot = await db.collection("visitors").get();
+      let data = {};
+      snapshot.forEach(doc => {
+        data[doc.id] = doc.data().count;
+      });
+
+      const today = new Date().toISOString().split('T')[0];
+      const todayCount = data[today] || 0;
+      const totalCount = data["total"] || 0;
+
+      // 최근 5일 정렬
+      const dateKeys = Object.keys(data).filter(k => k !== "total").sort().slice(-5);
+      let list = dateKeys.map(k => `<li>${k}: ${data[k]}명</li>`).join("");
+
+      document.getElementById('visitorCounter').innerHTML = `
+        <p>오늘 방문자: ${todayCount}명</p>
+        <p>총 누적: ${totalCount}명</p>
+        <p>최근 방문자 수:</p>
+        <ul>${list}</ul>
+      `;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === 'showVisitor') {
+      document.getElementById('visitorCounter').style.display = 'block';
+      updateVisitorCount().then(loadVisitorData);
+    } else {
+      updateVisitorCount();
+    }
   </script>
 </body>
 </html>
+
 
 
