@@ -15,7 +15,7 @@
   <title>이찬원 정규2집 초집중 (메인)</title>
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
  <style>
@@ -431,19 +431,19 @@
     box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
   }
 
-
- #visitorBox {
+        #visitorBox {
       display: none; /* 기본 숨김 */
       position: fixed;
       bottom: 10px;
       right: 10px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       color: #fff;
       padding: 15px;
       border-radius: 12px;
       font-size: 14px;
       width: 320px;
       z-index: 9999;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
     }
     canvas {
       width: 100% !important;
@@ -544,7 +544,8 @@
   </div>
 </div>
 
-<div id="visitorBox">
+  <div id="visitorBox">
+    <p id="live">👥 현재 접속자: 계산중...</p>
     <p id="today"></p>
     <p id="total"></p>
     <canvas id="visitorChart"></canvas>
@@ -710,6 +711,7 @@ const firebaseConfig = {
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // === 📅 방문자 수 업데이트 ===
     async function updateVisitorCount() {
       const today = new Date().toISOString().split('T')[0];
       const todayDoc = db.collection('visitors').doc(today);
@@ -725,6 +727,7 @@ const firebaseConfig = {
       });
     }
 
+    // === 📊 방문자 데이터 로드 & 그래프 ===
     async function loadVisitorData() {
       const snap = await db.collection('visitors').get();
       let data = {};
@@ -734,19 +737,16 @@ const firebaseConfig = {
       const todayCount = data[today] || 0;
       const totalCount = data['total'] || 0;
 
-      // 날짜 정렬 후 최근 7일만 그래프
+      // 최근 7일 정렬
       const keys = Object.keys(data)
         .filter(k => k !== 'total')
         .sort()
         .slice(-7);
-
       const values = keys.map(k => data[k]);
 
-      // 숫자 표시
       document.getElementById('today').textContent = `📅 오늘 방문자: ${todayCount}명`;
       document.getElementById('total').textContent = `🌏 총 누적 방문자: ${totalCount}명`;
 
-      // 그래프 표시
       const ctx = document.getElementById('visitorChart').getContext('2d');
       new Chart(ctx, {
         type: 'bar',
@@ -755,9 +755,10 @@ const firebaseConfig = {
           datasets: [{
             label: '일별 방문자 수',
             data: values,
-            borderWidth: 1,
             backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            borderColor: 'rgba(255, 99, 132, 1)'
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            borderRadius: 5
           }]
         },
         options: {
@@ -770,12 +771,36 @@ const firebaseConfig = {
       });
     }
 
+    // === 👥 실시간 접속자 수 추적 ===
+    async function trackLiveUsers() {
+      const activeRef = db.collection("activeUsers");
+      const sessionId = Math.random().toString(36).substring(2, 15);
+      const userRef = activeRef.doc(sessionId);
+      await userRef.set({ active: true, time: firebase.firestore.FieldValue.serverTimestamp() });
+
+      // 페이지 떠날 때 세션 삭제
+      window.addEventListener("beforeunload", () => {
+        userRef.delete();
+      });
+
+      // 관리자일 경우 실시간 접속자 표시
+      activeRef.onSnapshot(snapshot => {
+        const count = snapshot.size;
+        document.getElementById('live').textContent = `👥 현재 접속자: ${count}명`;
+      });
+    }
+
+    // === 🔑 관리자 모드 판단 ===
     const params = new URLSearchParams(window.location.search);
     if (params.get('admin') === 'showVisitor') {
       document.getElementById('visitorBox').style.display = 'block';
-      updateVisitorCount().then(loadVisitorData);
+      updateVisitorCount().then(() => {
+        loadVisitorData();
+        trackLiveUsers();
+      });
     } else {
       updateVisitorCount();
+      trackLiveUsers(); // 일반 방문자도 실시간 접속자 집계만 등록
     }
   </script>
 </body>
