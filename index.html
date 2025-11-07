@@ -1,462 +1,91 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6PR41JF3WT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6PR41JF3WT');
-</script>
-
   <meta charset="UTF-8" />
   <title>이찬원 정규2집 초집중 (메인)</title>
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Firebase & Chart.js -->
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
- <style>
-    /* =========================
-       기본 스타일
-    ========================= */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Noto Sans KR', sans-serif;
-    }
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PR41JF3WT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6PR41JF3WT');
+  </script>
 
-    body {
-      background-color: White;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+  <style>
+    /* ========================= 기본 스타일 ========================= */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR', sans-serif;}
+    body { background:white; display:flex; flex-direction:column; min-height:100vh;}
+    a { text-decoration:none; color:inherit;}
 
-    a { text-decoration: none; color: inherit; }
+    /* ========================= 상단바 ========================= */
+    .top-bar { display:flex; align-items:center; justify-content:space-between; padding:2vh 5vw; background-color:#fce7e3; border-bottom:0.2vh solid #e0e0e0; z-index:100;}
+    .logo-section { display:flex; align-items:center; cursor:pointer; font-weight:bold;}
+    .logo-section img { height:6vh; margin-right:1vw;}
+    .logo-text { font-size:2.5vh; }
+    .hamburger { font-size:28px; cursor:pointer; }
 
-    /* =========================
-       상단바
-    ========================= */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2vh 5vw;
-      background-color: #fce7e3;
-      border-bottom: 0.2vh solid #e0e0e0;
-      z-index: 100;
-    }
+    /* ========================= 본문 ========================= */
+    main { display:flex; flex-direction:column; align-items:center; flex:1; text-align:center; padding:5vh 5vw; width:100%; max-width:1200px; margin:0 auto; }
 
-    .logo-section {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      font-weight: bold;
-    }
+    /* ========================= 배너 슬라이더 ========================= */
+    .banner-slider { width:100%; max-width:1000px; position:relative; overflow:hidden; margin-bottom:4vh; border-radius:1rem; }
+    .banner-track { display:flex; transition: transform 0.5s ease; }
+    .banner { min-width:100%; position:relative; overflow:hidden; max-height:500px; }
+    .banner img { width:100%; height:100%; object-fit:cover; display:block; }
+    .banner-text { position:absolute; bottom:2vh; left:2vw; color:white; font-size:2rem; font-weight:bold; text-shadow:0 0.3vh 0.3vh rgba(0,0,0,0.5); }
+    .banner-prev, .banner-next { color:white; position:absolute; top:50%; transform:translateY(-50%); font-size:2.5rem; background-color:transparent; border:none; border-radius:50%; padding:0.5rem 1rem; cursor:pointer; z-index:10; }
+    .banner-prev { left:1rem; } .banner-next { right:1rem; }
+    .banner-indicators { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%); display:flex; gap:0.5rem; z-index:10; }
+    .banner-indicators .dot { width:0.8rem; height:0.8rem; border-radius:50%; background:rgba(255,255,255,0.4); cursor:pointer; transition:background 0.3s;}
+    .banner-indicators .dot.active { background:rgba(0,0,0,0.9); }
 
-    .logo-section img {
-      height: 6vh;
-      margin-right: 1vw;
-    }
+    /* ========================= 버튼 그리드 ========================= */
+    .button-grid { width:100%; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-bottom:5vh;}
+    .grid-button { background-color:#ffffffb6; border-radius:3vh; padding:4vh 0; font-size:1.5rem; font-weight:bold; text-align:center; box-shadow:0 0.5vh 1vh rgba(0,0,0,0.1); cursor:pointer; transition:all 0.3s;}
+    .grid-button:hover { background-color:#ffd6ec; transform:translateY(-0.5vh);}
+    .border1 { border:1px solid rgb(88,88,88);}
+    .musiccore-btn { background-color:#ff85a2; color:white; font-weight:bold; border:2px solid #ff5f8a; transition: all 0.25s ease;}
+    .musiccore-btn:hover { background-color:#ff4d79; transform:scale(1.05); box-shadow:0 0 10px rgba(255,100,150,0.4); }
 
-    .logo-text { font-size: 2.5vh; }
+    /* ========================= 유튜브 카드 ========================= */
+    .youtube-card { background:#ffffff; border-radius:1rem; box-shadow:0 2px 10px rgba(0,0,0,0.1); padding:3vh 2vw; text-align:center; width:100%; max-width:1000px; margin:5vh auto;}
+    .youtube-card h3 { font-size:2rem; margin-bottom:2vh; font-weight:700; color:#333; }
+    .youtube-video { position:relative; width:100%; padding-top:56.25%; border-radius:1rem; overflow:hidden; margin-bottom:2vh;}
+    .youtube-video iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+    .youtube-stats { display:flex; justify-content:space-evenly; align-items:center; font-weight:bold; font-size:1.5rem; margin-top:2vh; border-radius:1rem; padding:2vh 2vw; width:95%; margin:auto;}
+    .youtube123 { background-color:#f2f4f7; border-radius:12px; flex:1; padding:20px 0; text-align:center; }
+    .youtube-stats div p { margin:0; font-size:1.2rem; color:#444;}
+    .youtube-stats span { font-size:1.2rem; color:#f36ca4; display:block; margin-top:0.5vh; }
 
-    /* =========================
-       본문
-    ========================= */
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      text-align: center;
-      padding: 5vh 5vw;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    /* ========================= 푸터 ========================= */
+    .site-footer { background:#f9f9f9; padding:5vh 5vw; font-size:1.5vh; color:#555; border-top:0.1vh solid #ddd;}
+    .footer-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:2vw; flex-wrap:wrap;}
+    .footer-left { display:flex; align-items:center; gap:1vw;}
+    .album-cover { width:6vh; height:6vh; border-radius:1vh; object-fit:cover; }
+    .footer-right { text-align:left; flex:1; min-width:200px;}
+    .footer-right p { margin:0.5vh 0;}
+    .social-icons { display:flex; gap:1vw; margin-top:1vh;}
+    .social-icons img { width:2.5vh; height:2.5vh; border-radius:50%; cursor:pointer; }
 
-    /* =========================
-       배너 슬라이더
-    ========================= */
-    .banner-slider {
-      width: 100%;
-      max-width: 1000px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 4vh;
-      border-radius: 1rem;
-    }
+    /* ========================= 반응형 ========================= */
+    @media(max-width:1024px){.banner-text{font-size:1.8rem}.grid-button{font-size:1.3rem}}
+    @media(max-width:768px){.logo-text{font-size:4vw}.grid-button{font-size:4vw;padding:4vh 0}.banner-text{font-size:4vw}.album-cover{width:5vh;height:5vh}}
+    @media(max-width:480px){.grid-button{font-size:6vw;padding:3vh 0}.banner-text{font-size:6vw}.logo-text{font-size:5vw}}
 
-    .banner-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .banner {
-      min-width: 100%;
-      position: relative;
-      overflow: hidden;
-      max-height: 500px;
-    }
-
-    .banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .banner-text {
-      position: absolute;
-      bottom: 2vh;
-      left: 2vw;
-      color: white;
-      font-size: 2rem;
-      font-weight: bold;
-      text-shadow: 0 0.3vh 0.3vh rgba(0,0,0,0.5);
-    }
-
-    .banner-prev, .banner-next {
-      color:white;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2.5rem;
-      background-color:transparent;
-      border: none;
-      border-radius: 50%;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .banner-prev { left: 1rem; }
-    .banner-next { right: 1rem; }
-
-    .banner-prev:hover, .banner-next:hover { background-color:transparent; }
-
-    /* 배너 인디케이터 */
-    .banner-indicators {
-      position: absolute;
-      bottom: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 0.5rem;
-      z-index: 10;
-    }
-
-    .banner-indicators .dot {
-      width: 0.8rem;
-      height: 0.8rem;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .banner-indicators .dot.active {
-      background: rgba(0,0,0,0.9);
-    }
-
-    /* =========================
-       버튼 그리드
-    ========================= */
-    .button-grid {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 5vh;
-      
-    }
-
-    .grid-button {
-      background-color: #ffffffb6;
-      border-radius: 3vh;
-      padding: 4vh 0;
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 0.5vh 1vh rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .grid-button:hover {
-      background-color: #ffd6ec;
-      transform: translateY(-0.5vh);
-    }
-
-    .border1 {
-      border: 1px solid rgb(88, 88, 88);
-    }
-
-    /* =========================
-       푸터
-    ========================= */
-    .site-footer {
-      background: #f9f9f9;
-      padding: 5vh 5vw;
-      font-size: 1.5vh;
-      color: #555;
-      border-top: 0.1vh solid #ddd;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 2vw;
-      flex-wrap: wrap;
-    }
-
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 1vw;
-    }
-
-    .album-cover {
-      width: 6vh;
-      height: 6vh;
-      border-radius: 1vh;
-      object-fit: cover;
-    }
-
-    .footer-right {
-      text-align: left;
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .footer-right p { margin: 0.5vh 0; }
-
-    .social-icons {
-      display: flex;
-      gap: 1vw;
-      margin-top: 1vh;
-    }
-
-    .social-icons img {
-      width: 2.5vh;
-      height: 2.5vh;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    /* =========================
-       반응형
-    ========================= */
-    @media (max-width: 1024px) {
-      .banner-text { font-size: 1.8rem; }
-      .grid-button { font-size: 1.3rem; }
-    }
-
-    @media (max-width: 768px) {
-      .logo-text { font-size: 4vw; }
-      .grid-button { font-size: 4vw; padding: 4vh 0; }
-      .banner-text { font-size: 4vw; }
-      .album-cover { width: 5vh; height: 5vh; }
-    }
-
-    @media (max-width: 480px) {
-      .grid-button { font-size: 6vw; padding: 3vh 0; }
-      .banner-text { font-size: 6vw; }
-      .logo-text { font-size: 5vw; }
-    }
-
-  .video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 비율 (9/16 = 0.5625) */
-    margin: 0 auto;
-    max-width: 100%;
-  }
-
-  .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  /* 사이드 메뉴 */
-.side-menu {
-  position: fixed;
-  top: 0;
-  right: -250px; /* 숨김 상태 */
-  width: 250px;
-  height: 100%;
-  background: white; /* 흰색 배경 */
-  color: black;      /* 글씨 검정 */
-  padding: 60px 20px 20px 20px;
-  transition: right 0.3s ease;
-  z-index: 1000;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-}
-
-.side-menu.open {
-  right: 0;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-.side-menu li {
-  margin: 20px 0;
-}
-
-.side-menu a {
-  color: black; /* 글씨 검정 */
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-/* 닫기 버튼 스타일 */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: black;
-  font-weight: bold;
-  padding: 0;
-  line-height: 1;
-}
-
-
-.hamburger {
-  font-size: 28px;
-  cursor: pointer;
-}
-
-/* 유튜브 추이 카드  */
-.youtube-card {
-  background: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 3vh 2vw;
-  text-align: center;
-  width: 100%;
-  max-width: 1000px; /* 배너와 동일 */
-  margin: 5vh auto;
-}
-
-.youtube-card h3 {
-  font-size: 2rem; /* 크게 */
-  margin-bottom: 2vh;
-  font-weight: 700;
-  color: #333;
-}
-
-/* 유튜브 영상 */
-.youtube-video {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 비율 */
-  border-radius: 1rem;
-  overflow: hidden;
-  margin-bottom: 2vh;
-}
-
-.youtube-video iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: none;
-}
-
-/* 조회수 / 좋아요 표시 */
-.youtube-stats {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin-top: 2vh;
-  border-radius: 1rem;           /* 💡 둥근 모서리 */
-  padding: 2vh 2vw;              /* 💡 안쪽 여백 */
-  width: 95%;                    /* 카드 안에서 여백 확보 */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.youtube123 {
-  background-color: #f2f4f7; /* 각 칸 연한회색 */
-  border-radius: 12px;
-  flex: 1;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.youtube-stats div p {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #444;
-}
-
-.youtube-stats span {
-  font-size: 1.2rem;
-  color: #f36ca4; /* 💡 핑크빛 포인트 컬러 */
-  display: block;
-  margin-top: 0.5vh;
-}
-
-  .musiccore-btn {
-    background-color: #ff85a2; /* 기본 핑크 */
-    color: white;
-    font-weight: bold;
-    border: 2px solid #ff5f8a;
-    transition: all 0.25s ease;
-  }
-  .musiccore-btn:hover {
-    background-color: #ff4d79; /* hover 시 진한 핑크 */
-    transform: scale(1.05); /* 살짝 커지는 효과 */
-    box-shadow: 0 0 10px rgba(255, 100, 150, 0.4);
-  }
-
-    #visitorBox {
-      display: none;
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 14px;
-      width: 320px;
-      z-index: 9999;
-      box-shadow: 0 0 15px rgba(255,255,255,0.2);
-    }
-    canvas {
-      width: 100% !important;
-      height: 180px !important;
-    }
+    /* ========================= 사이드 메뉴 ========================= */
+    .side-menu { position:fixed; top:0; right:-250px; width:250px; height:100%; background:white; color:black; padding:60px 20px 20px 20px; transition:right 0.3s ease; z-index:1000; box-shadow:-2px 0 5px rgba(0,0,0,0.1);}
+    .side-menu.open{right:0;}
+    .side-menu ul{list-style:none; padding:0; margin-top:20px;}
+    .side-menu li{margin:20px 0;}
+    .side-menu a{color:black; font-size:1.1rem; font-weight:500;}
+    .close-btn{position:absolute; top:10px; right:15px; font-size:2rem; background:none; border:none; cursor:pointer; color:black; font-weight:bold; padding:0; line-height:1;}
   </style>
 </head>
 <body>
-
-  <!--코드 훔쳐갈려고 하시는군요ㅋ -->
 
   <!-- 상단바 -->
   <header class="top-bar">
@@ -466,116 +95,62 @@
     </a>
     <div class="hamburger">☰</div>
   </header>
-    <div include-html="components/menu.html"></div>
+
+  <!-- 사이드 메뉴 포함 -->
+  <div include-html="components/menu.html"></div>
+
   <!-- 본문 -->
   <main>
     <!-- 배너 슬라이더 -->
-<div class="banner-slider">
-  <div class="banner-track">
-    <div class="banner">
-      <a href="https://into.melon.com/bridge/kakaotalk/musicwave/cuG8l5tkxiky8wod6kr6yg?type=channel&t=1760010014532/banner1" target="_blank">
-        <img src="/images/banner1.jpg" alt="배너1">
-        <div class="banner-text">뮤직웨이브 바로가기</div>
-      </a>
+    <div class="banner-slider">
+      <div class="banner-track">
+        <div class="banner">
+          <a href="https://into.melon.com/bridge/kakaotalk/musicwave/cuG8l5tkxiky8wod6kr6yg?type=channel&t=1760010014532/banner1" target="_blank">
+            <img src="/images/banner1.jpg" alt="배너1">
+            <div class="banner-text">뮤직웨이브 바로가기</div>
+          </a>
+        </div>
+        <div class="banner">
+          <a href="https://cafe.naver.com/2chanwon" target="_blank">
+            <img src="/images/banner2.jpg" alt="배너2">
+            <div class="banner-text">이찬원 공식팬카페 바로가기</div>
+          </a>
+        </div>
+      </div>
+      <div class="banner-indicators">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+      <button class="banner-prev">&#10094;</button>
+      <button class="banner-next">&#10095;</button>
     </div>
 
-    <div class="banner">
-      <a href="https://cafe.naver.com/2chanwon" target="_blank">
-        <img src="/images/banner2.jpg" alt="배너2">
-        <div class="banner-text">이찬원 공식팬카페 바로가기</div>
-      </a>
+    <!-- 버튼 그리드 -->
+    <div class="button-grid">
+      <div class="grid-button border1" onclick="location.href='streaming.html'">음원 원클릭</div>
+      <div class="grid-button border1" onclick="location.href='guide.html'">가이드</div>
+      <div class="grid-button border1" onclick="location.href='vote.html'">투표 바로가기</div>
+      <div class="grid-button border1" onclick="location.href='radio.html'">라디오 원클릭</div>
     </div>
-  </div>
 
-  <!-- ✅ 인디케이터를 이 위치로 이동 -->
-  <div class="banner-indicators">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-  </div>
-
-  <button class="banner-prev">&#10094;</button>
-  <button class="banner-next">&#10095;</button>
-</div>
-
-
-
-
-   <!-- <button class="banner-prev">&#10094;</button>
-    <button class="banner-next">&#10095;</button> -->
-
-    <!-- 배너 인디케이터 -->
-    <div class="banner-indicators">
-     <!-- <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span> -->
+    <!-- 유튜브 카드 -->
+    <div class="youtube-card">
+      <h3>📈 유튜브 추이</h3>
+      <div class="youtube-video">
+        <iframe src="https://www.youtube.com/embed/AIh7UA7UoYI?autoplay=1&mute=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="youtube-stats">
+        <div class="youtube123">
+          <p>조회수</p>
+          <span id="yt-views">4,381,259</span>
+        </div>
+        <div class="youtube123">
+          <p>좋아요</p>
+          <span id="yt-likes">286,900</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <!-- 버튼 그리드 -->
-  <div class="button-grid">
-    <div class="grid-button border1" onclick="location.href='streaming.html'">음원 원클릭</div>
-    <div class="grid-button border1" onclick="location.href='guide.html'">가이드</div>
-    <div class="grid-button border1" onclick="location.href='vote.html'">투표 바로가기</div>
-    <div class="grid-button border1" onclick="location.href='radio.html'">라디오 원클릭</div>
-
-    <!--  <div class="grid-button border1 musiccore-btn" onclick="location.href='sms:%230505?body=이찬원'">
-    💌 음악중심 문자투표 💌 -->
-  </div>
-   </div>
-  <div class="youtube-card">
-  <h3>📈 유튜브 추이</h3>
-  <div class="video-wrapper">
-  <iframe
-    src="https://www.youtube.com/embed/AIh7UA7UoYI?autoplay=1&mute=1&rel=0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen>
-  </iframe>
-</div>
-
-<div class="youtube-stats">
-  <div class="youtube123">
-    <p>조회수</p>
-    <span id="yt-views">4,381,259</span>
-  </div>
-  &nbsp;
-  <div class="youtube123">
-    <p>좋아요</p>
-    <span id="yt-likes">286,900</span>
-  </div>
-</div>
-  </div>
-</div>
-
-<!-- 방문자 통계 박스 -->
-<div id="visitorBox" style="
-  display:none;
-  position:fixed;
-  bottom:10px;
-  right:10px;
-  background:#fff;
-  border:1px solid #ccc;
-  border-radius:10px;
-  padding:15px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.25);
-  z-index:999999;
-  font-family:'Noto Sans KR', sans-serif;
-  width:320px;
-">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-    <h3 style="margin:0; font-size:15px;">📊 방문자 통계</h3>
-    <button id="closeVisitorBox"
-      style="background:none; border:none; font-size:18px; cursor:pointer; z-index:1000001; position:relative;">✕</button>
-  </div>
-  <p id="todayVisitors">오늘 방문자: 0</p>
-  <p id="yesterdayVisitors">어제 방문자: 0</p>
-  <p id="totalVisitors">총 누적 방문자: 0</p>
-  <canvas id="visitorChart" width="300" height="150"
-    style="pointer-events:none; z-index:1;"></canvas>
-</div>
-
-
-</main>
+  </main>
 
   <!-- 푸터 -->
   <footer class="site-footer">
@@ -593,321 +168,152 @@
     </div>
   </footer>
 
-  <!-- =========================
-       배너 슬라이더 JS
-  ========================= -->
+  <!-- ========================= JS ========================= -->
   <script>
- // includeHTML 함수 (menu.html 불러오기)
-    function includeHTML(callback) {
-      const elements = document.querySelectorAll('[include-html]');
-      let count = elements.length;
-      if (count === 0) callback?.();
+    // includeHTML 함수
+  function includeHTML(callback) {
+    const elements = document.querySelectorAll('[include-html]');
+    let count = elements.length;
+    if (count === 0) callback?.();
+    elements.forEach(el => {
+      const file = el.getAttribute('include-html');
+      if (file) {
+        fetch(file)
+          .then(res => res.ok ? res.text() : Promise.reject('Include failed'))
+          .then(data => { 
+            el.innerHTML = data; 
+            el.removeAttribute('include-html'); 
+            count--; 
+            if(count===0) callback?.(); 
+          })
+          .catch(err => { 
+            el.innerHTML = "내용을 불러올 수 없습니다."; 
+            console.error(err); 
+            count--; 
+            if(count===0) callback?.(); 
+          });
+      }
+    });
+  }
 
-      elements.forEach(el => {
-        const file = el.getAttribute('include-html');
-        if (file) {
-          fetch(file)
-            .then(res => {
-              if (!res.ok) throw new Error('Include failed');
-              return res.text();
-            })
-            .then(data => {
-              el.innerHTML = data;
-              el.removeAttribute('include-html');
-              count--;
-              if (count === 0) callback?.();
-            })
-            .catch(err => {
-              el.innerHTML = "내용을 불러올 수 없습니다.";
-              console.error(err);
-              count--;
-              if (count === 0) callback?.();
-            });
+  window.addEventListener("DOMContentLoaded", () => {
+    includeHTML(() => {
+      // 🔹 메뉴 로드 후 실행되므로 이제 확실히 동작함
+      const hamburger = document.querySelector(".hamburger");
+      const sideMenu = document.querySelector("#sideMenu");
+      const closeBtn = document.querySelector(".close-btn");
+
+      if (hamburger && sideMenu) {
+        hamburger.addEventListener("click", () => {
+          sideMenu.classList.add("open");
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+          sideMenu.classList.remove("open");
+        });
+      }
+
+      // 메뉴 바깥 클릭 시 닫힘
+      document.addEventListener("click", (e) => {
+        if (
+          sideMenu.classList.contains("open") &&
+          !sideMenu.contains(e.target) &&
+          !hamburger.contains(e.target)
+        ) {
+          sideMenu.classList.remove("open");
         }
       });
+    });
+
+    // 🔻 아래부터는 배너 코드 그대로 유지 🔻
+    const track = document.querySelector('.banner-track');
+    const banners = document.querySelectorAll('.banner');
+    const prevBtn = document.querySelector('.banner-prev');
+    const nextBtn = document.querySelector('.banner-next');
+    const dots = document.querySelectorAll('.dot');
+    let index = 0;
+
+    function updateBanner() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((dot,i)=>dot.classList.toggle('active', i===index));
     }
 
-    // 페이지 로드 후
+    prevBtn.addEventListener('click', ()=>{ index = (index-1+banners.length)%banners.length; updateBanner(); });
+    nextBtn.addEventListener('click', ()=>{ index = (index+1)%banners.length; updateBanner(); });
+    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{ index=i; updateBanner(); }));
+    setInterval(()=>{ index=(index+1)%banners.length; updateBanner(); },3000);
+
+    // 유튜브 API
+    const API_KEY = 'AIzaSyDyBTeWrMGPDpFgT0zfqXV6SAdf3DwvC2c';
+    const VIDEO_ID = 'AIh7UA7UoYI';
+    async function fetchVideoStats() {
+      const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${VIDEO_ID}&key=${API_KEY}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if(data.items && data.items.length>0){
+          const stats = data.items[0].statistics;
+          document.getElementById('yt-views').innerText = Number(stats.viewCount).toLocaleString();
+          document.getElementById('yt-likes').innerText = Number(stats.likeCount).toLocaleString();
+        } else {
+          document.getElementById('yt-views').innerText="정보 없음";
+          document.getElementById('yt-likes').innerText="정보 없음";
+        }
+      } catch(e){ console.error("YouTube API 오류:", e); }
+    }
+    fetchVideoStats();
+    setInterval(fetchVideoStats,60000);
+  });
+
+
+
     window.addEventListener("DOMContentLoaded", () => {
       includeHTML(() => {
-        // menu.html 불러온 후 햄버거 버튼 클릭 이벤트 등록
         const hamburger = document.querySelector(".hamburger");
-        hamburger.addEventListener("click", () => {
-          const sideMenu = document.getElementById("sideMenu");
-          if (sideMenu) {
-            sideMenu.classList.toggle("open");
-          }
-        });
+        const sideMenu = document.getElementById("sideMenu");
+        if(hamburger && sideMenu) hamburger.addEventListener("click", ()=>{ sideMenu.classList.add("open"); });
+        document.addEventListener("click",(e)=>{ if(e.target.id==="closeBtn" || e.target.classList.contains("close-btn")) sideMenu.classList.remove("open"); });
       });
 
-      // 배너 슬라이더 기능
+      // 배너 슬라이더
       const track = document.querySelector('.banner-track');
       const banners = document.querySelectorAll('.banner');
       const prevBtn = document.querySelector('.banner-prev');
       const nextBtn = document.querySelector('.banner-next');
       const dots = document.querySelectorAll('.dot');
       let index = 0;
-
       function updateBanner() {
         track.style.transform = `translateX(-${index * 100}%)`;
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        dots.forEach((dot,i)=>dot.classList.toggle('active', i===index));
       }
+      prevBtn.addEventListener('click', ()=>{ index = (index-1+banners.length)%banners.length; updateBanner(); });
+      nextBtn.addEventListener('click', ()=>{ index = (index+1)%banners.length; updateBanner(); });
+      dots.forEach((dot,i)=>dot.addEventListener('click',()=>{ index=i; updateBanner(); }));
+      setInterval(()=>{ index=(index+1)%banners.length; updateBanner(); },3000);
 
-      prevBtn.addEventListener('click', () => {
-        index = (index - 1 + banners.length) % banners.length;
-        updateBanner();
-      });
-
-      nextBtn.addEventListener('click', () => {
-        index = (index + 1) % banners.length;
-        updateBanner();
-      });
-
-      dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          index = i;
-          updateBanner();
-        });
-      });
-
-      setInterval(() => {
-        index = (index + 1) % banners.length;
-        updateBanner();
-      }, 3000);
+      // 유튜브 API
+      const API_KEY = 'AIzaSyDyBTeWrMGPDpFgT0zfqXV6SAdf3DwvC2c';
+      const VIDEO_ID = 'AIh7UA7UoYI';
+      async function fetchVideoStats() {
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${VIDEO_ID}&key=${API_KEY}`;
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          if(data.items && data.items.length>0){
+            const stats = data.items[0].statistics;
+            document.getElementById('yt-views').innerText = Number(stats.viewCount).toLocaleString();
+            document.getElementById('yt-likes').innerText = Number(stats.likeCount).toLocaleString();
+          } else {
+            document.getElementById('yt-views').innerText="정보 없음";
+            document.getElementById('yt-likes').innerText="정보 없음";
+          }
+        } catch(e){ console.error("YouTube API 오류:", e);}
+      }
+      fetchVideoStats();
+      setInterval(fetchVideoStats,60000);
     });
-
-    window.addEventListener("DOMContentLoaded", () => {
-  includeHTML(() => {
-    const hamburger = document.querySelector(".hamburger");
-    const sideMenu = document.getElementById("sideMenu");
-    const closeBtn = document.getElementById("closeBtn");
-
-    if (hamburger && sideMenu) {
-      hamburger.addEventListener("click", () => {
-        sideMenu.classList.add("open");
-      });
-    }
-
-    if (closeBtn && sideMenu) {
-      closeBtn.addEventListener("click", () => {
-        sideMenu.classList.remove("open");
-      });
-    }
-  });
-});
-
-const API_KEY = 'AIzaSyDyBTeWrMGPDpFgT0zfqXV6SAdf3DwvC2c';
-const VIDEO_ID = 'AIh7UA7UoYI';
-
-async function fetchVideoStats() {
-  const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${VIDEO_ID}&key=${API_KEY}`;
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data.items && data.items.length > 0) {
-      const stats = data.items[0].statistics;
-      document.getElementById('yt-views').innerText = Number(stats.viewCount).toLocaleString();
-      document.getElementById('yt-likes').innerText = Number(stats.likeCount).toLocaleString();
-    } else {
-      document.getElementById('yt-views').innerText = "정보 없음";
-      document.getElementById('yt-likes').innerText = "정보 없음";
-    }
-  } catch (e) {
-    console.error("YouTube API 오류:", e);
-  }
-}
-
-fetchVideoStats();
-setInterval(fetchVideoStats, 60000);
   </script>
-
-  <!-- 🔒 관리자 접근용 비밀번호 입력 -->
-<div id="adminLogin" style="text-align:center; margin-top:20px; display:none;">
-  <input type="password" id="adminPassword" placeholder="관리자 비밀번호 입력" 
-         style="padding:10px; border-radius:8px; border:1px solid #aaa;">
-  <button onclick="checkAdminPassword()" 
-          style="padding:10px 20px; border:none; background:#ff66a3; color:white; border-radius:8px; cursor:pointer;">
-    확인
-  </button>
-  <p id="loginMessage" style="color:red; margin-top:8px;"></p>
-</div>
-
-<script>
-  // 🔑 관리자 비밀번호 (원하는 값으로 변경)
-  const ADMIN_PASSWORD = "8196"; 
-
-  // 로그인 박스 표시
-  document.getElementById('adminLogin').style.display = 'block';
-
-  function checkAdminPassword() {
-    const input = document.getElementById("adminPassword").value;
-    const msg = document.getElementById("loginMessage");
-
-    if (input === ADMIN_PASSWORD) {
-      msg.textContent = "✅ 관리자 모드로 진입합니다.";
-      setTimeout(() => {
-        document.getElementById("adminLogin").style.display = "none";
-        document.getElementById("visitorBox").style.display = "block";
-        startAdminMode();
-      }, 800);
-    } else {
-      msg.textContent = "❌ 비밀번호가 틀렸습니다.";
-    }
-  }
-
-  // 🔧 관리자 모드 시작 시 실행
-  function startAdminMode() {
-    updateVisitorCount().then(() => {
-      trackLiveUsers();
-      watchVisitorData();
-    });
-  }
-
-  // 일반 사용자 → 방문자만 증가 + 실시간 접속자 반영
-  updateVisitorCount();
-  trackLiveUsers();
-
-  // === Firebase 설정 (당신의 config 그대로 유지) ===
-  const firebaseConfig = {
-    apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
-    authDomain: "visitor-counter-bf055.firebaseapp.com",
-    projectId: "visitor-counter-bf055",
-    storageBucket: "visitor-counter-bf055.firebasestorage.app",
-    messagingSenderId: "388207600708",
-    appId: "1:388207600708:web:5e9fc58d2ad75a3cd6c811",
-    measurementId: "G-W7ZDT9H9D9"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  // === 📅 방문자 수 증가 ===
-  async function updateVisitorCount() {
-    const today = new Date().toISOString().split('T')[0];
-    const todayDoc = db.collection('visitors').doc(today);
-    const totalDoc = db.collection('visitors').doc('total');
-
-    await db.runTransaction(async tx => {
-      const t = await tx.get(todayDoc);
-      const g = await tx.get(totalDoc);
-      const todayCount = t.exists ? t.data().count + 1 : 1;
-      const totalCount = g.exists ? g.data().count + 1 : 1;
-      tx.set(todayDoc, { count: todayCount }, { merge: true });
-      tx.set(totalDoc, { count: totalCount }, { merge: true });
-    });
-  }
-
-  // === 📊 그래프 그리기 ===
-  let chart;
-  function renderChart(data) {
-    const keys = Object.keys(data)
-      .filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)) // 날짜형식만 필터
-      .sort()
-      .slice(-7);
-    const values = keys.map(k => data[k]);
-
-    const ctx = document.getElementById('visitorChart').getContext('2d');
-    if (chart) chart.destroy();
-    chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: keys,
-        datasets: [{
-          label: '일별 방문자 수',
-          data: values,
-          fill: true,
-          tension: 0.3,
-          backgroundColor: 'rgba(255, 105, 180, 0.2)',
-          borderColor: '#ff6fa8',
-          borderWidth: 2,
-          pointBackgroundColor: '#fff',
-          pointBorderColor: '#ff6fa8'
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: '#fff' } },
-          y: { ticks: { color: '#fff' }, beginAtZero: true }
-        }
-      }
-    });
-  }
-
-  // === 👥 실시간 접속자 추적 ===
-  async function trackLiveUsers() {
-    const activeRef = db.collection("activeUsers");
-    const sessionId = Math.random().toString(36).substring(2, 15);
-    const userRef = activeRef.doc(sessionId);
-    await userRef.set({ active: true, time: firebase.firestore.FieldValue.serverTimestamp() });
-
-    // 페이지 닫을 때 세션 제거
-    window.addEventListener("beforeunload", () => {
-      userRef.delete();
-    });
-
-    // 실시간 접속자 감시
-    activeRef.onSnapshot(snapshot => {
-      const count = snapshot.size;
-      document.getElementById('live').textContent = `👥 현재 접속자: ${count}명`;
-    });
-  }
-
-  // === 📈 실시간 그래프/방문자 반영 ===
-  function watchVisitorData() {
-    db.collection("visitors").onSnapshot(snapshot => {
-      let data = {};
-      snapshot.forEach(doc => data[doc.id] = doc.data().count || 0);
-
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('today').textContent = `📅 오늘 방문자: ${data[today] || 0}명`;
-      document.getElementById('total').textContent = `🌏 총 누적 방문자: ${data['total'] || 0}명`;
-
-      renderChart(data);
-    });
-  }
-
-  // === 🔑 관리자 모드만 표시 ===
-  const params = new URLSearchParams(window.location.search);
-  const isAdmin = params.get('admin') === 'showVisitor';
-
-  if (isAdmin) {
-    document.getElementById('visitorBox').style.display = 'block';
-    updateVisitorCount().then(() => {
-      trackLiveUsers();
-      watchVisitorData();
-    });
-  } else {
-    updateVisitorCount();
-    trackLiveUsers();
-  }
-
-  // 닫기 버튼 기능
-  window.addEventListener("DOMContentLoaded", () => {
-    const closeBtn = document.getElementById("closeVisitorBox");
-    const box = document.getElementById("visitorBox");
-
-    if (closeBtn && box) {
-      closeBtn.addEventListener("click", () => {
-        box.style.display = "none";
-        console.log("✅ 방문자 박스 닫힘");
-      });
-    }
-  });
-  
-  window.addEventListener("DOMContentLoaded", () => {
-  const closeBtn = document.getElementById("closeVisitorBox");
-  const box = document.getElementById("visitorBox");
-  
-  if (closeBtn && box) {
-    closeBtn.addEventListener("click", () => {
-      box.style.display = "none";
-    });
-  }
-});
-</script>
 </body>
-</html>
-
-
-
+</html>  
