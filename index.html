@@ -415,7 +415,35 @@
   margin-top: 0.5vh;
 }
 
-
+    /* 모달 스타일 */
+    #visitorModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .visitor-content {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    .visitor-content h2 { margin-bottom: 20px; }
+    .visitor-content button.close {
+      position: absolute;
+      top: 10px; right: 10px;
+      border: none;
+      background: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
 
   </style>
 </head>
@@ -503,6 +531,16 @@
   <div class="youtube123">
     <p>좋아요</p>
     <span id="yt-likes">286,900</span>
+  </div>
+</div>
+<!-- 방문자수 모달 -->
+<div id="visitorModal">
+  <div class="visitor-content">
+    <button class="close">&times;</button>
+    <h2>방문자 통계</h2>
+    <p>👥 실시간 방문자수: <span id="liveVisitors">0</span></p>
+    <p>📅 오늘 방문자수: <span id="todayVisitors">0</span></p>
+    <p>🌍 누적 방문자수: <span id="totalVisitors">0</span></p>
   </div>
 </div>
 
@@ -652,7 +690,71 @@ async function fetchVideoStats() {
 
 fetchVideoStats();
 setInterval(fetchVideoStats, 60000);
-
   </script>
+  <!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, get, set, update, onValue, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  // 🔥 Firebase 설정 (여기에 본인 프로젝트 값 넣기)
+const firebaseConfig = {
+  apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
+  authDomain: "visitor-counter-bf055.firebaseapp.com",
+  projectId: "visitor-counter-bf055",
+  storageBucket: "visitor-counter-bf055.firebasestorage.app",
+  messagingSenderId: "388207600708",
+  appId: "1:388207600708:web:5e9fc58d2ad75a3cd6c811",
+  measurementId: "G-W7ZDT9H9D9"
+};
+
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // 오늘 날짜 (형식: YYYY-MM-DD)
+  const today = new Date().toISOString().split('T')[0];
+
+  // 방문자 카운트 업데이트
+  const totalRef = ref(db, 'visitors/total');
+  const todayRef = ref(db, `visitors/daily/${today}`);
+  update(totalRef, { count: increment(1) });
+  update(todayRef, { count: increment(1) });
+
+  // 실시간 방문자수 감지
+  const liveRef = ref(db, 'visitors/live');
+  update(liveRef, { count: increment(1) });
+  window.addEventListener("beforeunload", () => {
+    update(liveRef, { count: increment(-1) });
+  });
+
+  // 관리자 단축키 (Ctrl + Shift + V)
+  document.addEventListener("keydown", async (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'v') {
+      const password = prompt("관리자 비밀번호를 입력하세요:");
+      if (password === "8196") { // 🔒 관리자 비밀번호
+        document.getElementById("visitorModal").style.display = "flex";
+        loadVisitorData();
+      } else {
+        alert("비밀번호가 올바르지 않습니다.");
+      }
+    }
+  });
+
+  // 닫기 버튼
+  document.querySelector(".close").addEventListener("click", () => {
+    document.getElementById("visitorModal").style.display = "none";
+  });
+
+  // 방문자 데이터 불러오기
+  async function loadVisitorData() {
+    const totalSnap = await get(totalRef);
+    const todaySnap = await get(todayRef);
+    const liveSnap = await get(liveRef);
+
+    document.getElementById("totalVisitors").textContent = totalSnap.val()?.count || 0;
+    document.getElementById("todayVisitors").textContent = todaySnap.val()?.count || 0;
+    document.getElementById("liveVisitors").textContent = liveSnap.val()?.count || 0;
+  }
+</script>
 </body>
 </html>
