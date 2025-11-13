@@ -700,7 +700,7 @@ setInterval(fetchVideoStats, 60000);
   import { getDatabase, ref, get, set, update, onValue, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
   // 🔥 Firebase 설정 (여기에 본인 프로젝트 값 넣기)
-  const firebaseConfig = {
+ const firebaseConfig = {
   apiKey: "AIzaSyBRK9JUv3FV0yXNWYNJRD0TiOmYYm4NIXM",
   authDomain: "visitor-counter-bf055.firebaseapp.com",
   projectId: "visitor-counter-bf055",
@@ -711,11 +711,10 @@ setInterval(fetchVideoStats, 60000);
 };
 
 
-
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 
-  // 오늘 날짜 (형식: YYYY-MM-DD)
+ // 오늘 날짜 (형식: YYYY-MM-DD)
   const today = new Date().toISOString().split('T')[0];
 
   // 방문자 카운트 업데이트
@@ -735,7 +734,7 @@ setInterval(fetchVideoStats, 60000);
   document.addEventListener("keydown", async (e) => {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'v') {
       const password = prompt("관리자 비밀번호를 입력하세요:");
-      if (password === "1234") { // 🔒 관리자 비밀번호
+      if (password === "admin1234") { // 🔒 관리자 비밀번호
         document.getElementById("visitorModal").style.display = "flex";
         loadVisitorData();
       } else {
