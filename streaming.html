@@ -2,232 +2,116 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>이찬원 정규2집 초집중 (메인)</title>
-  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    /* =========================
-       기본 스타일
-    ========================= */
-    * {margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR', sans-serif;}
-    body {background-color:white; display:flex; flex-direction:column; min-height:100vh;}
-    a {text-decoration:none; color:inherit;}
-
-    /* 버튼 */
-    .sms-button, .sms-button1 {
-  display: inline-block;
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #0070d1;
-  background-color: #fff;
-  border: 2px solid #ffb8ea;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  cursor: pointer;
-  margin-right: 5px; /* 버튼 사이 간격 */
-  margin-bottom: 5px; /* 여러 줄일 경우 아래 간격 */
-
-  /* 💡 팁:
-margin-right → 오른쪽 간격
-margin-left → 왼쪽 간격
-margin → 한 번에 모든 방향 지정 가능 (margin: 5px 5px 5px 0;)
-예를 들어 <p> 안에 2개 버튼이 있을 때 간격이 너무 넓으면 margin-right를 줄이면 바로 붙어요. */
-  
-}
-    .sms-button:hover, .sms-button1:hover {background-color:#ffb8ea; box-shadow:0 6px 10px rgba(0,0,0,0.15);}
-
-    /* 상단바 */
-    .top-bar {display:flex; align-items:center; justify-content:space-between; padding:2vh 5vw; background-color:#fce7e3; border-bottom:0.2vh solid #e0e0e0; z-index:100;}
-    .logo-section {display:flex; align-items:center; cursor:pointer; font-weight:bold;}
-    .logo-section img {height:6vh; margin-right:1vw;}
-    .logo-text {font-size:2.5vh;}
-
-    /* 햄버거 */
-.hamburger {
-  font-size:28px;
-  cursor:pointer;
-  position:fixed;
-  top:15px;
-  right:20px;
-  z-index:900; /* X 버튼보다 아래 */
-}
-
-#closeBtn {
-  position:absolute;
-  top:15px;
-  right:20px;
-  font-size:2rem;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:black;
-  font-weight:bold;
-  z-index:1000; /* 햄버거보다 위 */
-}
-
-
-    /* 사이드 메뉴 */
-    .side-menu {position:fixed; top:0; right:-250px; width:250px; height:100%; background:white; color:black; padding:60px 20px 20px 20px; transition:right 0.3s ease; z-index:200; box-shadow:-2px 0 5px rgba(0,0,0,0.1);}
-    .side-menu.open {right:0;}
-    .side-menu ul {list-style:none; padding:0;}
-    .side-menu li {margin:20px 0;}
-    .side-menu a {color:black; font-size:1.1rem; font-weight:500;}
-    #closeBtn {position:absolute; top:10px; right:15px; font-size:2rem; background:none; border:none; cursor:pointer; color:black; font-weight:bold;}
-
-    /* 본문 */
-    main {display:flex; flex-direction:column; align-items:center; flex:1; text-align:center; padding:5vh 5vw; width:100%; max-width:1200px; margin:0 auto;}
-    .button-grid {width:100%; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:5vh;}
-    .grid-button {background-color:#fff; border-radius:3vh; padding:4vh 0; font-size:1.5rem; font-weight:bold; text-align:center; box-shadow:0 0.5vh 1vh rgba(0,0,0,0.1); cursor:pointer; transition:all 0.3s;}
-    .grid-button:hover {background-color:#ffd6ec; transform:translateY(-0.5vh);}
-    .border1 {border:1px solid rgb(88,88,88);}
-
-    /* 모달 */
-    .modal {display:none; position:fixed; z-index:200; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);}
-    .modal-content {background:#fff; margin:10% auto; padding:40px 20px; border-radius:1rem; width:80%; max-width:450px; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.3); position:relative;}
-    .modal-content .close-btn {position:absolute; top:10px; right:15px; font-size:2rem; font-weight:bold; color:#aaa; cursor:pointer;}
-    .modal-content .close-btn:hover {color:#333;}
-
-    /* 푸터 */
-    .site-footer {background:#f9f9f9; padding:5vh 5vw; font-size:1.5vh; color:#555; border-top:0.1vh solid #ddd;}
-    .footer-container {max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:2vw; flex-wrap:wrap;}
-    .footer-left {display:flex; align-items:center; gap:1vw;}
-    .album-cover {width:6vh; height:6vh; border-radius:1vh; object-fit:cover;}
-    .footer-right {text-align:left; flex:1; min-width:200px;}
-    .footer-right p {margin:0.5vh 0;}
-
-    /* 반응형 */
-    @media(max-width:1024px){.grid-button{font-size:1.3rem;}}
-    @media(max-width:768px){.logo-text{font-size:4vw;}.grid-button{font-size:4vw;}.album-cover{width:5vh;height:5vh;}}
-    @media(max-width:480px){.grid-button{font-size:6vw;}.logo-text{font-size:5vw;}}
-
-  
-    /* 큰 화면 (데스크톱) */
-@media (min-width: 1025px) {
-  main img {
-    width: 90%; /* 전체 창의 90%만 사용 */
-  }
-}
-
-/* 중간 화면 (태블릿) */
-@media (max-width: 1024px) and (min-width: 601px) {
-  main img {
-    width: 80%;
-  }
-}
-
-/* 작은 화면 (모바일) */
-@media (max-width: 600px) {
-  main img {
-    width: 95%;
-  }
-}
-  </style>
+  <title>음원 원클릭 스밍 | 이찬원 정규2집 초집중 CST</title>
+  <meta name="description" content="이찬원 정규 2집 <초집중> 멜론, 지니, 벅스, 바이브, 플로 원클릭 스트리밍 리스트 및 재생 가이드" />
+  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
   <!-- 상단바 -->
   <header class="top-bar">
     <a class="logo-section" href="index.html">
-      <img src="favicon/channels4_profile-removebg-preview.png" alt="로고"/>
-      <span class="logo-text">이찬원 정규2집 초집중</span>
+      <img src="favicon/channels4_profile-removebg-preview.png" alt="CST 로고" />
+      <div class="logo-text-group">
+        <span class="logo-badge">CHAN'S SUPPORTER TEAM</span>
+        <span class="logo-text">이찬원 정규2집 초집중</span>
+      </div>
     </a>
-      <div include-html="components/menu.html"></div>
+    <ul class="nav-links-desktop">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="streaming.html" class="active">음원 원클릭</a></li>
+      <li><a href="guide.html">가이드</a></li>
+      <li><a href="vote.html">투표 바로가기</a></li>
+      <li><a href="radio.html">라디오 원클릭</a></li>
+    </ul>
+    <div class="hamburger" aria-label="메뉴 열기">☰</div>
   </header>
 
-  <!-- 햄버거 버튼 -->
-  <div class="hamburger">☰</div>
+  <!-- 사이드 메뉴 (컴포넌트) -->
+  <div include-html="components/menu.html"></div>
 
   <!-- 본문 -->
   <main>
-    <h1 style="font-weight: bold;">음원 원클릭</h1>
-    <p style="margin-top: 50px; margin-bottom: 10px;"></p>
-    <h3>상시 음원 원클릭이 모두 업데이트 완료 <span style="color: red;;">(251113ver.)</span> 되었습니다.<br>
-    다음 앨범까지 해당 스트리밍 리스트로 스밍해주시길 바랍니다.<br>
-    <span style="font-weight:bold; color: #E7B2A5;">🩷오내찬란🩷</span></h3>
-      <p style="margin-top: 50px; margin-bottom: 10px;"></p>
-        <div class="button-grid">
-
-      <!-- 멜론 -->
-     <div class="border1 grid-button openModalBtn"
-     data-title="멜론 원클릭 스밍"
-     data-text="각 폰에 맞는 걸로 눌러주세요."
-     data-buttons='
-             <div style="text-align: center; margin-top: 25px;">
-         <p>
-           <button class="sms-button samsungBtn">삼성/LG</button>
-           <button class="sms-button" onclick="window.open(`https://tinyurl.com/ykbut73k`)">애플</button>
-         </p>
-         <p>
-           <button class="sms-button" onclick="location.href=`s_melon.html`">멜론 재생설정</button>
-         </p>
-       </div>
-     '>
-  🍈 멜론 🍈
-</div>
-
-
-
-      <!-- 지니 -->
-      <div class="border1 grid-button openModalBtn"
-           data-title="지니 원클릭 스밍"
-           data-text="각 폰에 맞는 걸로 눌러주세요."
-           data-buttons='
-             <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button" onclick="window.open(`https://tinyurl.com/3vtz68re`)">삼성/LG</button>
-             <button class="sms-button" onclick="window.open(`https://tinyurl.com/bdfzehmw`)">애플</button></p>
-             <p><button class="sms-button" onclick="location.href=`s_genie.html`">지니 재생설정</button></p>'>
-        🧞‍♂️ 지니 🧞‍♂️
+    <div class="page-hero">
+      <span class="hero-tag">🎵 STREAMING HUB</span>
+      <h1 class="page-title">음원 원클릭 스트리밍</h1>
+      <p class="page-subtitle">
+        사용하시는 음원 플랫폼을 선택하시면 기기별 원클릭 스밍 팝업이 나타납니다.
+      </p>
+      <div style="margin-top: 10px; font-weight: 800; color: #e2538b; font-size: 1.05rem;">
+        🩷 오내찬란 🩷
       </div>
-
-      <!-- 벅스 -->
-      <div class="border1 grid-button openModalBtn"
-           data-title="벅스 원클릭 스밍"
-           data-text="한번만 눌러주세요."
-           data-buttons='
-             <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button" onclick="window.open(`https://tinyurl.com/3skce9ms`)">삼성, LG, 애플</button></p>
-             <p><button class="sms-button" onclick="location.href=`s_bugs.html`">벅스 재생설정</button></p>'>
-        🐛 벅스 🐛
-      </div>
-
-      <!-- 바이브 -->
-      <div class="border1 grid-button openModalBtn"
-           data-title="바이브 원클릭 스밍"
-           data-text="순서대로 클릭해주세요."
-           data-buttons='
-               <p style="margin-top: 15px; margin-bottom: 10px;">
-               <button class="sms-button" onclick="window.open(`https://tinyurl.com/mr4bjj2n`)">1</button>
-               <button class="sms-button" onclick="window.open(`https://tinyurl.com/46xnvx9u`)">2</button>
-               <button class="sms-button" onclick="window.open(`https://tinyurl.com/yf6xjw8a`)">3</button>
-               <p style="margin-top: 15px; margin-bottom: 10px;">
-               <button class="sms-button" onclick="location.href=`s_vibe.html`">바이브 재생설정</button></p>'>
-        ♈️ 바이브 ♈️
-      </div>
-      
-      <!-- 플로 -->
-      <div class="border1 grid-button openModalBtn" 
-           data-title="플로 원클릭 스밍" 
-           data-text="한번만 눌러주세요."
-           data-buttons='
-             <p style="margin-top: 15px; margin-bottom: 10px;"><button class="sms-button" onclick="window.open(`https://tinyurl.com/2yc9fkkd`)">삼성, LG, 애플</button></p>
-             <button class="sms-button" onclick="location.href=`s_flo.html`">플로 재생설정</button>
-           '>
-        💠 플로 💠
-      </div>      
     </div>
-    <p style="margin-top: 15px; margin-bottom: 10px;"></p>
-        <img src="/images/tmafl.jpg" alt="스밍리스트">
-    <p style="margin-top: 20px; margin-bottom: 10px;"></p>
-        <img src="/images/flo_tmafl.jpg" alt="플로 스밍리스트">
+
+    <!-- 플랫폼 버튼 그리드 -->
+    <div class="button-grid" style="max-width: 900px;">
+
+      <!-- 1. 멜론 -->
+      <div class="grid-button" id="btnStreamMelon">
+        <div class="card-icon">🍈</div>
+        <div class="card-title">🍈 멜론 🍈</div>
+        <div class="card-desc">삼성/LG 3분할 &amp; 애플 원클릭</div>
+      </div>
+
+      <!-- 2. 지니 -->
+      <div class="grid-button" id="btnStreamGenie">
+        <div class="card-icon">🧞‍♂️</div>
+        <div class="card-title">🧞‍♂️ 지니 🧞‍♂️</div>
+        <div class="card-desc">삼성/LG &amp; 애플 지원</div>
+      </div>
+
+      <!-- 3. 벅스 -->
+      <div class="grid-button" id="btnStreamBugs">
+        <div class="card-icon">🐛</div>
+        <div class="card-title">🐛 벅스 🐛</div>
+        <div class="card-desc">전체 기종 원클릭 지원</div>
+      </div>
+
+      <!-- 4. 바이브 -->
+      <div class="grid-button" id="btnStreamVibe">
+        <div class="card-icon">♈</div>
+        <div class="card-title">♈️ 바이브 ♈️</div>
+        <div class="card-desc">1 ➔ 2 ➔ 3 순차 클릭</div>
+      </div>
+
+      <!-- 5. 플로 -->
+      <div class="grid-button" id="btnStreamFlo">
+        <div class="card-icon">💠</div>
+        <div class="card-title">💠 플로 💠</div>
+        <div class="card-desc">전체 기종 원클릭 지원</div>
+      </div>
+
+    </div>
+
+    <!-- 스밍 리스트 안내 이미지 -->
+    <div class="section-card" style="text-align: center; margin-top: 16px;">
+      <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;">📋 공식 음원 스트리밍 리스트</h2>
+      <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">
+        (이미지를 클릭하시면 고화질 원본으로 확대하여 확인하실 수 있습니다)
+      </p>
+
+      <div class="guide-image-container">
+        <h3 style="font-size: 1.05rem; font-weight: 700; color: #b15241; align-self: flex-start; margin-left: 4%;">
+          🎵 멜론 / 지니 / 벅스 / 바이브 리스트
+        </h3>
+        <img class="guide-img" src="images/tmafl.jpg" alt="공식 음원 스밍리스트" />
+
+        <h3 style="font-size: 1.05rem; font-weight: 700; color: #b15241; align-self: flex-start; margin-left: 4%; margin-top: 24px;">
+          💠 플로 (FLO) 전용 스밍리스트
+        </h3>
+        <img class="guide-img" src="images/flo_tmafl.jpg" alt="플로 전용 스밍리스트" />
+      </div>
+    </div>
   </main>
 
-  <!-- 모달 -->
+  <!-- 통합 모달 창 -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 id="modalTitle">팝업 제목</h2>
-      <div id="modalText">내용이 여기에 표시됩니다.</div>
+      <span class="close-btn" aria-label="닫기">&times;</span>
+      <h2 id="modalTitle">음원 원클릭</h2>
+      <div id="modalText"></div>
     </div>
   </div>
 
@@ -235,100 +119,132 @@ margin → 한 번에 모든 방향 지정 가능 (margin: 5px 5px 5px 0;)
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-left">
-        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버"/>
-        <h2>이찬원 정규2집 초집중</h2>
+        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버" />
+        <div>
+          <h2>이찬원 정규2집 초집중</h2>
+          <p style="font-size: 0.8rem; color: #888;">음원 · 투표 · 라디오 서포터즈 포털</p>
+        </div>
       </div>
       <div class="footer-right">
-        <h3>CHAN'S SUPPORTER TEAM</h3>
-        <p>X(트위터): <a href="mailto:@chans_CST">@chans_CST</a></p>
-        <p>Copyright © CHAN'S SUPPORTER TEAM All rights reserved.</p>
-        <p><a href="#">개인정보보호정책</a></p>
+        <h3>CHAN'S SUPPORTER TEAM (CST)</h3>
+        <p>X (트위터): <a href="https://x.com/chans_CST" target="_blank" rel="noopener noreferrer">@chans_CST</a></p>
+        <p>Copyright © CHAN'S SUPPORTER TEAM. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- JS -->
+  <script src="js/app.js"></script>
   <script>
-  // include-html 함수
-  function includeHTML(callback) {
-    const elements = document.querySelectorAll('[include-html]');
-    let count = elements.length;
-    if (count === 0) callback?.();
-    elements.forEach(el => {
-      const file = el.getAttribute('include-html');
-      if (file) {
-        fetch(file).then(res => res.ok ? res.text() : Promise.reject())
-          .then(data => {
-            el.innerHTML = data;
-            el.removeAttribute('include-html');
-            count--; 
-            if (count === 0) callback?.();
-          })
-          .catch(() => {
-            el.innerHTML = "내용을 불러올 수 없습니다.";
-            count--; 
-            if (count === 0) callback?.();
-          });
-      }
+    // 1. 멜론 모달
+    function showMelonStreamModal() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #555; font-weight: 600;">각 폰에 맞는 걸로 눌러주세요.</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="showMelonSamsungDetail()">
+            📱 삼성 / LG (안드로이드 3분할)
+          </button>
+          <button class="sms-button" onclick="window.open('https://tinyurl.com/ykbut73k')">
+            🍎 애플 (아이폰)
+          </button>
+          <button class="sms-button" onclick="location.href='s_melon.html'">
+            ⚙️ 멜론 재생 설정 가이드
+          </button>
+        </div>
+      `;
+      cstOpenModal('🍈 멜론 원클릭 스밍', html);
+    }
+
+    function showMelonSamsungDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showMelonStreamModal()">⬅️ 멜론 메뉴로 돌아가기</button>
+        <p style="margin-bottom: 14px; font-weight: 700; color: #b15241;">
+          순서대로 1번 ➔ 2번 ➔ 3번을 클릭해주세요 (삼성/LG)
+        </p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/3d6y3hjz')">1번 링크 클릭</button>
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/523yw87h')">2번 링크 클릭</button>
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/55db6buf')">3번 링크 클릭</button>
+          <button class="sms-button" onclick="location.href='s_melon.html'">⚙️ 멜론 재생 설정 가이드</button>
+        </div>
+      `;
+      cstOpenModal('멜론 삼성/LG 원클릭', html);
+    }
+
+    // 2. 지니 모달
+    function showGenieStreamModal() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #555; font-weight: 600;">각 폰에 맞는 걸로 눌러주세요.</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/3vtz68re')">
+            📱 삼성 / LG (안드로이드)
+          </button>
+          <button class="sms-button" onclick="window.open('https://tinyurl.com/bdfzehmw')">
+            🍎 애플 (아이폰)
+          </button>
+          <button class="sms-button" onclick="location.href='s_genie.html'">
+            ⚙️ 지니 재생 설정 가이드
+          </button>
+        </div>
+      `;
+      cstOpenModal('🧞‍♂️ 지니 원클릭 스밍', html);
+    }
+
+    // 3. 벅스 모달
+    function showBugsStreamModal() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #555; font-weight: 600;">한 번만 눌러주세요.</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/3skce9ms')">
+            🚀 삼성 / LG / 애플 전체 기종
+          </button>
+          <button class="sms-button" onclick="location.href='s_bugs.html'">
+            ⚙️ 벅스 재생 설정 가이드
+          </button>
+        </div>
+      `;
+      cstOpenModal('🐛 벅스 원클릭 스밍', html);
+    }
+
+    // 4. 바이브 모달
+    function showVibeStreamModal() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #555; font-weight: 600;">순서대로 클릭해주세요.</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/mr4bjj2n')">1번 링크 클릭</button>
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/46xnvx9u')">2번 링크 클릭</button>
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/yf6xjw8a')">3번 링크 클릭</button>
+          <button class="sms-button" onclick="location.href='s_vibe.html'">
+            ⚙️ 바이브 재생 설정 가이드
+          </button>
+        </div>
+      `;
+      cstOpenModal('♈ 바이브 원클릭 스밍', html);
+    }
+
+    // 5. 플로 모달
+    function showFloStreamModal() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #555; font-weight: 600;">한 번만 눌러주세요.</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="window.open('https://tinyurl.com/2yc9fkkd')">
+            🚀 삼성 / LG / 애플 전체 기종
+          </button>
+          <button class="sms-button" onclick="location.href='s_flo.html'">
+            ⚙️ 플로 재생 설정 가이드
+          </button>
+        </div>
+      `;
+      cstOpenModal('💠 플로 원클릭 스밍', html);
+    }
+
+    // Bind event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btnStreamMelon')?.addEventListener('click', showMelonStreamModal);
+      document.getElementById('btnStreamGenie')?.addEventListener('click', showGenieStreamModal);
+      document.getElementById('btnStreamBugs')?.addEventListener('click', showBugsStreamModal);
+      document.getElementById('btnStreamVibe')?.addEventListener('click', showVibeStreamModal);
+      document.getElementById('btnStreamFlo')?.addEventListener('click', showFloStreamModal);
     });
-  }
-
-  // 사이드 메뉴 & 햄버거
-  window.addEventListener("DOMContentLoaded", () => {
-    includeHTML(() => {
-      const hamburger = document.querySelector(".hamburger");
-      const sideMenu = document.getElementById("sideMenu");
-      const closeBtn = document.getElementById("closeBtn");
-
-      if (hamburger && sideMenu) {
-        hamburger.addEventListener("click", () => {
-          sideMenu.classList.add("open");
-          hamburger.style.display = "none";
-        });
-      }
-
-      if (closeBtn && sideMenu) {
-        closeBtn.addEventListener("click", () => {
-          sideMenu.classList.remove("open");
-          hamburger.style.display = "block";
-        });
-      }
-
-      // ✅ 모달 버튼 이벤트도 여기서 붙이기
-      const modal = document.getElementById('myModal');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalText = document.getElementById('modalText');
-      const closeModalBtn = modal.querySelector('.close-btn');
-
-      const openBtns = document.querySelectorAll('.openModalBtn');
-      openBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          modalTitle.textContent = btn.getAttribute('data-title');
-          modalText.innerHTML = btn.getAttribute('data-text') + 
-            '<div class="modal-buttons">' + (btn.getAttribute('data-buttons')||'') + '</div>';
-          modal.style.display = 'block';
-
-          const samsungBtn = modalText.querySelector('.samsungBtn');
-          if (samsungBtn) {
-            samsungBtn.addEventListener('click', () => {
-              modalText.innerHTML =
-                '순서대로 클릭해주세요. <P></p>(삼성/LG)<br><div class="modal-buttons">' +
-                '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<button class="sms-button" onclick="window.open(`https://tinyurl.com/3d6y3hjz`)">1</button>' +
-              '<button class="sms-button" onclick="window.open(`https://tinyurl.com/523yw87h`)">2</button>' +
-              '<button class="sms-button" onclick="window.open(`https://tinyurl.com/55db6buf`)">3</button>' +
-              '</div>' +
-              '</div>';
-            });
-          }
-        });
-      });
-
-      closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
-      window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
-    });
-  });
   </script>
-
 </body>
 </html>

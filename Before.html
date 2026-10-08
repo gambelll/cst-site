@@ -2,123 +2,70 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>이찬원 정규 2집 초집중</title>
-  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Noto Sans KR', sans-serif;
-      overflow-x: hidden;
-      background: #f9f9f9;
-    }
-
-    /* 상단바 */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 40px;
-      background-color: #fce7e3;
-      border-bottom: 2px solid #e0e0e0;
-      position: relative;
-      z-index: 100;
-    }
-
-    .logo-section {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      justify-content: center;
-    }
-
-    .logo-section img {
-      height: 60px;
-      margin-right: 15px;
-    }
-
-    .logo-text {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    /* 본문 영역 */
-    main {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    main h1 {
-      font-size: 24px;
-      margin-bottom: 30px;
-    }
-
-    /* SMS 버튼 */
-    .sms-button {
-      display: inline-block;
-      padding: 15px 30px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #0070d1;
-      background-color: hsl(0, 0%, 100%);
-      border: 2px solid #ffb8ea;
-      border-radius: 50px;  /* 둥근 버튼 */
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    .sms-button:hover {
-      background-color: #ffb8ea;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
-    }
-
-
-        /* SMS 버튼 */
-    .once {
-      display: inline-block;
-      padding: 15px 30px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #0070d1;
-      background-color: hsl(0, 0%, 100%);
-      border: 2px solid #ffb8ea;
-      border-radius: 50px;  /* 둥근 버튼 */
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    .click {
-      background-color: #ffb8ea;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
-    }
-    /* 모바일 반응형 */
-    @media (max-width: 768px) {
-      .sms-button {
-        width: 80%;
-        font-size: 18px;
-      }
-    }
-  </style>
+  <title>이찬원 정규2집 초집중 | CHAN'S SUPPORTER TEAM</title>
+  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+
   <!-- 상단바 -->
   <header class="top-bar">
     <a class="logo-section" href="index.html">
-      <img src="favicon/channels4_profile-removebg-preview.png" alt="로고" />
-      <span class="logo-text">이찬원 정규 2집 초집중</span>
+      <img src="favicon/channels4_profile-removebg-preview.png" alt="CST 로고" />
+      <div class="logo-text-group">
+        <span class="logo-badge">CHAN'S SUPPORTER TEAM</span>
+        <span class="logo-text">이찬원 정규2집 초집중</span>
+      </div>
     </a>
+    <ul class="nav-links-desktop">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="streaming.html">음원 원클릭</a></li>
+      <li><a href="guide.html">가이드</a></li>
+      <li><a href="vote.html">투표 바로가기</a></li>
+      <li><a href="radio.html">라디오 원클릭</a></li>
+    </ul>
   </header>
- <h1> 이찬원 &lt;하늘여행&gt;</h1>
-<button type="button" class="sms-button" onClick="location.href='once.html'">📻라디오</button>
-<h1>  </h1>
-<button type="button" class="sms-button" onClick="location.href='guide.html'">🚗가이드</button>
+
+  <!-- 본문 -->
+  <main>
+    <div class="page-hero">
+      <span class="hero-tag">📻 RADIO &amp; GUIDE</span>
+      <h1 class="page-title">이찬원 &lt;하늘여행&gt;</h1>
+      <p class="page-subtitle">
+        라디오 신청 및 가이드 바로가기
+      </p>
+    </div>
+
+    <div class="section-card" style="display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 500px;">
+      <button type="button" class="sms-button primary" onclick="location.href='radio.html'">
+        📻 라디오 신청 바로가기
+      </button>
+      <button type="button" class="sms-button" onclick="location.href='guide.html'">
+        📖 가이드 모음 바로가기
+      </button>
+      <button type="button" class="sms-button" onclick="location.href='index.html'">
+        🏠 메인 홈으로 이동
+      </button>
+    </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버" />
+        <div>
+          <h2>이찬원 정규2집 초집중</h2>
+          <p style="font-size: 0.8rem; color: #888;">음원 · 투표 · 라디오 서포터즈 포털</p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <h3>CHAN'S SUPPORTER TEAM (CST)</h3>
+        <p>Copyright © CHAN'S SUPPORTER TEAM. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
-
-
-

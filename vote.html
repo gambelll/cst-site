@@ -2,440 +2,119 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>이찬원 정규2집 초집중 (메인)</title>
-  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    /* =========================
-       기본 스타일
-    ========================= */
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR',sans-serif; }
-    body { background:white; display:flex; flex-direction:column; min-height:100vh; }
-    a { text-decoration:none; color:inherit; }
-
-    /* 버튼 */
-.sms-button, .sms-button1 {
-  display: inline-block;
-  width: 250px;        /* 버튼 가로 고정 */
-  height: 60px;        /* 버튼 세로 고정 */
-  line-height: 1.2;    /* 텍스트 줄 높이 */
-  font-size: 18px;
-  font-weight: bold;
-  color: #0070d1;
-  background-color: #fff;
-  border: 1px solid rgb(88, 88, 88);
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  cursor: pointer;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  word-break: break-word; /* 글자 길어도 줄바꿈 */
-}
-
-    .sms-button:hover, .sms-button1:hover { background-color:#ffb8ea; box-shadow:0 6px 10px rgba(0,0,0,0.15); }
-
-    /* 상단바 */
-    .top-bar { display:flex; align-items:center; justify-content:space-between; padding:2vh 5vw; background-color:#fce7e3; border-bottom:0.2vh solid #e0e0e0; z-index:100; }
-    .logo-section { display:flex; align-items:center; cursor:pointer; font-weight:bold; }
-    .logo-section img { height:6vh; margin-right:1vw; }
-    .logo-text { font-size:2.5vh; }
-        /* 햄버거 */
-.hamburger {
-  font-size:28px;
-  cursor:pointer;
-  position:fixed;
-  top:15px;
-  right:20px;
-  z-index:900; /* X 버튼보다 아래 */
-}
-
-#closeBtn {
-  position:absolute;
-  top:15px;
-  right:20px;
-  font-size:2rem;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:black;
-  font-weight:bold;
-  z-index:1000; /* 햄버거보다 위 */
-}
-
-    /* 본문 */
-    main { display:flex; flex-direction:column; align-items:center; flex:1; text-align:center; padding:5vh 5vw; width:100%; max-width:1200px; margin:0 auto; }
-
-    /* 모달 */
-    .modal { display:none; position:fixed; z-index:200; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
-    .modal-content { background:#fff; margin:5% auto; padding:40px 20px; border-radius:1rem; width:80%; max-width:450px; max-height:80vh; overflow-y:auto; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.3); }
-    .close-btn { float:right; font-size:1.8rem; font-weight:bold; color:#aaa; cursor:pointer; }
-    .close-btn:hover { color:#333; }
-
-    /* 푸터 */
-    .site-footer { background:#f9f9f9; padding:5vh 5vw; font-size:1.5vh; color:#555; border-top:0.1vh solid #ddd; }
-    .footer-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:2vw; flex-wrap:wrap; }
-    .footer-left { display:flex; align-items:center; gap:1vw; }
-    .album-cover { width:6vh; height:6vh; border-radius:1vh; object-fit:cover; }
-    .footer-right { text-align:left; flex:1; min-width:200px; }
-    .footer-right p { margin:0.5vh 0; }
-
-    /* 사이드 메뉴 */
-    .side-menu {
-      position:fixed;
-      top:0; right:-250px;
-      width:250px; height:100%;
-      background:white;
-      color:black;
-      padding:60px 20px 20px 20px;
-      transition:right 0.3s ease;
-      z-index:1000;
-      box-shadow:-2px 0 5px rgba(0,0,0,0.1);
-    }
-    .side-menu.open { right:0; }
-    .side-menu ul { list-style:none; padding:0; margin-top:20px; }
-    .side-menu li { margin:20px 0; }
-    .side-menu a { color:black; font-size:1.1rem; font-weight:500; }
-    .side-menu .close-menu-btn {
-      position:absolute; top:10px; right:15px;
-      font-size:2rem; background:none; border:none;
-      cursor:pointer; color:black; font-weight:bold; padding:0; line-height:1;
-    }
-
-.voteimg {
-  max-width: 100%;
-  max-height: auto;
-  object-fit: contain;
-}
-
-
-    /* 반응형 */
-    @media (max-width:768px){ .logo-text{font-size:4vw;} .album-cover{width:5vh;height:5vh;} }
-    @media (max-width:480px){ .logo-text{font-size:5vw;} }
-
-main img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto; /* 가운데 정렬 */
-  border-radius: 10px; /* 살짝 둥글게 (선택사항) */
-}
-
-/* 큰 화면 (데스크톱) */
-@media (min-width: 1025px) {
-  main img {
-    width: 90%; /* 전체 창의 90%만 사용 */
-  }
-}
-
-/* 중간 화면 (태블릿) */
-@media (max-width: 1024px) and (min-width: 601px) {
-  main img {
-    width: 80%;
-  }
-}
-
-/* 작은 화면 (모바일) */
-@media (max-width: 600px) {
-  main img {
-    width: 95%;
-  }
-}
-</style>
-  </style>
+  <title>음악방송 투표 | 이찬원 정규2집 초집중 CST</title>
+  <meta name="description" content="이찬원 음악방송(음악중심, 뮤직뱅크, 인기가요) 사전투표, 실시간 문자투표, 앱별 투표 가이드" />
+  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
   <!-- 상단바 -->
   <header class="top-bar">
     <a class="logo-section" href="index.html">
-      <img src="favicon/channels4_profile-removebg-preview.png" alt="로고" />
-      <span class="logo-text">이찬원 정규2집 초집중</span>
+      <img src="favicon/channels4_profile-removebg-preview.png" alt="CST 로고" />
+      <div class="logo-text-group">
+        <span class="logo-badge">CHAN'S SUPPORTER TEAM</span>
+        <span class="logo-text">이찬원 정규2집 초집중</span>
+      </div>
     </a>
-     <div include-html="components/menu.html"></div>
+    <ul class="nav-links-desktop">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="streaming.html">음원 원클릭</a></li>
+      <li><a href="guide.html">가이드</a></li>
+      <li><a href="vote.html" class="active">투표 바로가기</a></li>
+      <li><a href="radio.html">라디오 원클릭</a></li>
+    </ul>
+    <div class="hamburger" aria-label="메뉴 열기">☰</div>
   </header>
-  <!-- 햄버거 버튼 -->
-  <div class="hamburger">☰</div>
+
+  <!-- 사이드 메뉴 (컴포넌트) -->
+  <div include-html="components/menu.html"></div>
 
   <!-- 본문 -->
   <main>
-    <h1 style="font-weight: bold;">음악방송 투표 바로가기</h1>
-    <p style="margin-top: 50px; margin-bottom: 10px;"></p>
-        <h3 style="font-weight:normal; color: #E7B2A5;">🐶정규 2집 음방 투표는 끝이 났습니다.<br>
-          다음 앨범에서 만나요. <span style="font-weight:bold;"> 오내찬란🩷</span> </h3>
-         <!-- <a class="sms-button" href="sms:%230505?body=이찬원">💌음악중심 문자투표💌</a> 
+    <div class="page-hero">
+      <span class="hero-tag">🏆 VOTE CENTER</span>
+      <h1 class="page-title">음악방송 투표 바로가기</h1>
+      <p class="page-subtitle">
+        참여하실 음악방송 투표 항목을 클릭하시면 상세 투표 안내와 바로가기 팝업이 나타납니다.
+      </p>
+    </div>
 
-        <div class="sms-button openModalBtn voteimg" 
-       data-title="[뮤빗&문자] 실시간투표" 
-       data-text="11월 1일 오후 3시 30분 ~4시 25분경 종료"
-       data-buttons='
-    <div style="text-align: left;">
-    <p style="margin-top: 40px; margin-bottom: 20px;">
-<h2 style="font-weight:bold; color:red;"> 일정: 11월 1일 오후 3시 30분 ~4시 25분경 종료</h2>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3 style="color: white; background-color: blue; display: inline;">실시간 뮤빗 투표</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4>- 생방송 시작 후 투표 창이 열면서 시작<br>
-- 뮤빗에서 최대한 많은 계정마다 150 하트비트 채우기가 매우 중요<br>
-- 큰 차이로 이길수록 1위에 가까워집니다.</h4>
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://www.muniverse.io/votehome`)">뮤빗 실시간투표 가기</button>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3 style="color: white; background-color: blue; display: inline;">실시간 문자 투표</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4>- 생방송 시작 후 MC들이 문자 투표 시작합니다! 라고 외쳐야 유효<br>
-- 선착순이 아니므로 여유 있게 3시 40분~4시 10분 사이에 투표</h4>
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<h4 style="color: red;">​생방송 중 실시간 뮤빗 투표와 문자 투표는 둘 다 동시에 필수로 하셔야 합니다.</h4>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.<br>
-&nbsp;&nbsp;➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.</h4>
-    <p style="margin-top: 10px; margin-bottom: 10px;">   
-<span><a class="sms-button" href="sms:%230505?body=이찬원">💌음악중심 문자투표💌</span></a> </div>
-    '>
-   [음중] 실시간투표
-    </div> 
-    
-         <a class="sms-button openModalBtn voteimg" 
-       data-title="[뮤빗] 음악중심 사전투표" 
-       data-text="10월 28일 오후 6시~10월 31일 오전 11시"
-       data-buttons='
-           <div style="text-align: left;">
-          <p style="margin-top: 40px; margin-bottom: 20px;">
-<h4>쇼! 음악중심 사전투표는 31일 오전 11시 마감입니다. 
-          <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3 style="color: red;"> ✅️ 초집중 안내 (30일 오전 11시 마감)</h3>
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4>✔️30일 오전 10시부터 투표 시작 <br>
-✔️계정별 150하트비트는 반드시 남기고 투표 <br>
-✔️순위별 점수가 정해져 있기에 오늘 뮤직뱅크와 같이 큰 차이로 이길 필요는 없고 1위만 하면 됩니다. <br>
-✔️모니터링을 통해 안전한 차이가 벌어지면 투표 중지 안내를 드릴 수도 있으니 공카 공지를 자주 확인 부탁드립니다. <br>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h4 style="color: red;">실시간 투표를 위해 계정별 150하트비트 채우는 데에 집중을 부탁드립니다.</h4>
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4>쇼!음악중심 실시간투표를 위해 뮤빗에서 하트비트를 모아주세요. <br>
-&nbsp;&nbsp;(사전투표는 길게 모아왔기에 계정 확보가 중요한 실시간 투표 대비 필요)
-          <p style="margin-top: 20px; margin-bottom: 10px;">
-<h3 style="color: white; background-color: red; display: inline;">실시간투표: 11월 1일 오후 3시 30분~ 오후 4시 10분(예정)</h3>
-          <p style="margin-top: 20px; margin-bottom: 10px;">
-<h4> 사전투표는 무제한이기에 한계정에서 다수의 하트비트 투표 가능하지만 실시간투표는 계정당 150하트비트만 투표가능합니다.<br> 
-  사전투표용 하트비트 모은 계정 외에 <span style="color: red;">새로운 계정에 150하트비트를 채워주세요.</span></h4>
-               <p style="margin-top: 20px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://cafe.naver.com/2chanwon/1965156`)">자세한 내용은 여기로</button>
-       '>
-      [음악중심] 사전투표
-    </a>
-         <a class="sms-button openModalBtn voteimg" 
-       data-title="[팬캐스트] 뮤직뱅크 사전투표" 
-       data-text="10월 26일 오후 3시~10월 29일 오전 11시"
-       data-buttons='
-    <div style="text-align: left;">
-    <p style="margin-top: 40px; margin-bottom: 20px;">
-<h4>뮤직뱅크 사전투표에 대하여 중요한 안내드립니다. <br>
-뮤직뱅크 사전투표는 2000점 만점으로 1위의 득표수를 기준으로 비율에 따라 점수가 정해집니다.<br>
-따라서 저희는 무조건 큰 차이로 사전투표를 이겨야만 1위에 가까워질 수 있습니다. </h4>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h2>💥💥<span style="color: white; background-color: red;">주의사항</span>💥💥</h2>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h3 style="color: red;">절대 다른 투표와 혼동하지 마시고 반드시 [뮤직뱅크 사전투표]에만 투표해주세요.</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4>[팬스테이지 픽] 투표와 [사전투표]가 동시에 진행되기에 [팬스테이지 픽]에 투표하는 일은 절대로 있어서는 안 됩니다. <br>
-팬스테이지 픽은 열어보지도 마시고 순위가 떨어져도 신경 쓰지 마세요. 저희는 음악방송 1위를 위한 [사전투표]에만 초집중하셔야 합니다. </h4>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h2 style="color: red;"> ⭕️파란색 사전투표에만 투표하기⭕️</h2>
- <h2>❌️분홍색 투표는 절대 금지❌️</h2>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/MB_tkxn1.jpg" alt="뮤직뱅크 사전투표1">
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/MB_tkxn2.jpg" alt="뮤직뱅크 사전투표2"> 
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://cafe.naver.com/2chanwon/1964248`)">자세한 내용은 여기로</button>
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://fancast.go.link/3zSxm`)">🛎투표 바로가기🛎</button> </div>
-    '>
-   [뮤뱅] 사전투표
-    </a> 
+    <!-- 활동 안내 알림 -->
+    <div class="notice-ticker" style="margin-bottom: 28px;">
+      <span class="notice-badge"><span class="pulse-dot"></span> 총공 안내</span>
+      <span class="notice-text">🐶 정규 2집 음악방송 활동 안내 및 투표 가이드 모음입니다. 다음 앨범에서도 함께해요! 🩷오내찬란🩷</span>
+    </div>
 
-         <a class="sms-button openModalBtn voteimg" 
-       data-title="[하이어] 인기가요 사전투표" 
-       data-text="10월 27일~10월 31일"
-       data-buttons='
-           <div style="text-align: left;">
-          <p style="margin-top: 40px; margin-bottom: 20px;">
-<h4>인기가요 사전투표가 시작되었습니다.<br>
-인기가요는 이번주 투표가 다음주 성적에 반영됩니다.<br>
-오늘자 투표 진행해주세요.
-          <p style="margin-top: 30px; margin-bottom: 20px;">
-<h2 style="font-weight:bold; color:red;">✔️투표 기간:10월 27일~10월 31일</h2>
-            <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3 style="color: blue;"> ✔️매일 1일 10표씩
-          <p style="margin-top: 20px; margin-bottom: 10px;">
-          <img class="voteimg" src="/images/linc_vote1.jpg" alt="1">
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-          <img class="voteimg" src="/images/linc_vote2.jpg" alt="1">
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-          <img class="voteimg" src="/images/linc_vote3.jpg" alt="1">  </div>
-    '>
-   [인기가요] 사전투표
-    </a>
+    <!-- 음방 투표 버튼 그리드 -->
+    <div class="button-grid" style="max-width: 900px;">
 
-         <a class="sms-button openModalBtn voteimg" 
-       data-title="[음악중심] 스테이지 엠픽 투표" 
-       data-text="11월 1일 오후 3시~11월 6일 오전 9시"
-       data-buttons='
-     <div style="text-align: left;">
-       <p style="margin-top: 40px; margin-bottom: 20px;"></p>
-<h3>금일 쇼! 음악중심 생방송이 종료 된 후에 최고의 무대를 뽑는 <span style="color: red;">[스테이지 엠픽]</span> 투표가 시작되었습니다.<br>
-  인기가요 핫스테이지상과 같이 <span style="color: red;">아티스트에게 트로피가 전달됩니다.</span>
-     <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-<h2 style="font-weight:bold; color:red;"> 투표기간: 11월 1일 오후 3시~11월 6일 오전 9시 </h2>
-     <p style="margin-top: 20px; margin-bottom: 10px;"></p>
-<h3>​뮤니버스 사이트에서 계정별 <span style="color: blue;">매일 10표씩 투표</span>하기 
-&nbsp;&nbsp;(어플설치 없음, 광고보기 없음)<br>
-✔️<span style="color: red;">네이버앱은 사용불가</span><br>
-✔️<span style="color: red;">크롬, 삼성인터넷, 오페라, 웨일, 파이어폭스 가능</span><br>
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
- <img class="voteimg" src="/images/muni_qmfkdnwj.png" alt="뮤니버스브라우져">
-    <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-👇사이트👇
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<button class="sms-button" onclick="window.open(`https://www.muniverse.io/votehome`)">뮤니버스 바로가기</button>
-    <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-👇로그인 방법👇
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
- <img class="voteimg" src="/images/muni_login1.jpg" alt="뮤니버스로그인1">
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<img class="voteimg" src="/images/muni_login2.jpg" alt="뮤니버스로그인2">
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<img class="voteimg" src="/images/muni_login3.jpg" alt="뮤니버스로그인3">
-    <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-👇투표방법👇
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-반드시 + 눌러 10 표 한번에 투표하기
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<img class="voteimg" src="/images/muni_vote1.jpg" alt="뮤니버스투표하기1">
-     <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<img class="voteimg" src="/images/muni_vote2.jpg" alt="뮤니버스투표하기2">
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<img class="voteimg" src="/images/muni_vote3.jpg" alt="뮤니버스투표하기3">
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-<img class="voteimg" src="/images/muni_vote4.jpg" alt="뮤니버스투표하기4">
-    <p style="margin-top: 30px; margin-bottom: 20px;"></p>
- ​👇로그아웃 방법👇
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/muni_logout1.jpg" alt="뮤니버스로그아웃1">
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/muni_logout2.jpg" alt="뮤니버스로그아웃2"> </div>
-    '>
-   [음악중심] 스테이지 엠빅
-   </a>
+      <!-- 1. 음중 실시간투표 -->
+      <div class="grid-button" id="btnVoteMcLive">
+        <div class="card-icon">💌</div>
+        <div class="card-title">[음중] 실시간투표</div>
+        <div class="card-desc">생방송 실시간 문자투표 &amp; 뮤빗</div>
+      </div>
 
-        <a class="sms-button openModalBtn voteimg" 
-       data-title="[하이어] 인기가요 핫스테이지 투표" 
-       data-text="현재~11월 6일(목) 오후 12시"
-       data-buttons='
-    <div style="text-align: left;">
-    <p style="margin-top: 40px; margin-bottom: 20px;">
-<h4>금일 인기가요 생방송이 종료된 후에 최고의 무대를 뽑는 <span style="color: red;">[핫스테이지]</span>투표가 시작되었습니다. <br>
-투표에서 1위를 한 <span style="color: red;">아티스트에게 트로피가 전달됩니다.</span>
-     <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-오늘부터 <span style="color: blue;">매일 10표</span>(=300루비=30다이아)씩 투표해 주세요. <br>
-일일 투표수가 정해진 투표이기에 반드시 오늘 10표를 완료하셔야 합니다.
-     <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-내일 26일(월) 오후 6시 전후부터 투표 현황이 보이지 않아서 이때 역전이 되는 경우가 많으니 특별히 주의해야 합니다.
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h2 style="font-weight:bold; color:red;">투표기간: 현재~11월 6일(목) 오후 12시</h2>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3>✅ 1 표 = <span style="color: red;">30 루비</span> = <span style="color: blue;">3 다이아</span></h3>
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<h3>✅1일 10표(=300루비=30다이아) 필요
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4 style="color: red;">- 방송 종료 직후부터 차주 목요일(12:00)까지 5일동안 투표 진행</h4>
-<h4>- 투표 현황 및 순위는 <span style="color: red;">방송 종료부터 25시간동안 공개된 이후 비공개 처리</span>➡️ 생방송을 통해 핫스테이지 1위 확인<br>
-- <span style="color: blue;">다이아</span>는 <span style="color: red;">루비로 교환하지 않아도</span> 바로 투표 가능하며 유효기간이 없습니다
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3>👇투표하는 곳👇</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://myhigher.chottu.link/MAsdxt`)">핫스테이지 투표하기</button>
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<h3>👇투표방법👇</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/higher_hot1.jpeg" alt="인기가요 투표방법1">   
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/higher_hot2.jpg" alt="인기가요 투표방2">   
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/higher_hot3.jpg" alt="인기가요 투표방법3">   
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/higher_hot4.jpeg" alt="인기가요 투표방법4">   
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/higher_hot5.jpg" alt="인기가요 투표방법5">   
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h3>👇다계정 로그아웃 방법👇</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/higher_hot6.jpg" alt="인기가요 다계정">   </div> 
-       '>
-      [인기가요] 핫스테이지
-    </a>
-    
-        <a class="sms-button openModalBtn voteimg" 
-       data-title="[팬캐스트] 뮤직뱅크 팬스테이지 픽" 
-       data-text="10월 26일 오후 3시~10월 29일 오전 11시"
-       data-buttons='
-    <div style="text-align: left;">
-    <p style="margin-top: 40px; margin-bottom: 20px;">
-<h4>뮤직뱅크 사전투표에 대하여 중요한 안내드립니다. <br>
-뮤직뱅크 사전투표는 2000점 만점으로 1위의 득표수를 기준으로 비율에 따라 점수가 정해집니다.<br>
-따라서 저희는 무조건 큰 차이로 사전투표를 이겨야만 1위에 가까워질 수 있습니다. </h4>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h2>💥💥<span style="color: white; background-color: red;">주의사항</span>💥💥</h2>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h3 style="color: red;">절대 다른 투표와 혼동하지 마시고 반드시 [뮤직뱅크 사전투표]에만 투표해주세요.</h3>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<h4>[팬스테이지 픽] 투표와 [사전투표]가 동시에 진행되기에 [팬스테이지 픽]에 투표하는 일은 절대로 있어서는 안 됩니다. <br>
-팬스테이지 픽은 열어보지도 마시고 순위가 떨어져도 신경 쓰지 마세요. 저희는 음악방송 1위를 위한 [사전투표]에만 초집중하셔야 합니다. </h4>
-    <p style="margin-top: 30px; margin-bottom: 20px;">
-<h2 style="color: red;"> ⭕️파란색 사전투표에만 투표하기⭕️</h2>
- <h2>❌️분홍색 투표는 절대 금지❌️</h2>
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/MB_tkxn1.jpg" alt="뮤직뱅크 사전투표1">
-    <p style="margin-top: 10px; margin-bottom: 10px;">
-<img class="voteimg" src="/images/MB_tkxn2.jpg" alt="뮤직뱅크 사전투표2"> 
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://cafe.naver.com/2chanwon/1964248`)">자세한 내용은 여기로</button>
-    <p style="margin-top: 20px; margin-bottom: 10px;">
-<button class="sms-button" onclick="window.open(`https://fancast.go.link/3zSxm`)">🛎투표 바로가기🛎</button> </div>
-    '>
-   [뮤뱅] 사전투표
-    </a> -->
-    
-    <!--미공-->
-    <!-- <div style="text-align: left;">
-    <a class="sms-button openModalBtn voteimg" 
-       data-title="[더쇼] 스타플래닛" 
-       data-text="곧 오픈 예정입니다."
-       data-buttons='
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-          <img class="voteimg" src="/images/vote.jpg" alt="1">
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-          <img class="voteimg" src="/images/vote.jpg" alt="1">
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-          <button class="sms-button" onclick="window.open(`주소`)">스타플래닛 투표하러 가기</button> </div>
-       '>
-      스타플래닛 투표하기 -->
-    </a>
+      <!-- 2. 음중 사전투표 -->
+      <div class="grid-button" id="btnVoteMcPre">
+        <div class="card-icon">🗳️</div>
+        <div class="card-title">[음중] 사전투표</div>
+        <div class="card-desc">뮤빗 앱 사전투표 가이드</div>
+      </div>
+
+      <!-- 3. 뮤뱅 사전투표 -->
+      <div class="grid-button" id="btnVoteMbPre">
+        <div class="card-icon">🎵</div>
+        <div class="card-title">[뮤뱅] 사전투표</div>
+        <div class="card-desc">팬캐스트 파란색 사전투표</div>
+      </div>
+
+      <!-- 4. 인기가요 사전투표 -->
+      <div class="grid-button" id="btnVoteInkiPre">
+        <div class="card-icon">🌟</div>
+        <div class="card-title">[인기가요] 사전투표</div>
+        <div class="card-desc">하이어 1일 10표 투표</div>
+      </div>
+
+      <!-- 5. 음중 스테이지 엠픽 -->
+      <div class="grid-button" id="btnVoteMuni">
+        <div class="card-icon">🏆</div>
+        <div class="card-title">[음중] 스테이지 엠픽</div>
+        <div class="card-desc">뮤니버스 매일 10표 투표</div>
+      </div>
+
+      <!-- 6. 인기가요 핫스테이지 -->
+      <div class="grid-button" id="btnVoteHotStage">
+        <div class="card-icon">💖</div>
+        <div class="card-title">[인기가요] 핫스테이지</div>
+        <div class="card-desc">하이어 매일 10표 핫스테이지</div>
+      </div>
+
+    </div>
+
+    <!-- 하단 퀵 링크 -->
+    <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+      <button class="sms-button" onclick="location.href='streaming.html'">
+        🎵 음원 원클릭 스밍
+      </button>
+      <button class="sms-button" onclick="location.href='guide.html'">
+        📖 가이드 모음
+      </button>
+      <button class="sms-button" onclick="location.href='radio.html'">
+        📻 라디오 신청
+      </button>
+    </div>
   </main>
 
-  <!-- 모달 -->
+  <!-- 통합 모달 창 -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 id="modalTitle">팝업 제목</h2>
-      <div id="modalText">내용이 여기에 표시됩니다.</div>
+      <span class="close-btn" aria-label="닫기">&times;</span>
+      <h2 id="modalTitle">투표 안내</h2>
+      <div id="modalText"></div>
     </div>
   </div>
 
@@ -444,85 +123,209 @@ main img {
     <div class="footer-container">
       <div class="footer-left">
         <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버" />
-        <h2>이찬원 정규2집 초집중</h2>
+        <div>
+          <h2>이찬원 정규2집 초집중</h2>
+          <p style="font-size: 0.8rem; color: #888;">음원 · 투표 · 라디오 서포터즈 포털</p>
+        </div>
       </div>
       <div class="footer-right">
-        <h3>CHAN'S SUPPORTER TEAM</h3>
-        <p>X(트위터): <a href="mailto:@chans_CST">@chans_CST</a></p>
-        <p>Copyright © CHAN'S SUPPORTER TEAM All rights reserved.</p>
-        <p><a href="#">개인정보보호정책</a></p>
+        <h3>CHAN'S SUPPORTER TEAM (CST)</h3>
+        <p>X (트위터): <a href="https://x.com/chans_CST" target="_blank" rel="noopener noreferrer">@chans_CST</a></p>
+        <p>Copyright © CHAN'S SUPPORTER TEAM. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- JS -->
+  <script src="js/app.js"></script>
   <script>
-           // include-html 함수
-    function includeHTML(callback) {
-      const elements = document.querySelectorAll('[include-html]');
-      let count = elements.length;
-      if(count===0) callback?.();
-      elements.forEach(el=>{
-        const file = el.getAttribute('include-html');
-        if(file){
-          fetch(file).then(res=>res.ok?res.text():Promise.reject())
-          .then(data=>{
-            el.innerHTML=data;
-            el.removeAttribute('include-html');
-            count--; if(count===0) callback?.();
-          }).catch(()=>{el.innerHTML="내용을 불러올 수 없습니다."; count--; if(count===0) callback?.();});
-        }
-      });
+    // 1. [음중] 실시간투표 모달
+    function showVoteMcLiveModal() {
+      const html = `
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #e2538b; margin-bottom: 12px;">
+            일정: 생방송 시작 후 ~ 종료 전까지
+          </h3>
+
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;">
+            <h4 style="font-weight: 800; color: #b15241; margin-bottom: 4px;">1️⃣ 실시간 뮤빗 투표</h4>
+            - 생방송 시작 후 투표 창이 열리면 시작<br />
+            - 뮤빗에서 최대한 많은 계정마다 150 하트비트 채우기가 매우 중요
+          </div>
+          <div style="text-align: center; margin-bottom: 18px;">
+            <button class="sms-button primary" onclick="window.open('https://www.muniverse.io/votehome')">
+              뮤빗 실시간투표 바로가기
+            </button>
+          </div>
+
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;">
+            <h4 style="font-weight: 800; color: #b15241; margin-bottom: 4px;">2️⃣ 실시간 문자 투표</h4>
+            - 생방송 중 MC의 <strong>'문자 투표 시작합니다!'</strong> 멘트 후 유효<br />
+            - 수신번호: <strong>#0505</strong> / 내용: <strong>이찬원</strong>
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center;">
+            <a class="sms-button primary" href="sms:#0505?body=이찬원">
+              💌 음악중심 문자투표 (#0505)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원', '문구 [이찬원]이 복사되었습니다!')">
+              📋 문구 '이찬원' 복사
+            </button>
+          </div>
+        </div>
+      `;
+      cstOpenModal('[음악중심] 실시간 투표', html);
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      includeHTML(() => {
-        const hamburger = document.querySelector(".hamburger");
-        const sideMenu = document.getElementById("sideMenu");
-        const closeBtn = document.getElementById("closeBtn");
+    // 2. [음중] 사전투표 모달
+    function showVoteMcPreModal() {
+      const html = `
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #e2538b; margin-bottom: 12px;">
+            쇼! 음악중심 사전투표 안내
+          </h3>
+          <p style="margin-bottom: 12px; color: #555;">
+            쇼! 음악중심 사전투표 및 실시간 투표를 위해 뮤빗(Mubeat)에서 하트비트를 모아주세요.
+          </p>
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;">
+            ✔️ 계정별 150 하트비트는 반드시 남기고 사전투표<br />
+            ✔️ 실시간 투표는 계정당 150 하트비트만 투표 가능하므로 <strong>새로운 계정 확보</strong>가 중요합니다.
+          </div>
+          <div style="text-align: center;">
+            <button class="sms-button primary" onclick="window.open('https://cafe.naver.com/2chanwon/1965156')">
+              ☕ 공카 상세 안내 바로가기
+            </button>
+          </div>
+        </div>
+      `;
+      cstOpenModal('[음악중심] 사전투표', html);
+    }
 
-        hamburger?.addEventListener("click", ()=>{
-          sideMenu?.classList.add("open");
-          hamburger.style.display="none";
-        });
+    // 3. [뮤뱅] 사전투표 모달
+    function showVoteMbPreModal() {
+      const html = `
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: #fff0f0; border: 1.5px solid #ffb3b3; color: #d63031; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; text-align: center; font-weight: 800;">
+            ⭕ 파란색 [뮤직뱅크 사전투표]에만 투표하기<br />
+            ❌ 분홍색 [팬스테이지 픽]은 절대 금지!
+          </div>
+          <p style="color: #555; margin-bottom: 14px;">
+            뮤직뱅크 사전투표는 2,000점 만점으로 1위 득표수 비율에 따라 점수가 정해지므로 무조건 큰 차이로 이겨야 합니다.
+          </p>
+          <img src="images/MB_tkxn1.jpg" alt="뮤직뱅크 안내1" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" />
+          <img src="images/MB_tkxn2.jpg" alt="뮤직뱅크 안내2" style="width: 100%; border-radius: 8px; margin-bottom: 16px;" />
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center;">
+            <button class="sms-button primary" onclick="window.open('https://fancast.go.link/3zSxm')">
+              🛎️ 팬캐스트 투표 바로가기
+            </button>
+            <button class="sms-button" onclick="window.open('https://cafe.naver.com/2chanwon/1964248')">
+              ☕ 공카 자세한 내용 확인
+            </button>
+          </div>
+        </div>
+      `;
+      cstOpenModal('[뮤직뱅크] 사전투표', html);
+    }
 
-        closeBtn?.addEventListener("click", ()=>{
-          sideMenu?.classList.remove("open");
-          hamburger.style.display="block";
-        });
-      });
+    // 4. [인기가요] 사전투표 모달
+    function showVoteInkiPreModal() {
+      const html = `
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #e2538b; margin-bottom: 12px;">
+            SBS 인기가요 사전투표 (하이어)
+          </h3>
+          <p style="margin-bottom: 12px;">
+            인기가요는 이번 주 투표가 다음 주 방송 성적에 반영됩니다.<br />
+            <strong>✔️ 매일 1일 10표씩 필수 투표!</strong>
+          </p>
+          <img src="images/linc_vote1.jpg" alt="인기가요1" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" />
+          <img src="images/linc_vote2.jpg" alt="인기가요2" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" />
+          <img src="images/linc_vote3.jpg" alt="인기가요3" style="width: 100%; border-radius: 8px; margin-bottom: 16px;" />
+          <div style="text-align: center;">
+            <button class="sms-button primary" onclick="window.open('https://myhigher.chottu.link/MAsdxt')">
+              🛎️ 하이어 투표하러 가기
+            </button>
+          </div>
+        </div>
+      `;
+      cstOpenModal('[인기가요] 사전투표', html);
+    }
+
+    // 5. [음중] 스테이지 엠픽 모달
+    function showVoteMuniModal() {
+      const html = `
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #e2538b; margin-bottom: 12px;">
+            쇼! 음악중심 [스테이지 엠픽] 투표 (뮤니버스)
+          </h3>
+          <p style="margin-bottom: 12px;">
+            최고의 무대를 뽑는 투표로 1위 아티스트에게 직접 트로피가 전달됩니다.<br />
+            ✔️ 어플 설치 없음 / 광고 시청 없음<br />
+            ✔️ <strong>네이버앱 불가</strong>, 크롬/삼성인터넷/웨일/사파리 가능<br />
+            ✔️ <strong>+ 버튼을 눌러 매일 10표 한 번에 투표</strong>
+          </p>
+          <div style="text-align: center; margin: 16px 0;">
+            <button class="sms-button primary" onclick="window.open('https://www.muniverse.io/votehome')">
+              🌐 뮤니버스 사이트 바로가기
+            </button>
+          </div>
+          <h4 style="font-weight: 700; margin: 14px 0 6px;">1. 사용 가능 브라우저</h4>
+          <img src="images/muni_qmfkdnwj.png" alt="뮤니버스 브라우저" style="width: 100%; margin-bottom: 12px;" />
+          <h4 style="font-weight: 700; margin: 14px 0 6px;">2. 로그인 방법</h4>
+          <img src="images/muni_login1.jpg" alt="뮤니버스 로그인1" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/muni_login2.jpg" alt="뮤니버스 로그인2" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/muni_login3.jpg" alt="뮤니버스 로그인3" style="width: 100%; margin-bottom: 12px;" />
+          <h4 style="font-weight: 700; margin: 14px 0 6px;">3. 투표 방법 (+ 눌러 10표 한번에)</h4>
+          <img src="images/muni_vote1.jpg" alt="뮤니버스 투표1" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/muni_vote2.jpg" alt="뮤니버스 투표2" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/muni_vote3.jpg" alt="뮤니버스 투표3" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/muni_vote4.jpg" alt="뮤니버스 투표4" style="width: 100%; margin-bottom: 12px;" />
+          <h4 style="font-weight: 700; margin: 14px 0 6px;">4. 다계정 로그아웃 방법</h4>
+          <img src="images/muni_logout1.jpg" alt="뮤니버스 로그아웃1" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/muni_logout2.jpg" alt="뮤니버스 로그아웃2" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('[음악중심] 스테이지 엠픽', html);
+    }
+
+    // 6. [인기가요] 핫스테이지 모달
+    function showVoteHotStageModal() {
+      const html = `
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #e2538b; margin-bottom: 12px;">
+            SBS 인기가요 [핫스테이지] 투표 (하이어)
+          </h3>
+          <p style="margin-bottom: 12px;">
+            1위 아티스트에게 직접 트로피가 전달되는 최고 인기 무대 투표입니다.<br />
+            ✔️ <strong>1표 = 30루비 = 3다이아</strong><br />
+            ✔️ <strong>1일 10표(=300루비=30다이아)</strong> 필수 투표!<br />
+            ✔️ 다이아는 루비로 교환하지 않아도 바로 투표 가능
+          </p>
+          <div style="text-align: center; margin: 16px 0;">
+            <button class="sms-button primary" onclick="window.open('https://myhigher.chottu.link/MAsdxt')">
+              💖 핫스테이지 투표하러 가기
+            </button>
+          </div>
+          <h4 style="font-weight: 700; margin: 14px 0 6px;">👇 투표 방법</h4>
+          <img src="images/higher_hot1.jpeg" alt="하이어1" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/higher_hot2.jpg" alt="하이어2" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/higher_hot3.jpg" alt="하이어3" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/higher_hot4.jpeg" alt="하이어4" style="width: 100%; margin-bottom: 6px;" />
+          <img src="images/higher_hot5.jpg" alt="하이어5" style="width: 100%; margin-bottom: 12px;" />
+          <h4 style="font-weight: 700; margin: 14px 0 6px;">👇 다계정 로그아웃 방법</h4>
+          <img src="images/higher_hot6.jpg" alt="하이어 다계정" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('[인기가요] 핫스테이지', html);
+    }
+
+    // Bind event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btnVoteMcLive')?.addEventListener('click', showVoteMcLiveModal);
+      document.getElementById('btnVoteMcPre')?.addEventListener('click', showVoteMcPreModal);
+      document.getElementById('btnVoteMbPre')?.addEventListener('click', showVoteMbPreModal);
+      document.getElementById('btnVoteInkiPre')?.addEventListener('click', showVoteInkiPreModal);
+      document.getElementById('btnVoteMuni')?.addEventListener('click', showVoteMuniModal);
+      document.getElementById('btnVoteHotStage')?.addEventListener('click', showVoteHotStageModal);
     });
-
-    // 모달
-    const modal = document.getElementById('myModal');
-    const openBtns = document.querySelectorAll('.openModalBtn');
-    const closeModalBtn = modal.querySelector('.close-btn');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalText = document.getElementById('modalText');
-
-    openBtns.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        modalTitle.textContent = btn.dataset.title;
-        modalText.innerHTML = btn.dataset.text + '<div class="modal-buttons">'+(btn.dataset.buttons||'')+'</div>';
-        modal.style.display = 'block';
-
-        const samsungBtn = modalText.querySelector('.samsungBtn');
-        if(samsungBtn){
-          samsungBtn.addEventListener('click', ()=>{
-            modalText.innerHTML =
-              '순서대로 클릭해주세요. (삼성/LG)<br><div class="modal-buttons">' +
-              '<button class="sms-button" onclick="window.open(`https://han.gl/8s8eo`)">1</button>' +
-              '<button class="sms-button" onclick="window.open(`https://han.gl/h8itL`)">2</button>' +
-              '<button class="sms-button" onclick="window.open(`https://han.gl/T93hl`)">3</button>' +
-              '<button class="sms-button" onclick="window.open(`https://han.gl/qqn24`)">4</button>' +
-              '</div>';
-          });
-        }
-      });
-    });
-
-    closeModalBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
-    window.addEventListener('click', e=>{ if(e.target===modal) modal.style.display='none'; });
   </script>
 </body>
 </html>
