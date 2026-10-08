@@ -7,7 +7,7 @@
   <meta name="description" content="이찬원 정규 2집 <초집중> 음원 스트리밍, 음원 다운로드, 유튜브 스밍, 뮤빗, 사운드어시스턴트 상세 가이드" />
   <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   
-    <!-- Fonts & Core Stylesheet (Dual Link + Inline Fail-Safe) -->
+        <!-- Fonts & Core Stylesheet (Dual Link + Inline Fail-Safe) -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -375,14 +375,14 @@ main {
   padding: 24px max(4vw, 16px) 60px;
 }
 
-/* Real-time Notice Bar */
+/* Real-time Notice Bar & Marquee Ticker */
 .notice-ticker {
   width: 100%;
   max-width: 1000px;
   background: linear-gradient(90deg, #fce7e3 0%, #ffeaf4 50%, #fce7e3 100%);
   border: 1px solid rgba(231, 178, 165, 0.45);
   border-radius: var(--cst-radius-full);
-  padding: 10px 20px;
+  padding: 10px 18px;
   margin-bottom: 24px;
   display: flex;
   align-items: center;
@@ -402,10 +402,11 @@ main {
   color: var(--cst-accent-deep);
   font-weight: 800;
   font-size: 0.78rem;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: var(--cst-radius-full);
   box-shadow: 0 1px 4px rgba(226, 83, 139, 0.15);
   flex-shrink: 0;
+  z-index: 3;
 }
 
 .pulse-dot {
@@ -424,11 +425,50 @@ main {
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(226, 83, 139, 0); }
 }
 
+.notice-content-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+}
+
+.notice-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: cstMarquee 22s linear infinite;
+}
+
+.notice-track:hover,
+.notice-track:active {
+  animation-play-state: paused;
+}
+
+.notice-item {
+  display: inline-block;
+  font-weight: 600;
+  padding-right: 60px;
+  font-size: 0.92rem;
+  color: var(--cst-text-title);
+  white-space: nowrap;
+}
+
+@keyframes cstMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .notice-text {
   font-weight: 600;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   flex: 1;
 }
 
@@ -1260,8 +1300,20 @@ main img:hover {
   }
   
   .notice-ticker {
-    padding: 8px 14px;
+    padding: 8px 12px;
+    gap: 8px;
     font-size: 0.84rem;
+  }
+  
+  .notice-badge {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    gap: 4px;
+  }
+  
+  .notice-item {
+    font-size: 0.84rem;
+    padding-right: 36px;
   }
   
   .modal-content {
@@ -1316,6 +1368,10 @@ main img:hover {
       <p style="font-size: 0.75rem; margin-top: 6px; color: #888;">CHAN'S SUPPORTER TEAM</p>
     </div>
   </nav>
+
+  
+
+  
 
   
     
@@ -1615,6 +1671,8 @@ main img:hover {
       document.getElementById('btnAssistantGuide')?.addEventListener('click', showAssistantGuideModal);
     });
   </script>
+  
+  
   
   <!-- Core Scripts (Root & Subfolder Fallback) -->
   <script src="app.js"></script>

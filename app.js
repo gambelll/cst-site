@@ -381,12 +381,37 @@
     }
   };
 
+  // --- Notice Marquee Ticker Auto-Enhancer ---
+  function initNoticeMarquee() {
+    document.querySelectorAll('.notice-ticker').forEach(ticker => {
+      if (ticker.querySelector('.notice-track')) return; // already structured
+      const textEl = ticker.querySelector('.notice-text');
+      if (!textEl) return;
+      
+      const rawHtml = textEl.innerHTML.trim();
+      const wrapper = document.createElement('div');
+      wrapper.className = 'notice-content-wrapper';
+      
+      const track = document.createElement('div');
+      track.className = 'notice-track';
+      
+      track.innerHTML = `
+        <span class="notice-item">${rawHtml}</span>
+        <span class="notice-item">${rawHtml}</span>
+      `;
+      
+      wrapper.appendChild(track);
+      textEl.replaceWith(wrapper);
+    });
+  }
+
   // --- Auto Initialization On DOMContentLoaded ---
   document.addEventListener('DOMContentLoaded', () => {
     includeHTML(() => {
       initNavigation();
     });
     initNavigation();
+    initNoticeMarquee();
     initBannerSlider();
     initModalSystem();
     initImageLightbox();
