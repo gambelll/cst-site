@@ -1465,8 +1465,100 @@ main img:hover {
   </footer>
 
   
-  <script>
-    // --- 1. KBS 메인 메뉴 ---
+<script>
+    // ========================================================
+    // 라디오 문자 신청 공통 설정 및 스마트 SMS 엔진
+    // ========================================================
+    const DEFAULT_RADIO_SONG = '이찬원의 <오늘은 왠지> 신청합니다';
+
+    // 기기 환경(iOS Safari vs Android)에 최적화된 SMS URL 생성
+    function getRadioSmsUrl(number, message = DEFAULT_RADIO_SONG) {
+      // iPhone, iPad 환경 감지 (iOS는 구분자로 '&' 필요, 안드로이드는 '?')
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const delimiter = isIOS ? '&' : '?';
+      
+      // '#' 기호가 URL 해시(#)로 잘리지 않도록 %23으로 변환
+      const cleanNumber = String(number).trim().replace('#', '%23');
+      
+      // 본문 한글/특수문자(<>) 안전 URL 인코딩
+      const encodedBody = encodeURIComponent(message);
+      
+      return 'sms:' + cleanNumber + delimiter + 'body=' + encodedBody;
+    }
+
+    // 문자 신청 버튼 클릭 핸들러 (모바일: 문자앱 즉시 호출, PC: 클립보드 복사 안내)
+    function handleRadioSmsClick(event, number, message = DEFAULT_RADIO_SONG) {
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+        (navigator.maxTouchPoints > 0 && window.innerWidth <= 1024);
+      
+      const smsUrl = getRadioSmsUrl(number, message);
+
+      if (isMobile) {
+        // 모바일 환경: 시스템 기본 문자 앱 호출 (수신번호 + 본문 자동 입력)
+        window.location.href = smsUrl;
+      } else {
+        // PC / 데스크톱 환경: 안내 토스트 팝업 및 문구 복사
+        if (event) event.preventDefault();
+        if (typeof copyText === 'function') {
+          copyText(message, '신청 번호(' + number + ')와 신청곡 문구가 복사되었습니다!
+스마트폰에서 클릭하시면 문자 앱으로 바로 연결됩니다.');
+        } else {
+          alert('신청 번호: ' + number + '
+신청 문구: ' + message + '
+
+스마트폰에서 접속 시 문자 앱으로 바로 전송됩니다.');
+        }
+      }
+    }
+
+    // 채널 세부 페이지 공통 템플릿 생성기
+    function getChannelDetailHtml(backFnName, channelTitle, number, imgSrc, imgAlt) {
+      const smsHref = getRadioSmsUrl(number, DEFAULT_RADIO_SONG);
+      return `
+        <button class="modal-nav-back" onclick="${backFnName}()">⬅️ 다른 채널 선택하기</button>
+        <div style="text-align: left; font-size: 0.95rem; line-height: 1.6;">
+          
+          <!-- 신청 유의사항 -->
+          <div style="background: #fff5f5; border-left: 4px solid #e53e3e; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="font-size: 1.05rem; font-weight: bold; color: #c53030; margin-bottom: 6px;">💥 신청 유의사항 💥</h3>
+            <p style="margin: 0; color: #4a5568; font-size: 0.9rem; line-height: 1.55;">
+              신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 
+              <strong>프로그램 목록에 있는 시간에만</strong> 신청해주세요.
+            </p>
+          </div>
+
+          <!-- 신청 단계 안내 -->
+          <div style="text-align: center; margin-bottom: 22px;">
+            <h3 style="font-size: 1.15rem; font-weight: bold; color: #2d3748; margin-bottom: 8px;">
+              👇 ${channelTitle} 신청하기
+            </h3>
+            <p style="font-size: 0.88rem; color: #718096; margin-bottom: 6px;">
+              * 아래 버튼을 누르면 메시지로 넘어갑니다.
+            </p>
+            <p style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 16px;">
+              ➡️ 문자 메시지로 넘어가면 <span style="color: white; background-color: #e53e3e; padding: 2px 7px; border-radius: 4px; font-weight: bold;">전송 버튼</span>을 눌러주세요!
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+              <a class="sms-button primary" href="${smsHref}" onclick="handleRadioSmsClick(event, '${number}')" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                📲 &lt;오늘은 왠지&gt; 신청하기
+              </a>
+              <button class="sms-button" onclick="copyText('${DEFAULT_RADIO_SONG}', '신청 문구가 복사되었습니다!')">
+                📋 문구 복사하기
+              </button>
+            </div>
+          </div>
+
+          <!-- 편성표 이미지 -->
+          <div style="margin-top: 15px;">
+            <img class="voteimg" src="${imgSrc}" alt="${imgAlt}" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" />
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 1. KBS 라디오 ---
     function showKbsMenu() {
       const html = `
         <p style="margin-bottom: 16px; color: #666; font-weight: 600;">(COOL FM / HAPPY FM 중 선택해주세요)</p>
@@ -1479,50 +1571,18 @@ main img:hover {
     }
 
     function showKbsCoolDetail() {
-      const html = `
-        <button class="modal-nav-back" onclick="showKbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
-        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
-          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
-            <strong>💥 신청 유의사항</strong><br />
-            신청곡을 받지 않는 방송(경제, 시사 등)을 피하고 프로그램 목록에 있는 시간에만 신청해주세요.
-          </div>
-          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
-            <a class="sms-button primary" href="sms:#8910?body=이찬원의 <오늘은 왠지> 신청합니다">
-              📲 COOL FM 신청 문자 보내기 (#8910)
-            </a>
-            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
-              📋 문구 복사하기
-            </button>
-          </div>
-          <img src="images/kbs_cool.jpg" alt="KBS 쿨FM 편성표" style="width: 100%;" />
-        </div>
-      `;
+      const html = getChannelDetailHtml('showKbsMenu', 'KBS COOL FM (89.1MHz)', '#8910', 'images/kbs_cool.jpg', 'KBS COOL FM 편성표');
       cstOpenModal('KBS COOL FM 신청', html);
+      document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     function showKbsHappyDetail() {
-      const html = `
-        <button class="modal-nav-back" onclick="showKbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
-        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
-          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
-            <strong>💥 신청 유의사항</strong><br />
-            신청곡을 받지 않는 방송을 피하고 음악 프로그램 시간에만 신청해주세요.
-          </div>
-          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
-            <a class="sms-button primary" href="sms:#1061?body=이찬원의 <오늘은 왠지> 신청합니다">
-              📲 HAPPY FM 신청 문자 보내기 (#1061)
-            </a>
-            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
-              📋 문구 복사하기
-            </button>
-          </div>
-          <img src="images/kbs_happy.jpg" alt="KBS 해피FM 편성표" style="width: 100%;" />
-        </div>
-      `;
+      const html = getChannelDetailHtml('showKbsMenu', 'KBS HAPPY FM (106.1MHz)', '#1061', 'images/kbs_happy.jpg', 'KBS HAPPY FM 편성표');
       cstOpenModal('KBS HAPPY FM 신청', html);
+      document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
-    // --- 2. MBC 메인 메뉴 ---
+    // --- 2. MBC 라디오 ---
     function showMbcMenu() {
       const html = `
         <p style="margin-bottom: 16px; color: #666; font-weight: 600;">(FM4U / 표준FM 중 선택해주세요)</p>
@@ -1535,50 +1595,18 @@ main img:hover {
     }
 
     function showMbcFm4uDetail() {
-      const html = `
-        <button class="modal-nav-back" onclick="showMbcMenu()">⬅️ 방송국 선택으로 돌아가기</button>
-        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
-          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
-            <strong>💥 신청 유의사항</strong><br />
-            신청곡을 받지 않는 시간대를 피하고 음악 프로그램 시간에만 신청해주세요.
-          </div>
-          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
-            <a class="sms-button primary" href="sms:#8000?body=이찬원의 <오늘은 왠지> 신청합니다">
-              📲 FM4U 신청 문자 보내기 (#8000)
-            </a>
-            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
-              📋 문구 복사하기
-            </button>
-          </div>
-          <img src="images/mbc_fm4u.jpg" alt="MBC FM4U 편성표" style="width: 100%;" />
-        </div>
-      `;
+      const html = getChannelDetailHtml('showMbcMenu', 'MBC FM4U (91.9MHz)', '#8000', 'images/mbc_fm4u.jpg', 'MBC FM4U 편성표');
       cstOpenModal('MBC FM4U 신청', html);
+      document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     function showMbcStandardDetail() {
-      const html = `
-        <button class="modal-nav-back" onclick="showMbcMenu()">⬅️ 방송국 선택으로 돌아가기</button>
-        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
-          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
-            <strong>💥 신청 유의사항</strong><br />
-            신청곡을 받지 않는 방송(시사, 어학 등)을 피하고 프로그램 목록에 있는 시간에만 신청해주세요.
-          </div>
-          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
-            <a class="sms-button primary" href="sms:#8001?body=이찬원의 <오늘은 왠지> 신청합니다">
-              📲 표준FM 신청 문자 보내기 (#8001)
-            </a>
-            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
-              📋 문구 복사하기
-            </button>
-          </div>
-          <img src="images/mbc_vywns.jpg" alt="MBC 표준FM 편성표" style="width: 100%;" />
-        </div>
-      `;
+      const html = getChannelDetailHtml('showMbcMenu', 'MBC 표준FM (95.9MHz)', '#8001', 'images/mbc_vywns.jpg', 'MBC 표준FM 편성표');
       cstOpenModal('MBC 표준FM 신청', html);
+      document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
-    // --- 3. SBS 메인 메뉴 ---
+    // --- 3. SBS 라디오 ---
     function showSbsMenu() {
       const html = `
         <p style="margin-bottom: 16px; color: #666; font-weight: 600;">(파워FM / 러브FM 중 선택해주세요)</p>
@@ -1591,47 +1619,15 @@ main img:hover {
     }
 
     function showSbsPowerDetail() {
-      const html = `
-        <button class="modal-nav-back" onclick="showSbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
-        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
-          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
-            <strong>💥 신청 유의사항</strong><br />
-            신청곡을 받는 음악/예능 프로그램 시간에 맞춰 신청해주세요.
-          </div>
-          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
-            <a class="sms-button primary" href="sms:#1077?body=이찬원의 <오늘은 왠지> 신청합니다">
-              📲 파워FM 신청 문자 보내기 (#1077)
-            </a>
-            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
-              📋 문구 복사하기
-            </button>
-          </div>
-          <img src="images/sbs_power.jpg" alt="SBS 파워FM 편성표" style="width: 100%;" />
-        </div>
-      `;
+      const html = getChannelDetailHtml('showSbsMenu', 'SBS 파워FM (107.7MHz)', '#1077', 'images/sbs_power.jpg', 'SBS 파워FM 편성표');
       cstOpenModal('SBS 파워FM 신청', html);
+      document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     function showSbsLoveDetail() {
-      const html = `
-        <button class="modal-nav-back" onclick="showSbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
-        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
-          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
-            <strong>💥 신청 유의사항</strong><br />
-            신청곡을 받는 프로그램 목록 시간에 맞춰 신청해주세요.
-          </div>
-          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
-            <a class="sms-button primary" href="sms:#1035?body=이찬원의 <오늘은 왠지> 신청합니다">
-              📲 러브FM 신청 문자 보내기 (#1035)
-            </a>
-            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
-              📋 문구 복사하기
-            </button>
-          </div>
-          <img src="images/sbs_love.jpg" alt="SBS 러브FM 편성표" style="width: 100%;" />
-        </div>
-      `;
+      const html = getChannelDetailHtml('showSbsMenu', 'SBS 러브FM (103.5MHz)', '#1035', 'images/sbs_love.jpg', 'SBS 러브FM 편성표');
       cstOpenModal('SBS 러브FM 신청', html);
+      document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     // Event Bindings
