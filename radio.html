@@ -1401,21 +1401,21 @@ main img:hover {
     <div class="button-grid" style="max-width: 900px;">
 
       <!-- 1. KBS 라디오 -->
-      <div class="grid-button" id="btnRadioKbs">
+      <div class="grid-button" id="btnRadioKbs" onclick="showKbsMenu()" style="cursor:pointer;">
         <div class="card-icon">🫛</div>
         <div class="card-title">KBS 라디오</div>
         <div class="card-desc">Cool FM (#8910) / Happy FM (#1061)</div>
       </div>
 
       <!-- 2. MBC 라디오 -->
-      <div class="grid-button" id="btnRadioMbc">
+      <div class="grid-button" id="btnRadioMbc" onclick="showMbcMenu()" style="cursor:pointer;">
         <div class="card-icon">🤖</div>
         <div class="card-title">MBC 라디오</div>
         <div class="card-desc">FM4U (#8000) / 표준FM (#8001)</div>
       </div>
 
       <!-- 3. SBS 라디오 -->
-      <div class="grid-button" id="btnRadioSbs">
+      <div class="grid-button" id="btnRadioSbs" onclick="showSbsMenu()" style="cursor:pointer;">
         <div class="card-icon">🐵</div>
         <div class="card-title">SBS 라디오</div>
         <div class="card-desc">파워FM (#1077) / 러브FM (#1035)</div>
@@ -1472,51 +1472,58 @@ main img:hover {
     const DEFAULT_RADIO_SONG = '이찬원의 <오늘은 왠지> 신청합니다';
 
     // 기기 환경(iOS Safari vs Android)에 최적화된 SMS URL 생성
-    function getRadioSmsUrl(number, message = DEFAULT_RADIO_SONG) {
-      // iPhone, iPad 환경 감지 (iOS는 구분자로 '&' 필요, 안드로이드는 '?')
+    function getRadioSmsUrl(number, message) {
+      if (!message) message = DEFAULT_RADIO_SONG;
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
       const delimiter = isIOS ? '&' : '?';
-      
-      // '#' 기호가 URL 해시(#)로 잘리지 않도록 %23으로 변환
-      const cleanNumber = String(number).trim().replace('#', '%23');
-      
-      // 본문 한글/특수문자(<>) 안전 URL 인코딩
-      const encodedBody = encodeURIComponent(message);
-      
-      return 'sms:' + cleanNumber + delimiter + 'body=' + encodedBody;
+      const cleanNumber = String(number).trim().replace('#', '');
+      return 'sms:%23' + cleanNumber + delimiter + 'body=' + message;
     }
 
     // 문자 신청 버튼 클릭 핸들러 (모바일: 문자앱 즉시 호출, PC: 클립보드 복사 안내)
-    function handleRadioSmsClick(event, number, message = DEFAULT_RADIO_SONG) {
+    function handleRadioSmsClick(event, number, message) {
+      if (!message) message = DEFAULT_RADIO_SONG;
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
         (navigator.maxTouchPoints > 0 && window.innerWidth <= 1024);
       
       const smsUrl = getRadioSmsUrl(number, message);
 
       if (isMobile) {
-        // 모바일 환경: 시스템 기본 문자 앱 호출 (수신번호 + 본문 자동 입력)
         window.location.href = smsUrl;
       } else {
-        // PC / 데스크톱 환경: 안내 토스트 팝업 및 문구 복사
         if (event) event.preventDefault();
         if (typeof copyText === 'function') {
-          copyText(message, '신청 번호(' + number + ')와 신청곡 문구가 복사되었습니다!
-스마트폰에서 클릭하시면 문자 앱으로 바로 연결됩니다.');
+          copyText(message, '신청 번호(' + number + ')와 신청곡 문구가 복사되었습니다!');
         } else {
-          alert('신청 번호: ' + number + '
-신청 문구: ' + message + '
-
-스마트폰에서 접속 시 문자 앱으로 바로 전송됩니다.');
+          alert('신청 번호: ' + number + ' / ' + message);
         }
       }
     }
+
+    // 만능 모달 오픈 헬퍼 (cstOpenModal 또는 직접 DOM 제어)
+    function openRadioModal(title, content) {
+      if (typeof window.cstOpenModal === 'function') {
+        window.cstOpenModal(title, content);
+        return;
+      }
+      const modal = document.getElementById('myModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalText = document.getElementById('modalText');
+      if (modalTitle) modalTitle.textContent = title || '';
+      if (modalText) modalText.innerHTML = content || '';
+      if (modal) {
+        modal.style.display = 'flex';
+        modal.classList.add('show');
+      }
+    }
+    window.openRadioModal = openRadioModal;
 
     // 채널 세부 페이지 공통 템플릿 생성기
     function getChannelDetailHtml(backFnName, channelTitle, number, imgSrc, imgAlt) {
       const smsHref = getRadioSmsUrl(number, DEFAULT_RADIO_SONG);
       return `
-        <button class="modal-nav-back" onclick="${backFnName}()">⬅️ 다른 채널 선택하기</button>
+        <button class="modal-nav-back" onclick="` + backFnName + `()">⬅️ 다른 채널 선택하기</button>
         <div style="text-align: left; font-size: 0.95rem; line-height: 1.6;">
           
           <!-- 신청 유의사항 -->
@@ -1531,7 +1538,7 @@ main img:hover {
           <!-- 신청 단계 안내 -->
           <div style="text-align: center; margin-bottom: 22px;">
             <h3 style="font-size: 1.15rem; font-weight: bold; color: #2d3748; margin-bottom: 8px;">
-              👇 ${channelTitle} 신청하기
+              👇 ` + channelTitle + ` 신청하기
             </h3>
             <p style="font-size: 0.88rem; color: #718096; margin-bottom: 6px;">
               * 아래 버튼을 누르면 메시지로 넘어갑니다.
@@ -1541,10 +1548,10 @@ main img:hover {
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-              <a class="sms-button primary" href="${smsHref}" onclick="handleRadioSmsClick(event, '${number}')" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+              <a class="sms-button primary" href="` + smsHref + `" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
                 📲 &lt;오늘은 왠지&gt; 신청하기
               </a>
-              <button class="sms-button" onclick="copyText('${DEFAULT_RADIO_SONG}', '신청 문구가 복사되었습니다!')">
+              <button class="sms-button" onclick="copyText('` + DEFAULT_RADIO_SONG + `', '신청 문구가 복사되었습니다!')">
                 📋 문구 복사하기
               </button>
             </div>
@@ -1552,7 +1559,7 @@ main img:hover {
 
           <!-- 편성표 이미지 -->
           <div style="margin-top: 15px;">
-            <img class="voteimg" src="${imgSrc}" alt="${imgAlt}" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" />
+            <img class="voteimg" src="` + imgSrc + `" alt="` + imgAlt + `" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" />
           </div>
         </div>
       `;
@@ -1567,18 +1574,18 @@ main img:hover {
           <button class="sms-button" onclick="showKbsHappyDetail()">KBS HAPPY FM (#1061)</button>
         </div>
       `;
-      cstOpenModal('🫛 KBS 라디오 선택', html);
+      openRadioModal('🫛 KBS 라디오 선택', html);
     }
 
     function showKbsCoolDetail() {
       const html = getChannelDetailHtml('showKbsMenu', 'KBS COOL FM (89.1MHz)', '#8910', 'images/kbs_cool.jpg', 'KBS COOL FM 편성표');
-      cstOpenModal('KBS COOL FM 신청', html);
+      openRadioModal('KBS COOL FM 신청', html);
       document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     function showKbsHappyDetail() {
       const html = getChannelDetailHtml('showKbsMenu', 'KBS HAPPY FM (106.1MHz)', '#1061', 'images/kbs_happy.jpg', 'KBS HAPPY FM 편성표');
-      cstOpenModal('KBS HAPPY FM 신청', html);
+      openRadioModal('KBS HAPPY FM 신청', html);
       document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
@@ -1591,18 +1598,18 @@ main img:hover {
           <button class="sms-button" onclick="showMbcStandardDetail()">MBC 표준FM (#8001)</button>
         </div>
       `;
-      cstOpenModal('🤖 MBC 라디오 선택', html);
+      openRadioModal('🤖 MBC 라디오 선택', html);
     }
 
     function showMbcFm4uDetail() {
       const html = getChannelDetailHtml('showMbcMenu', 'MBC FM4U (91.9MHz)', '#8000', 'images/mbc_fm4u.jpg', 'MBC FM4U 편성표');
-      cstOpenModal('MBC FM4U 신청', html);
+      openRadioModal('MBC FM4U 신청', html);
       document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     function showMbcStandardDetail() {
       const html = getChannelDetailHtml('showMbcMenu', 'MBC 표준FM (95.9MHz)', '#8001', 'images/mbc_vywns.jpg', 'MBC 표준FM 편성표');
-      cstOpenModal('MBC 표준FM 신청', html);
+      openRadioModal('MBC 표준FM 신청', html);
       document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
@@ -1615,27 +1622,44 @@ main img:hover {
           <button class="sms-button" onclick="showSbsLoveDetail()">SBS 러브FM (#1035)</button>
         </div>
       `;
-      cstOpenModal('🐵 SBS 라디오 선택', html);
+      openRadioModal('🐵 SBS 라디오 선택', html);
     }
 
     function showSbsPowerDetail() {
       const html = getChannelDetailHtml('showSbsMenu', 'SBS 파워FM (107.7MHz)', '#1077', 'images/sbs_power.jpg', 'SBS 파워FM 편성표');
-      cstOpenModal('SBS 파워FM 신청', html);
+      openRadioModal('SBS 파워FM 신청', html);
       document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
     function showSbsLoveDetail() {
       const html = getChannelDetailHtml('showSbsMenu', 'SBS 러브FM (103.5MHz)', '#1035', 'images/sbs_love.jpg', 'SBS 러브FM 편성표');
-      cstOpenModal('SBS 러브FM 신청', html);
+      openRadioModal('SBS 러브FM 신청', html);
       document.querySelector('.modal-content')?.scrollTo(0, 0);
     }
 
+    window.showKbsMenu = showKbsMenu;
+    window.showMbcMenu = showMbcMenu;
+    window.showSbsMenu = showSbsMenu;
+    window.showKbsCoolDetail = showKbsCoolDetail;
+    window.showKbsHappyDetail = showKbsHappyDetail;
+    window.showMbcFm4uDetail = showMbcFm4uDetail;
+    window.showMbcStandardDetail = showMbcStandardDetail;
+    window.showSbsPowerDetail = showSbsPowerDetail;
+    window.showSbsLoveDetail = showSbsLoveDetail;
+    window.handleRadioSmsClick = handleRadioSmsClick;
+
     // Event Bindings
-    document.addEventListener('DOMContentLoaded', () => {
+    function bindRadioEvents() {
       document.getElementById('btnRadioKbs')?.addEventListener('click', showKbsMenu);
       document.getElementById('btnRadioMbc')?.addEventListener('click', showMbcMenu);
       document.getElementById('btnRadioSbs')?.addEventListener('click', showSbsMenu);
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindRadioEvents);
+    } else {
+      bindRadioEvents();
+    }
   </script>
   
   
