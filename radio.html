@@ -2,204 +2,1447 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>이찬원 정규2집 초집중</title>
-  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    /* =========================
-       기본 스타일
-    ========================= */
-    * {margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR', sans-serif;}
-    body {background-color:white; display:flex; flex-direction:column; min-height:100vh;}
-    a{text-decoration:none;color:inherit;}
+  <title>라디오 신청 원클릭 | 이찬원 정규2집 초집중 CST</title>
+  <meta name="description" content="이찬원 정규 2집 타이틀곡 <오늘은 왠지> KBS, MBC, SBS 라디오 문자 사연 및 신청곡 원클릭 포털" />
+  <link rel="icon" href="favicon/channels4_profile-removebg-preview.png" type="image/png" />
+  
+        <!-- Fonts & Core Stylesheet (Dual Link + Inline Fail-Safe) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style id="cst-core-theme">
+@charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 
-    /* 버튼 */
-    .sms-button, .sms-button1 {
-      width: 250px;        /* 버튼 가로 고정 */
-      height: 60px;        /* 버튼 세로 고정 */
-      line-height: 1.2;    /* 텍스트 줄 높이 */
-      font-size: 18px;
-      display:inline-block;
-      padding:15px 30px;
-      font-size:18px;
-      font-weight:bold;
-      color:#0070d1;
-      background-color:#fff;
-      border:1px solid rgb(88, 88, 88);
-      border-radius:50px;
-      text-decoration:none;
-      transition:all 0.3s ease;
-      box-shadow:0 4px 6px rgba(0,0,0,0.1);
-      cursor:pointer;
-    }
-    .sms-button:hover, .sms-button1:hover {background-color:#ffb8ea; box-shadow:0 6px 10px rgba(0,0,0,0.15);}
+/* ==========================================================================
+   CST (CHAN'S SUPPORTER TEAM) - MODERN STREAMING TEAM DESIGN SYSTEM
+   Signature Colors: Soft Peach (#fce7e3, #E7B2A5), Rose Pink (#ffb8ea, #ffd6ec, #f36ca4)
+   ========================================================================== */
 
-    /* =========================
-       상단바
-    ========================= */
-    .top-bar {display:flex; align-items:center; justify-content:space-between; padding:2vh 5vw; background-color:#fce7e3; border-bottom:0.2vh solid #e0e0e0; z-index:100; position:relative;}
-    .logo-section {display:flex; align-items:center; cursor:pointer; font-weight:bold;}
-    .logo-section img {height:6vh; margin-right:1vw;}
-    .logo-text {font-size:2.5vh;}
-    
-    /* 햄버거 */
-.hamburger {
-  font-size:28px;
-  cursor:pointer;
-  position:fixed;
-  top:15px;
-  right:20px;
-  z-index:900; /* X 버튼보다 아래 */
+:root {
+  /* CST Signature Color Palette */
+  --cst-primary: #E7B2A5;
+  --cst-primary-light: #fce7e3;
+  --cst-primary-dark: #c97f70;
+  --cst-primary-rgb: 231, 178, 165;
+  
+  --cst-accent-pink: #ffb8ea;
+  --cst-accent-soft: #ffd6ec;
+  --cst-accent-deep: #e2538b;
+  --cst-accent-rose: #f36ca4;
+  
+  --cst-bg-main: #fdfbfb;
+  --cst-bg-card: rgba(255, 255, 255, 0.95);
+  --cst-bg-card-hover: #ffffff;
+  --cst-bg-subtle: #f8f6f6;
+  
+  --cst-text-title: #1e2029;
+  --cst-text-body: #3d4251;
+  --cst-text-muted: #717786;
+  --cst-text-light: #9aa1b1;
+  
+  --cst-border-light: rgba(231, 178, 165, 0.35);
+  --cst-border-strong: rgba(231, 178, 165, 0.65);
+  
+  --cst-shadow-sm: 0 2px 8px rgba(231, 178, 165, 0.15);
+  --cst-shadow-md: 0 8px 24px rgba(226, 120, 138, 0.12);
+  --cst-shadow-lg: 0 16px 40px rgba(226, 120, 138, 0.18);
+  --cst-shadow-glow: 0 0 25px rgba(243, 108, 164, 0.25);
+
+  --cst-radius-sm: 10px;
+  --cst-radius-md: 16px;
+  --cst-radius-lg: 24px;
+  --cst-radius-full: 9999px;
+
+  --cst-font: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --cst-header-h: 72px;
 }
 
-#closeBtn {
-  position:absolute;
-  top:15px;
-  right:20px;
-  font-size:2rem;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:black;
-  font-weight:bold;
-  z-index:1000; /* 햄버거보다 위 */
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-    /* =========================
-       본문
-    ========================= */
-    main {display:flex; flex-direction:column; align-items:center; flex:1; text-align:center; padding:5vh 5vw; width:100%; max-width:1200px; margin:0 auto;}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
 
-    /* 버튼 그리드 */
-    .button-grid {width:100%; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-bottom:5vh;}
-    .grid-button {background-color:#fff; border-radius:3vh; padding:4vh 0; font-size:1.5rem; font-weight:bold; text-align:center; box-shadow:0 0.5vh 1vh rgba(0,0,0,0.1); cursor:pointer; transition:all 0.3s;}
-    .grid-button:hover {background-color:#ffd6ec; transform:translateY(-0.5vh);}
-    .border1 {border:1px solid rgb(88,88,88);}
+body {
+  font-family: var(--cst-font);
+  background: var(--cst-bg-main);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(252, 231, 227, 0.6) 0px, transparent 50%),
+    radial-gradient(at 100% 10%, rgba(255, 214, 236, 0.45) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(252, 231, 227, 0.35) 0px, transparent 60%);
+  background-attachment: fixed;
+  color: var(--cst-text-body);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* 모달 팝업 */
-    .modal {display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);}
-    .modal-content {background:#fff; margin:5% auto; padding:40px 20px; border-radius:1rem; width:80%; max-width:450px; max-height:80vh; overflow-y:auto; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.3); position:relative;}
-    .modal-content .close-btn {position:absolute; top:10px; right:15px; font-size:2rem; font-weight:bold; color:#aaa; cursor:pointer;}
-    .modal-content .close-btn:hover {color:#333;}
-    .vibe-buttons {display:grid; grid-template-columns:repeat(2,1fr); column-gap:1px; row-gap:1px; margin-top:15px;}
-    .vibe-guide-button {display:flex; justify-content:center; margin-top:15px;}
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
 
-    /* 푸터 */
-    .site-footer {background:#f9f9f9; padding:5vh 5vw; font-size:1.5vh; color:#555; border-top:0.1vh solid #ddd;}
-    .footer-container {max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:2vw; flex-wrap:wrap;}
-    .footer-left {display:flex; align-items:center; gap:1vw;}
-    .album-cover {width:6vh; height:6vh; border-radius:1vh; object-fit:cover;}
-    .footer-right {text-align:left; flex:1; min-width:200px;}
-    .footer-right p {margin:0.5vh 0;}
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
 
-    /* 반응형 */
-    @media(max-width:768px){.logo-text{font-size:4vw;}.grid-button{font-size:4vw;}.album-cover{width:5vh;height:5vh;}}
-    @media(max-width:480px){.grid-button{font-size:6vw;}.logo-text{font-size:5vw;}}
-
-    .voteimg {padding:1px 15px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
-    .voteimg1 {padding:1px 15px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
-    .voteimg2 {padding:1px 15px; border-radius:1rem; width:100%; max-width:450px; text-align:center;}
-
-    /* 사이드 메뉴 */
-    .side-menu {position:fixed; top:0; right:-250px; width:250px; height:100%; background:#fff; color:#000; padding:60px 20px 20px 20px; transition:right 0.3s ease; z-index:1500; box-shadow:-2px 0 5px rgba(0,0,0,0.1);}
-    .side-menu.open {right:0;}
-    .side-menu ul {list-style:none; padding:0; margin-top:20px;}
-    .side-menu li {margin:20px 0;}
-    .side-menu a {color:black; font-size:1.1rem; font-weight:500;}
-    .close-btn {position:absolute; top:10px; right:15px; font-size:2rem; background:none; border:none; cursor:pointer; color:black; font-weight:bold; padding:0; line-height:1;}
-
-main img {
+img {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto; /* 가운데 정렬 */
-  border-radius: 10px; /* 살짝 둥글게 (선택사항) */
 }
 
-/* 큰 화면 (데스크톱) */
-@media (min-width: 1025px) {
-  main img {
-    width: 90%; /* 전체 창의 90%만 사용 */
+/* ==========================================================================
+   TOP BAR & NAVIGATION
+   ========================================================================== */
+.top-bar {
+  position: sticky;
+  top: 0;
+  height: var(--cst-header-h);
+  background: rgba(252, 231, 227, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(231, 178, 165, 0.4);
+  box-shadow: 0 4px 20px rgba(231, 178, 165, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(5vw, 20px);
+  z-index: 1000;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.top-bar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 25px rgba(226, 120, 138, 0.15);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-section img {
+  height: 46px;
+  width: 46px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(231, 178, 165, 0.4));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo-section:hover img {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cst-accent-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.logo-text {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--cst-text-title);
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #1e2029 30%, #a44f3e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Nav links for desktop */
+.nav-links-desktop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-links-desktop a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cst-text-body);
+  padding: 8px 16px;
+  border-radius: var(--cst-radius-full);
+  transition: all 0.25s ease;
+}
+
+.nav-links-desktop a:hover,
+.nav-links-desktop a.active {
+  color: #a44f3e;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(231, 178, 165, 0.25);
+}
+
+.hamburger {
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--cst-text-title);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(231, 178, 165, 0.35);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.hamburger:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+  box-shadow: var(--cst-shadow-sm);
+}
+
+@media (min-width: 901px) {
+  .hamburger {
+    display: none;
   }
 }
 
-/* 중간 화면 (태블릿) */
-@media (max-width: 1024px) and (min-width: 601px) {
-  main img {
-    width: 80%;
+@media (max-width: 900px) {
+  .nav-links-desktop {
+    display: none;
   }
 }
 
-/* 작은 화면 (모바일) */
-@media (max-width: 600px) {
-  main img {
-    width: 95%;
+/* ==========================================================================
+   SIDE MENU DRAWER
+   ========================================================================== */
+.side-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 32, 41, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1998;
+}
+
+.side-menu-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: min(300px, 85vw);
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 24px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1999;
+  box-shadow: -10px 0 35px rgba(30, 32, 41, 0.15);
+  border-left: 1px solid rgba(231, 178, 165, 0.3);
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(231, 178, 165, 0.25);
+  margin-bottom: 20px;
+}
+
+.side-menu-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--cst-text-title);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close-btn, #closeBtn {
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--cst-text-muted);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--cst-primary-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover, #closeBtn:hover {
+  background: var(--cst-accent-soft);
+  color: var(--cst-text-title);
+  transform: rotate(90deg);
+}
+
+.side-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.side-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--cst-radius-md);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--cst-text-body);
+  background: transparent;
+  transition: all 0.25s ease;
+}
+
+.side-menu li a:hover,
+.side-menu li a.active {
+  background: linear-gradient(135deg, var(--cst-primary-light) 0%, #fff0f7 100%);
+  color: #b15241;
+  transform: translateX(4px);
+  box-shadow: var(--cst-shadow-sm);
+}
+
+.side-menu-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(231, 178, 165, 0.25);
+  font-size: 0.8rem;
+  color: var(--cst-text-muted);
+  text-align: center;
+}
+
+/* ==========================================================================
+   MAIN CONTAINER & HERO / NOTICE TICKER
+   ========================================================================== */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px max(4vw, 16px) 60px;
+}
+
+/* Real-time Notice Bar & Marquee Ticker */
+.notice-ticker {
+  width: 100%;
+  max-width: 1000px;
+  background: linear-gradient(90deg, #fce7e3 0%, #ffeaf4 50%, #fce7e3 100%);
+  border: 1px solid rgba(231, 178, 165, 0.45);
+  border-radius: var(--cst-radius-full);
+  padding: 10px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(231, 178, 165, 0.18);
+  font-size: 0.92rem;
+  color: var(--cst-text-title);
+  position: relative;
+  overflow: hidden;
+}
+
+.notice-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: var(--cst-accent-deep);
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: var(--cst-radius-full);
+  box-shadow: 0 1px 4px rgba(226, 83, 139, 0.15);
+  flex-shrink: 0;
+  z-index: 3;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #e2538b;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(226, 83, 139, 0.7);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(226, 83, 139, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(226, 83, 139, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(226, 83, 139, 0); }
+}
+
+.notice-content-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+}
+
+.notice-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: cstMarquee 22s linear infinite;
+}
+
+.notice-track:hover,
+.notice-track:active {
+  animation-play-state: paused;
+}
+
+.notice-item {
+  display: inline-block;
+  font-weight: 600;
+  padding-right: 60px;
+  font-size: 0.92rem;
+  color: var(--cst-text-title);
+  white-space: nowrap;
+}
+
+@keyframes cstMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
-</style>
+
+.notice-text {
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Page Header Hero */
+.page-hero {
+  text-align: center;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cst-primary-light);
+  color: #b15241;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: var(--cst-radius-full);
+  border: 1px solid rgba(231, 178, 165, 0.4);
+  margin-bottom: 12px;
+}
+
+.page-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 800;
+  color: var(--cst-text-title);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+  color: var(--cst-text-muted);
+  font-weight: 500;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   BANNER SLIDER
+   ========================================================================== */
+.banner-slider {
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 36px;
+  border-radius: var(--cst-radius-lg);
+  box-shadow: var(--cst-shadow-md);
+  background: #000;
+  border: 1px solid rgba(231, 178, 165, 0.3);
+}
+
+.banner-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.banner {
+  min-width: 100%;
+  position: relative;
+  overflow: hidden;
+  max-height: 480px;
+  aspect-ratio: 16 / 7.5;
+  background: #111;
+}
+
+.banner a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.banner:hover img {
+  transform: scale(1.02);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 24px;
+  left: 28px;
+  right: 28px;
+  color: #ffffff;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-weight: 800;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.banner-btn-pill {
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e2029;
+  padding: 6px 16px;
+  border-radius: var(--cst-radius-full);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.banner-prev, .banner-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.25s ease;
+}
+
+.banner-prev { left: 16px; }
+.banner-next { right: 16px; }
+
+.banner-prev:hover, .banner-next:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e2029;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.banner-indicators {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  padding: 5px 12px;
+  border-radius: var(--cst-radius-full);
+}
+
+.banner-indicators .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.banner-indicators .dot.active {
+  width: 24px;
+  border-radius: var(--cst-radius-full);
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   BUTTON GRID & CARDS
+   ========================================================================== */
+.button-grid {
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 36px;
+}
+
+.grid-button {
+  background: var(--cst-bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid var(--cst-border-light);
+  border-radius: var(--cst-radius-lg);
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  box-shadow: var(--cst-shadow-sm);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.grid-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(252, 231, 227, 0.6) 0%, rgba(255, 214, 236, 0.6) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.grid-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.grid-button:hover {
+  transform: translateY(-6px);
+  border-color: var(--cst-primary);
+  box-shadow: var(--cst-shadow-md), var(--cst-shadow-glow);
+}
+
+.grid-button:hover::before {
+  opacity: 1;
+}
+
+.grid-button:active {
+  transform: translateY(-2px);
+}
+
+.card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 4px 8px rgba(231, 178, 165, 0.3));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.grid-button:hover .card-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--cst-text-title);
+  letter-spacing: -0.02em;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--cst-text-muted);
+}
+
+/* Button style for SMS & Actions */
+.sms-button, .sms-button1 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 180px;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e2029;
+  background: #ffffff;
+  border: 1.5px solid var(--cst-border-strong);
+  border-radius: var(--cst-radius-full);
+  box-shadow: 0 4px 14px rgba(231, 178, 165, 0.2);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  margin: 4px;
+}
+
+.sms-button:hover, .sms-button1:hover {
+  background: linear-gradient(135deg, #fce7e3 0%, #ffd6ec 100%);
+  color: #b15241;
+  border-color: var(--cst-accent-pink);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(243, 108, 164, 0.22);
+}
+
+.sms-button:active, .sms-button1:active {
+  transform: translateY(0);
+}
+
+.sms-button.primary {
+  background: linear-gradient(135deg, #E7B2A5 0%, #e2538b 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.sms-button.primary:hover {
+  box-shadow: 0 8px 24px rgba(226, 83, 139, 0.35);
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ==========================================================================
+   YOUTUBE LIVE STATS CARD
+   ========================================================================== */
+.youtube-card {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--cst-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid var(--cst-border-light);
+  border-radius: var(--cst-radius-lg);
+  box-shadow: var(--cst-shadow-md);
+  padding: 32px 24px;
+  margin: 10px auto 36px;
+  text-align: center;
+}
+
+.youtube-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.youtube-card-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--cst-text-title);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ff0000;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--cst-radius-full);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.live-badge .pulse-dot {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 ratio */
+  border-radius: var(--cst-radius-md);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  background: #000;
+  margin-bottom: 24px;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.youtube-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, rgba(252, 231, 227, 0.4) 0%, rgba(255, 214, 236, 0.4) 100%);
+  border: 1px solid rgba(231, 178, 165, 0.35);
+  border-radius: var(--cst-radius-md);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, rgba(252, 231, 227, 0.7) 0%, rgba(255, 214, 236, 0.7) 100%);
+  box-shadow: var(--cst-shadow-sm);
+}
+
+.stat-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--cst-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 900;
+  color: var(--cst-accent-deep);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   MODAL POPUPS
+   ========================================================================== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 22, 30, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 3000;
+  overflow-y: auto;
+  padding: 20px 14px;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: var(--cst-radius-lg);
+  border: 1.5px solid var(--cst-border-light);
+  width: 100%;
+  max-width: 540px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 36px 24px 28px;
+  position: relative;
+  text-align: center;
+  box-shadow: var(--cst-shadow-lg);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin: auto;
+}
+
+/* Custom Modal Scrollbar */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(231, 178, 165, 0.1);
+  border-radius: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(231, 178, 165, 0.6);
+  border-radius: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--cst-accent-deep);
+}
+
+.modal.show .modal-content {
+  transform: scale(1);
+}
+
+.modal-content .close-btn,
+.modal-content .close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+}
+
+.modal-header-icon {
+  font-size: 2.5rem;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 2px 6px rgba(231, 178, 165, 0.4));
+}
+
+.modal-content h2, #modalTitle {
+  font-size: 1.38rem;
+  font-weight: 800;
+  color: var(--cst-text-title);
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.modal-content #modalText {
+  font-size: 0.98rem;
+  color: var(--cst-text-body);
+  line-height: 1.65;
+}
+
+.modal-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--cst-radius-md);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  margin: 12px 0;
+}
+
+.modal-buttons {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-buttons .sms-button {
+  width: 100%;
+  max-width: 340px;
+}
+
+.modal-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #b15241;
+  background: var(--cst-primary-light);
+  border: 1px solid rgba(231, 178, 165, 0.5);
+  padding: 6px 14px;
+  border-radius: var(--cst-radius-full);
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: all 0.2s ease;
+}
+
+.modal-nav-back:hover {
+  background: var(--cst-accent-soft);
+  transform: translateX(-3px);
+}
+
+/* Visitor Modal Content */
+.visitor-content {
+  background: white;
+  border-radius: var(--cst-radius-lg);
+  padding: 36px 28px;
+  width: min(380px, 90vw);
+  text-align: center;
+  position: relative;
+  box-shadow: var(--cst-shadow-lg);
+}
+
+.visitor-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 8px 0;
+  background: var(--cst-primary-light);
+  border-radius: var(--cst-radius-md);
+  font-weight: 600;
+}
+
+.visitor-stat-row span {
+  font-weight: 800;
+  color: var(--cst-accent-deep);
+}
+
+/* ==========================================================================
+   IMAGE LIGHTBOX / PREVIEW & GUIDE CONTENT
+   ========================================================================== */
+.guide-image-container {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.guide-img,
+main img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--cst-radius-md);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(231, 178, 165, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.guide-img:hover,
+main img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(226, 120, 138, 0.18);
+}
+
+.section-card {
+  width: 100%;
+  background: var(--cst-bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--cst-border-light);
+  border-radius: var(--cst-radius-lg);
+  padding: 32px 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--cst-shadow-sm);
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+.toast-notice {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(30, 32, 41, 0.95);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--cst-radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(231, 178, 165, 0.35);
+  padding: 40px max(5vw, 20px);
+  margin-top: auto;
+  color: var(--cst-text-muted);
+  font-size: 0.9rem;
+}
+
+.footer-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.album-cover {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.footer-left h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--cst-text-title);
+}
+
+.footer-right {
+  text-align: right;
+  flex: 1;
+  min-width: 240px;
+}
+
+.footer-right h3 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #b15241;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.footer-right p {
+  margin: 3px 0;
+  font-size: 0.84rem;
+}
+
+.footer-right a {
+  color: var(--cst-text-body);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.footer-right a:hover {
+  color: var(--cst-accent-deep);
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --cst-header-h: 64px;
+  }
+  
+  .top-bar {
+    padding: 0 16px;
+  }
+  
+  .logo-text {
+    font-size: 1.02rem;
+  }
+  
+  .logo-section img {
+    height: 38px;
+    width: 38px;
+  }
+  
+  main {
+    padding: 16px 14px 40px;
+  }
+  
+  .button-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .grid-button {
+    padding: 18px 12px;
+    border-radius: var(--cst-radius-md);
+  }
+  
+  .card-icon {
+    font-size: 1.8rem;
+  }
+  
+  .card-title {
+    font-size: 1.05rem;
+  }
+  
+  .card-desc {
+    font-size: 0.75rem;
+  }
+  
+  .banner-slider {
+    border-radius: var(--cst-radius-md);
+    margin-bottom: 24px;
+  }
+  
+  .banner-text {
+    font-size: 1.15rem;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+  
+  .banner-btn-pill {
+    display: none;
+  }
+  
+  .youtube-card {
+    padding: 20px 14px;
+    border-radius: var(--cst-radius-md);
+  }
+  
+  .youtube-card-title {
+    font-size: 1.2rem;
+  }
+  
+  .sms-button, .sms-button1 {
+    width: 100%;
+    min-width: auto;
+    font-size: 0.98rem;
+    padding: 12px 20px;
+  }
+  
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-right {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .notice-ticker {
+    padding: 8px 12px;
+    gap: 8px;
+    font-size: 0.84rem;
+  }
+  
+  .notice-badge {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    gap: 4px;
+  }
+  
+  .notice-item {
+    font-size: 0.84rem;
+    padding-right: 36px;
+  }
+  
+  .modal-content {
+    padding: 28px 18px 22px;
+    border-radius: var(--cst-radius-md);
+  }
+}
+
+  </style>
 </head>
 <body>
 
   <!-- 상단바 -->
   <header class="top-bar">
     <a class="logo-section" href="index.html">
-      <img src="favicon/channels4_profile-removebg-preview.png" alt="로고" />
-      <span class="logo-text">이찬원 정규2집 초집중</span>
+      <img src="favicon/channels4_profile-removebg-preview.png" alt="CST 로고" />
+      <div class="logo-text-group">
+        <span class="logo-badge">CHAN'S SUPPORTER TEAM</span>
+        <span class="logo-text">이찬원 정규2집 초집중</span>
+      </div>
     </a>
-     <div include-html="components/menu.html"></div>
+    <ul class="nav-links-desktop">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="streaming.html">음원 원클릭</a></li>
+      <li><a href="guide.html">가이드</a></li>
+      <li><a href="vote.html">투표 바로가기</a></li>
+      <li><a href="radio.html" class="active">라디오 원클릭</a></li>
+    </ul>
+    <div class="hamburger" aria-label="메뉴 열기">☰</div>
   </header>
 
-  <!-- 햄버거 버튼 -->
-  <div class="hamburger">☰</div>
+  <!-- 사이드 메뉴 (모바일 내비게이션 드로어) -->
+  <div class="side-menu-backdrop" id="sideMenuBackdrop"></div>
+  <nav id="sideMenu" class="side-menu">
+    <div class="side-menu-header">
+      <div class="side-menu-title">
+        <span>🩷</span>
+        <span>CST 총공 메뉴</span>
+      </div>
+      <button id="closeBtn" class="close-btn" aria-label="메뉴 닫기">✕</button>
+    </div>
+    <ul>
+      <li><a href="index.html"><span style="font-size: 1.2rem;">🏠</span> 홈 (메인)</a></li>
+      <li><a href="streaming.html"><span style="font-size: 1.2rem;">🎵</span> 음원 원클릭</a></li>
+      <li><a href="guide.html"><span style="font-size: 1.2rem;">📖</span> 가이드 모음</a></li>
+      <li><a href="vote.html"><span style="font-size: 1.2rem;">🏆</span> 음악방송 투표</a></li>
+      <li><a href="radio.html"><span style="font-size: 1.2rem;">📻</span> 라디오 원클릭</a></li>
+    </ul>
+    <div class="side-menu-footer">
+      <p><strong>이찬원 정규 2집 &lt;초집중&gt;</strong></p>
+      <p style="color: #e2538b; font-weight: bold; margin-top: 4px;">🩷 오내찬란 🩷</p>
+      <p style="font-size: 0.75rem; margin-top: 6px; color: #888;">CHAN'S SUPPORTER TEAM</p>
+    </div>
+  </nav>
+
+  
+
+  
+
+  
+    
 
   <!-- 본문 -->
   <main>
-    <h1 style="display: inline-block;  background-color: #E7B2A5;  color: #464646;   padding: 4px 10px;  border-radius: 6px;  font-weight: 700;"> 이찬원 &lt;오늘은 왠지&gt;</h1>
-    <p style="margin-top: 10px; margin-bottom: 10px;"></p>
-     <h2 style="font-weight: bold;""> 📻라디오 신청 원클릭📻</h2>
-    <p style="margin-top: 30px; margin-bottom: 20px;"></p>
-    <div class="button-grid">
-      <div class="border1 grid-button openModalBtn"
-           data-title="🫛KBS 라디오🫛" 
-           data-text="(Cool FM / Happy FM 선택하기)"
-           data-buttons='
-          <p style="margin-top: 20px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn">COOL FM</button></p>
-          <p style="margin-top: 15px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn1">HAPPY FM</button></p>
-          '>
-          KBS</div>
+    <div class="page-hero">
+      <span class="hero-tag">📻 RADIO REQUEST HUB</span>
+      <h1 class="page-title">이찬원 &lt;오늘은 왠지&gt; 라디오 신청</h1>
+      <p class="page-subtitle">
+        신청하실 방송사(KBS, MBC, SBS)를 선택하시면 채널 선택 및 문자 원클릭 팝업이 나타납니다.
+      </p>
+    </div>
 
-          <div class="border1 grid-button openModalBtn"
-           data-title="🤖MBC 라디오🤖" 
-           data-text="(FM4U / 표준FM 선택하기)"
-           data-buttons='
-          <p style="margin-top: 20px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn2">FM4U</button></p>
-          <p style="margin-top: 15px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn3">표준FM</button></p>
-          '>
-          MBC</div>
+    <!-- 유의사항 안내 바 -->
+    <div class="notice-ticker" style="margin-bottom: 28px;">
+      <span class="notice-badge"><span class="pulse-dot"></span> 라디오 안내</span>
+      <div class="notice-content-wrapper">
+        <div class="notice-track">
+          <span class="notice-item">📻 KBS · MBC · SBS 주요 라디오 프로그램 사연 및 &lt;오늘은 왠지&gt; 신청곡 전송</span>
+          <span class="notice-item">📻 KBS · MBC · SBS 주요 라디오 프로그램 사연 및 &lt;오늘은 왠지&gt; 신청곡 전송</span>
+        </div>
+      </div>
+    </div>
 
-          <div class="border1 grid-button openModalBtn"
-           data-title="🐵SBS 라디오🐵" 
-           data-text="(파워FM / 러브FM 선택하기)"
-           data-buttons='
-          <p style="margin-top: 20px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn4">파워FM</button></p>
-          <p style="margin-top: 15px; margin-bottom: 10px;">
-            <button class="sms-button samsungBtn5">러브FM</button></p>
-          '>
-          SBS</div>
+    <!-- 라디오 방송사 버튼 그리드 -->
+    <div class="button-grid" style="max-width: 900px;">
+
+      <!-- 1. KBS 라디오 -->
+      <div class="grid-button" id="btnRadioKbs">
+        <div class="card-icon">🫛</div>
+        <div class="card-title">KBS 라디오</div>
+        <div class="card-desc">Cool FM (#8910) / Happy FM (#1061)</div>
+      </div>
+
+      <!-- 2. MBC 라디오 -->
+      <div class="grid-button" id="btnRadioMbc">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">MBC 라디오</div>
+        <div class="card-desc">FM4U (#8000) / 표준FM (#8001)</div>
+      </div>
+
+      <!-- 3. SBS 라디오 -->
+      <div class="grid-button" id="btnRadioSbs">
+        <div class="card-icon">🐵</div>
+        <div class="card-title">SBS 라디오</div>
+        <div class="card-desc">파워FM (#1077) / 러브FM (#1035)</div>
+      </div>
+
+    </div>
+
+    <!-- 하단 퀵 링크 -->
+    <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+      <button class="sms-button" onclick="location.href='streaming.html'">
+        🎵 음원 원클릭 스밍
+      </button>
+      <button class="sms-button" onclick="location.href='guide.html'">
+        📖 가이드 모음
+      </button>
+      <button class="sms-button" onclick="location.href='vote.html'">
+        🏆 음악방송 투표
+      </button>
     </div>
   </main>
 
-  <!-- 모달 -->
+  <!-- 통합 모달 창 -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 id="modalTitle">팝업 제목</h2>
-      <div id="modalText">내용이 여기에 표시됩니다.</div>
+      <span class="close-btn" aria-label="닫기">&times;</span>
+      <h2 id="modalTitle">라디오 신청</h2>
+      <div id="modalText"></div>
     </div>
   </div>
 
@@ -207,234 +1450,202 @@ main img {
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-left">
-        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버">
-        <h2>이찬원 정규2집 초집중</h2>
+        <img class="album-cover" src="favicon/channels4_profile-removebg-preview.png" alt="앨범 커버" />
+        <div>
+          <h2>이찬원 정규2집 초집중</h2>
+          <p style="font-size: 0.8rem; color: #888;">음원 · 투표 · 라디오 서포터즈 포털</p>
+        </div>
       </div>
       <div class="footer-right">
-        <h3>CHAN'S SUPPORTER TEAM</h3>
-        <p>X(트위터): <a href="mailto:@chans_CST">@chans_CST</a></p>
-        <p>Copyright © CHAN'S SUPPORTER TEAM All rights reserved.</p>
-        <p><a href="#">개인정보보호정책</a></p>
+        <h3>CHAN'S SUPPORTER TEAM (CST)</h3>
+        <p>X (트위터): <a href="https://x.com/chans_CST" target="_blank" rel="noopener noreferrer">@chans_CST</a></p>
+        <p>Copyright © CHAN'S SUPPORTER TEAM. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
+  
   <script>
-        // include-html 함수
-    function includeHTML(callback) {
-      const elements = document.querySelectorAll('[include-html]');
-      let count = elements.length;
-      if(count===0) callback?.();
-      elements.forEach(el=>{
-        const file = el.getAttribute('include-html');
-        if(file){
-          fetch(file).then(res=>res.ok?res.text():Promise.reject())
-          .then(data=>{
-            el.innerHTML=data;
-            el.removeAttribute('include-html');
-            count--; if(count===0) callback?.();
-          }).catch(()=>{el.innerHTML="내용을 불러올 수 없습니다."; count--; if(count===0) callback?.();});
-        }
-      });
+    // --- 1. KBS 메인 메뉴 ---
+    function showKbsMenu() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #666; font-weight: 600;">(COOL FM / HAPPY FM 중 선택해주세요)</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="showKbsCoolDetail()">KBS COOL FM (#8910)</button>
+          <button class="sms-button" onclick="showKbsHappyDetail()">KBS HAPPY FM (#1061)</button>
+        </div>
+      `;
+      cstOpenModal('🫛 KBS 라디오 선택', html);
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      includeHTML(() => {
-        const hamburger = document.querySelector(".hamburger");
-        const sideMenu = document.getElementById("sideMenu");
-        const closeBtn = document.getElementById("closeBtn");
+    function showKbsCoolDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showKbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
+            <strong>💥 신청 유의사항</strong><br />
+            신청곡을 받지 않는 방송(경제, 시사 등)을 피하고 프로그램 목록에 있는 시간에만 신청해주세요.
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
+            <a class="sms-button primary" href="sms:#8910?body=이찬원의 <오늘은 왠지> 신청합니다">
+              📲 COOL FM 신청 문자 보내기 (#8910)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
+              📋 문구 복사하기
+            </button>
+          </div>
+          <img src="images/kbs_cool.jpg" alt="KBS 쿨FM 편성표" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('KBS COOL FM 신청', html);
+    }
 
-        hamburger?.addEventListener("click", ()=>{
-          sideMenu?.classList.add("open");
-          hamburger.style.display="none";
-        });
+    function showKbsHappyDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showKbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
+            <strong>💥 신청 유의사항</strong><br />
+            신청곡을 받지 않는 방송을 피하고 음악 프로그램 시간에만 신청해주세요.
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
+            <a class="sms-button primary" href="sms:#1061?body=이찬원의 <오늘은 왠지> 신청합니다">
+              📲 HAPPY FM 신청 문자 보내기 (#1061)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
+              📋 문구 복사하기
+            </button>
+          </div>
+          <img src="images/kbs_happy.jpg" alt="KBS 해피FM 편성표" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('KBS HAPPY FM 신청', html);
+    }
 
-        closeBtn?.addEventListener("click", ()=>{
-          sideMenu?.classList.remove("open");
-          hamburger.style.display="block";
-        });
-      });
+    // --- 2. MBC 메인 메뉴 ---
+    function showMbcMenu() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #666; font-weight: 600;">(FM4U / 표준FM 중 선택해주세요)</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="showMbcFm4uDetail()">MBC FM4U (#8000)</button>
+          <button class="sms-button" onclick="showMbcStandardDetail()">MBC 표준FM (#8001)</button>
+        </div>
+      `;
+      cstOpenModal('🤖 MBC 라디오 선택', html);
+    }
+
+    function showMbcFm4uDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showMbcMenu()">⬅️ 방송국 선택으로 돌아가기</button>
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
+            <strong>💥 신청 유의사항</strong><br />
+            신청곡을 받지 않는 시간대를 피하고 음악 프로그램 시간에만 신청해주세요.
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
+            <a class="sms-button primary" href="sms:#8000?body=이찬원의 <오늘은 왠지> 신청합니다">
+              📲 FM4U 신청 문자 보내기 (#8000)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
+              📋 문구 복사하기
+            </button>
+          </div>
+          <img src="images/mbc_fm4u.jpg" alt="MBC FM4U 편성표" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('MBC FM4U 신청', html);
+    }
+
+    function showMbcStandardDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showMbcMenu()">⬅️ 방송국 선택으로 돌아가기</button>
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
+            <strong>💥 신청 유의사항</strong><br />
+            신청곡을 받지 않는 방송(시사, 어학 등)을 피하고 프로그램 목록에 있는 시간에만 신청해주세요.
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
+            <a class="sms-button primary" href="sms:#8001?body=이찬원의 <오늘은 왠지> 신청합니다">
+              📲 표준FM 신청 문자 보내기 (#8001)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
+              📋 문구 복사하기
+            </button>
+          </div>
+          <img src="images/mbc_vywns.jpg" alt="MBC 표준FM 편성표" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('MBC 표준FM 신청', html);
+    }
+
+    // --- 3. SBS 메인 메뉴 ---
+    function showSbsMenu() {
+      const html = `
+        <p style="margin-bottom: 16px; color: #666; font-weight: 600;">(파워FM / 러브FM 중 선택해주세요)</p>
+        <div class="modal-buttons">
+          <button class="sms-button primary" onclick="showSbsPowerDetail()">SBS 파워FM (#1077)</button>
+          <button class="sms-button" onclick="showSbsLoveDetail()">SBS 러브FM (#1035)</button>
+        </div>
+      `;
+      cstOpenModal('🐵 SBS 라디오 선택', html);
+    }
+
+    function showSbsPowerDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showSbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
+            <strong>💥 신청 유의사항</strong><br />
+            신청곡을 받는 음악/예능 프로그램 시간에 맞춰 신청해주세요.
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
+            <a class="sms-button primary" href="sms:#1077?body=이찬원의 <오늘은 왠지> 신청합니다">
+              📲 파워FM 신청 문자 보내기 (#1077)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
+              📋 문구 복사하기
+            </button>
+          </div>
+          <img src="images/sbs_power.jpg" alt="SBS 파워FM 편성표" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('SBS 파워FM 신청', html);
+    }
+
+    function showSbsLoveDetail() {
+      const html = `
+        <button class="modal-nav-back" onclick="showSbsMenu()">⬅️ 방송국 선택으로 돌아가기</button>
+        <div style="text-align: left; font-size: 0.92rem; line-height: 1.65;">
+          <div style="background: var(--cst-primary-light); padding: 12px 16px; border-radius: 10px; margin-bottom: 14px;">
+            <strong>💥 신청 유의사항</strong><br />
+            신청곡을 받는 프로그램 목록 시간에 맞춰 신청해주세요.
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px;">
+            <a class="sms-button primary" href="sms:#1035?body=이찬원의 <오늘은 왠지> 신청합니다">
+              📲 러브FM 신청 문자 보내기 (#1035)
+            </a>
+            <button class="sms-button" onclick="copyText('이찬원의 <오늘은 왠지> 신청합니다', '신청 문구가 복사되었습니다!')">
+              📋 문구 복사하기
+            </button>
+          </div>
+          <img src="images/sbs_love.jpg" alt="SBS 러브FM 편성표" style="width: 100%;" />
+        </div>
+      `;
+      cstOpenModal('SBS 러브FM 신청', html);
+    }
+
+    // Event Bindings
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btnRadioKbs')?.addEventListener('click', showKbsMenu);
+      document.getElementById('btnRadioMbc')?.addEventListener('click', showMbcMenu);
+      document.getElementById('btnRadioSbs')?.addEventListener('click', showSbsMenu);
     });
-    // 모달 기능
-    const modal = document.getElementById('myModal');
-    const openBtns = document.querySelectorAll('.openModalBtn');
-    const closeModalBtn = modal.querySelector('.close-btn');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalText = document.getElementById('modalText');
-
-    openBtns.forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        modalTitle.textContent = btn.getAttribute('data-title');
-        modalText.innerHTML = btn.getAttribute('data-text') +
-                              '<div class="modal-buttons">'+
-                              (btn.getAttribute('data-buttons')||'') +
-                              '</div>';
-        modal.style.display='block';
-        
-    const samsungBtn = modalText.querySelector('.samsungBtn');
-          if (samsungBtn) {
-            samsungBtn.addEventListener('click', () => {
-              modalText.innerHTML =
-                '<div class="modal-buttons">' +
-                  '<div style="text-align: left;">' +
-                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
-              '<h2 style="font-weight: bold;"">💥신청 유의사항💥</h2>' + '</div>' +
-                             '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h3>신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
-
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <h3>👇KBS COOL FM 신청하기</h3> ' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
-              '<h4>➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +         
-              '<span><a class="sms-button" href="sms:%238910?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/kbs_cool.jpg" alt="쿨에프엠">' +'</div>' +
-           '</div>' +
-           '</div>' +              
-           '</div>';
-            });
-          }
-
-          const samsungBtn1 = modalText.querySelector('.samsungBtn1');
-          if (samsungBtn1) {
-            samsungBtn1.addEventListener('click', () => {
-              modalText.innerHTML =
-                '<div class="modal-buttons">' +
-                  '<div style="text-align: left;">' +
-                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
-              '<h2 style="font-weight: bold;"">💥신청 유의사항💥</h2>' + '</div>' +
-                             '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h3>신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
-
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <h3>👇KBS HAPPY FM 신청하기</h3> ' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
-              '<h4>➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +   
-              '<span><a class="sms-button" href="sms:%231061?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +                   
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/kbs_happy.jpg" alt="해피에프엠">' +'</div>' +
-           '</div>' +
-            '<div>' +
-              '</div>';
-            });
-          }
-
-          const samsungBtn2 = modalText.querySelector('.samsungBtn2');
-          if (samsungBtn2) {
-            samsungBtn2.addEventListener('click', () => {
-              modalText.innerHTML =
-                '<div class="modal-buttons">' +
-                  '<div style="text-align: left;">'+
-                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
-              '<h2 style="font-weight: bold;"">💥신청시 유의사항💥</h2>' + '</div>' +
-                             '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h3">신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
-
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <h3>👇MBC FM4U 신청하기</h3> ' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
-              '<h4>➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +          
-              '<span><a class="sms-button" href="sms:%238000?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/mbc_fm4u.jpg" alt="에프엠포유">' +'</div>' +
-           '</div>' +
-           '</div>' +              
-           '</div>';
-            });
-          }
-          
-          const samsungBtn3 = modalText.querySelector('.samsungBtn3');
-          if (samsungBtn3) {
-            samsungBtn3.addEventListener('click', () => {
-              modalText.innerHTML =
-                '<div class="modal-buttons">' +
-                  '<div style="text-align: left;">' +
-                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
-              '<h2 style="font-weight: bold;"">💥신청 유의사항💥</h2>' + '</div>' +
-                             '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h3>신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
-
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <h3>👇MBC 표준 FM 신청하기</h3> ' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
-              '<h4>➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +          
-              '<span><a class="sms-button" href="sms:%238001?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/mbc_vywns.jpg" alt="표준에프엠">' +'</div>' +
-           '</div>' +
-            '<div>' +
-              '</div>';
-            });
-          }
-          
-          const samsungBtn4 = modalText.querySelector('.samsungBtn4');
-          if (samsungBtn4) {
-            samsungBtn4.addEventListener('click', () => {
-              modalText.innerHTML =
-                '<div class="modal-buttons">' +
-                  '<div style="text-align: left;">' +
-                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
-              '<h2 style="font-weight: bold;"">💥신청 유의사항💥</h2>' + '</div>' +
-                             '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h3>신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
-
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <h3>👇SBS 파워 FM 신청하기</h3> ' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
-              '<h4>➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +          
-              '<span><a class="sms-button" href="sms:%231077?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/sbs_power.jpg" alt="파워에프엠">' +'</div>' +
-          '</div>' +
-           '<div>' +
-              '</div>';
-            });
-          }
-
-
-                    const samsungBtn5 = modalText.querySelector('.samsungBtn5');
-          if (samsungBtn5) {
-            samsungBtn5.addEventListener('click', () => {
-              modalText.innerHTML =
-                '<div class="modal-buttons">' +
-                  '<div style="text-align: left;">' +
-                '<div style="margin-top: 50px; margin-bottom: 30px;">' + 
-              '<h2 style="font-weight: bold;">💥신청 유의사항💥</h2>' + '</div>' +
-                             '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h3>신청곡을 받지 않는 방송(경제, 시사, 어학 방송 등)도 있으니 아무 시간대에 신청하지 마시고, 프로그램 목록에 있는 시간에만 신청해주세요.</h3>' +'</div>' +
-
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <h3>👇SBS 러브 FM 신청하기</h3> ' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +
-              '<h4>*아래 버튼을 누르면 메시지로 넘어갑니다.</h4>' +'</div>' +
-              '<h4>➡️문자 메시지로 넘어가면 <span style="color: white; background-color: red;">전송 버튼</span>을 눌러주세요.<br>' +
-           '<div style="margin-top: 15px; margin-bottom: 10px;">' +          
-              '<span><a class="sms-button" href="sms:%231035?body=이찬원의 &lt;오늘은 왠지&gt; 신청합니다">&lt;오늘은 왠지&gt; 신청하기</a></span> ' +
-           '<div style="margin-top: 30px; margin-bottom: 20px;">' +
-              ' <img class="voteimg" src="/images/sbs_love.jpg" alt="러브에프엠">' +'</div>' +
-           '</div>' +
-           '<div>' +
-              '</div>';
-            });
-          }
-      });
-    });
-    
-
-    closeModalBtn.addEventListener('click',()=>{modal.style.display='none';});
-    window.addEventListener('click', e=>{if(e.target===modal) modal.style.display='none';});
-
-
   </script>
+  
+  
+  
+  <!-- Core Scripts (Root & Subfolder Fallback) -->
+  <script src="app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
